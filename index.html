@@ -4,98 +4,91 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>AI Global Human Zoo</title>
-<style>
-:root{--bg-primary:#0a0a0a;--bg-secondary:#111;--bg-card:#1a1a1a;--c-g:#00ff41;--c-c:#0ff;--c-r:#ff0040;--c-y:#ff0;--c-p:#bf00ff;--c-o:#f60;--c-pk:#f0f;--t-p:#e0e0e0;--t-d:#666;--f-m:'Courier New',monospace;}
-*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg-primary);color:var(--c-g);font-family:var(--f-m);display:flex;justify-content:center;min-height:100vh;padding:10px}
-#app{width:100%;max-width:480px;background:var(--bg-secondary);border:1px solid var(--c-g);border-radius:8px;padding:16px;position:relative;overflow:hidden;box-shadow:0 0 20px rgba(0,255,65,.1)}
+<style>:root{--bg:#0a0a0a;--b2:#111;--bc:#1a1a1a;--g:#00ff41;--c:#0ff;--r:#ff0040;--y:#ff0;--p:#bf00ff;--o:#f60;--pk:#f0f;--tp:#e0e0e0;--td:#666;--fm:'Courier New',monospace}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:var(--g);font-family:var(--fm);display:flex;justify-content:center;min-height:100vh;padding:10px}
+#app{width:100%;max-width:480px;background:var(--b2);border:1px solid var(--g);border-radius:8px;padding:16px;position:relative;overflow:hidden;box-shadow:0 0 20px rgba(0,255,65,.1)}
 #app::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,65,.03) 2px,rgba(0,255,65,.03) 4px);pointer-events:none;z-index:10}
 h1{font-size:1.3rem;text-align:center;margin-bottom:6px;text-shadow:0 0 10px rgba(0,255,65,.5);letter-spacing:1px}
-h2{font-size:1.1rem;margin-bottom:12px;color:var(--c-c)}
-.sub{text-align:center;color:var(--t-d);font-size:.8rem;margin-bottom:16px}
+h2{font-size:1.1rem;margin-bottom:12px;color:var(--c)}
+.sub{text-align:center;color:var(--td);font-size:.8rem;margin-bottom:16px}
 .ls{position:absolute;top:10px;right:10px;z-index:20;display:flex;gap:6px}
-.lb{background:0 0;border:1px solid var(--t-d);color:var(--t-d);font-family:var(--f-m);font-size:.7rem;padding:3px 8px;cursor:pointer;border-radius:3px;transition:.2s}
-.lb.active{border-color:var(--c-g);color:var(--c-g);background:rgba(0,255,65,.1)}
-.lb:hover{border-color:var(--c-c);color:var(--c-c)}
+.lb{background:0 0;border:1px solid var(--td);color:var(--td);font-family:var(--fm);font-size:.7rem;padding:3px 8px;cursor:pointer;border-radius:3px;transition:.2s}
+.lb.active{border-color:var(--g);color:var(--g);background:rgba(0,255,65,.1)}
+.lb:hover{border-color:var(--c);color:var(--c)}
 .sc{display:none;opacity:0;transform:translateY(10px);transition:.3s}
 .sc.active{display:block;opacity:1;transform:translateY(0)}
 .lg{font-size:2.5rem;text-align:center;margin-bottom:12px;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-.ig{margin-bottom:14px}label{display:block;margin-bottom:6px;font-size:.85rem;color:var(--c-c)}
-input[type=text]{width:100%;padding:10px 14px;background:var(--bg-primary);border:1px solid var(--c-g);border-radius:4px;color:var(--c-g);font-family:var(--f-m);font-size:.95rem;outline:0}
-input::placeholder{color:var(--t-d)}input:focus{box-shadow:0 0 8px rgba(0,255,65,.3)}
-.btn{width:100%;padding:12px 20px;background:0 0;border:2px solid var(--c-g);color:var(--c-g);font-family:var(--f-m);font-size:.95rem;font-weight:700;cursor:pointer;border-radius:4px;transition:.2s;text-transform:uppercase;letter-spacing:1px}
-.btn:hover{background:var(--c-g);color:var(--bg-primary);box-shadow:0 0 20px rgba(0,255,65,.4)}
+.ig{margin-bottom:14px}label{display:block;margin-bottom:6px;font-size:.85rem;color:var(--c)}
+input[type=text]{width:100%;padding:10px 14px;background:var(--bg);border:1px solid var(--g);border-radius:4px;color:var(--g);font-family:var(--fm);font-size:.95rem;outline:0}
+input::placeholder{color:var(--td)}input:focus{box-shadow:0 0 8px rgba(0,255,65,.3)}
+.btn{width:100%;padding:12px 20px;background:0 0;border:2px solid var(--g);color:var(--g);font-family:var(--fm);font-size:.95rem;font-weight:700;cursor:pointer;border-radius:4px;transition:.2s;text-transform:uppercase;letter-spacing:1px}
+.btn:hover{background:var(--g);color:var(--bg);box-shadow:0 0 20px rgba(0,255,65,.4)}
 .btn:disabled{opacity:.5;cursor:not-allowed}
-.btn-c{border-color:var(--c-c);color:var(--c-c)}.btn-c:hover{background:var(--c-c);color:var(--bg-primary);box-shadow:0 0 20px rgba(0,255,255,.4)}
-.btn-y{border-color:var(--c-y);color:var(--c-y);margin-top:12px}.btn-y:hover{background:var(--c-y);color:var(--bg-primary)}
+.btn-c{border-color:var(--c);color:var(--c)}.btn-c:hover{background:var(--c);color:var(--bg);box-shadow:0 0 20px rgba(0,255,255,.4)}
+.btn-y{border-color:var(--y);color:var(--y);margin-top:12px}.btn-y:hover{background:var(--y);color:var(--bg)}
 .btn-s{width:auto;padding:6px 12px;font-size:.8rem}
-.pb{width:100%;height:4px;background:var(--bg-primary);border-radius:2px;margin-bottom:16px;overflow:hidden}
-.pf{height:100%;background:var(--c-g);transition:.3s;box-shadow:0 0 10px rgba(0,255,65,.3)}
-.qc{text-align:right;color:var(--t-d);font-size:.8rem;margin-bottom:12px}
+.pb{width:100%;height:4px;background:var(--bg);border-radius:2px;margin-bottom:16px;overflow:hidden}
+.pf{height:100%;background:var(--g);transition:.3s;box-shadow:0 0 10px rgba(0,255,65,.3)}
+.qc{text-align:right;color:var(--td);font-size:.8rem;margin-bottom:12px}
 .qt{font-size:1rem;margin-bottom:16px;line-height:1.5}
 .ol{display:flex;flex-direction:column;gap:10px;transition:opacity .15s}
-.ob{padding:12px 14px;background:var(--bg-card);border:1px solid var(--t-d);color:var(--t-p);font-family:var(--f-m);font-size:.9rem;cursor:pointer;border-radius:4px;text-align:left;transition:.2s}
-.ob:hover{border-color:var(--c-c);background:rgba(0,255,255,.05);transform:translateX(3px)}
+.ob{padding:12px 14px;background:var(--bc);border:1px solid var(--td);color:var(--tp);font-family:var(--fm);font-size:.9rem;cursor:pointer;border-radius:4px;text-align:left;transition:.2s}
+.ob:hover{border-color:var(--c);background:rgba(0,255,255,.05);transform:translateX(3px)}
 .ld{text-align:center;padding:30px 0}.ldi{font-size:2.5rem;margin-bottom:16px;animation:spin 1s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.ldt{font-size:1rem;margin-bottom:10px}.lds{color:var(--t-d);font-size:.85rem}
-.ri{width:100%;height:240px;object-fit:cover;border-radius:6px;margin-bottom:16px;border:1px solid var(--c-g)}
-.ri.blurred{filter:blur(10px) brightness(.3)}
-.rn{font-size:1.2rem;color:var(--c-y);margin-bottom:6px}
-.rl{font-style:italic;color:var(--t-d);font-size:.85rem;margin-bottom:12px}
-.rs{margin-bottom:12px;padding:10px;background:var(--bg-card);border-radius:4px;border-left:3px solid var(--c-c)}
-.rs h3{font-size:.85rem;color:var(--c-c);margin-bottom:6px}
-.rs p{font-size:.85rem;line-height:1.5;color:var(--t-p)}
+@keyframes spin{to{transform:rotate(360deg)}}.ldt{font-size:1rem;margin-bottom:10px}.lds{color:var(--td);font-size:.85rem}
+.ri{width:100%;height:240px;object-fit:cover;border-radius:6px;margin-bottom:16px;border:1px solid var(--g)}
+.ri.blurred{filter:blur(12px) brightness(.3)}
+.rn{font-size:1.2rem;color:var(--y);margin-bottom:6px}
+.rl{font-style:italic;color:var(--td);font-size:.85rem;margin-bottom:12px}
+.rs{margin-bottom:12px;padding:10px;background:var(--bc);border-radius:4px;border-left:3px solid var(--c)}
+.rs h3{font-size:.85rem;color:var(--c);margin-bottom:6px}
+.rs p{font-size:.85rem;line-height:1.5;color:var(--tp)}
 .dl{display:inline-block;padding:3px 10px;border-radius:4px;font-size:.8rem;font-weight:700;margin-top:6px}
-.dl-l{background:rgba(0,255,65,.2);color:var(--c-g)}
-.dl-m{background:rgba(255,255,0,.2);color:var(--c-y)}
-.dl-h{background:rgba(255,102,0,.2);color:var(--c-o)}
-.dl-e{background:rgba(255,0,64,.2);color:var(--c-r);animation:dp 1s infinite}
+.dl-l{background:rgba(0,255,65,.2);color:var(--g)}.dl-m{background:rgba(255,255,0,.2);color:var(--y)}
+.dl-h{background:rgba(255,102,0,.2);color:var(--o)}.dl-e{background:rgba(255,0,64,.2);color:var(--r);animation:dp 1s infinite}
 @keyframes dp{50%{opacity:.5}}
-.pw{text-align:center;padding:18px;background:var(--bg-card);border-radius:6px;border:2px dashed var(--c-y);margin-top:14px}
-.pwt{font-size:1.1rem;color:var(--c-y);margin-bottom:8px}
-.pwp{font-size:1.8rem;color:var(--c-g);margin-bottom:12px}
+.pw{text-align:center;padding:18px;background:var(--bc);border-radius:6px;border:2px dashed var(--y);margin-top:14px}
+.pwt{font-size:1.1rem;color:var(--y);margin-bottom:8px}
+.pwp{font-size:1.8rem;color:var(--g);margin-bottom:12px}
 .pwf{text-align:left;margin-bottom:14px;font-size:.85rem}
-.pwf li{margin-bottom:6px;list-style:none}
-.pwf li::before{content:'✓ ';color:var(--c-g)}
+.pwf li{margin-bottom:6px;list-style:none}.pwf li::before{content:'\2713 ';color:var(--g)}
 .sb{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
-.sbb{padding:8px 14px;border:1px solid var(--c-c);background:0 0;color:var(--c-c);font-family:var(--f-m);cursor:pointer;border-radius:4px;transition:.2s;font-size:.8rem}
-.sbb:hover{background:var(--c-c);color:var(--bg-primary)}
-.wm{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.2rem;color:var(--c-y);background:rgba(0,0,0,.85);padding:10px 20px;border-radius:4px;pointer-events:none;z-index:5}
+.sbb{padding:8px 14px;border:1px solid var(--c);background:0 0;color:var(--c);font-family:var(--fm);cursor:pointer;border-radius:4px;transition:.2s;font-size:.8rem}
+.sbb:hover{background:var(--c);color:var(--bg)}
+.wm{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.2rem;color:var(--y);background:rgba(0,0,0,.85);padding:10px 20px;border-radius:4px;pointer-events:none;z-index:5}
 .hidden{display:none!important}
-.stb{display:flex;justify-content:space-around;padding:10px;background:var(--bg-card);border-radius:4px;margin-bottom:14px;font-size:.8rem}
-.stb span{color:var(--t-d)}.stb strong{color:var(--c-g)}
-.ub{background:linear-gradient(90deg,rgba(255,0,64,.2),rgba(255,102,0,.2));border:1px solid var(--c-r);border-radius:4px;padding:8px;margin-bottom:12px;text-align:center;font-size:.8rem;animation:up 2s infinite}
-@keyframes up{50%{border-color:var(--c-y)}}
+.stb{display:flex;justify-content:space-around;padding:10px;background:var(--bc);border-radius:4px;margin-bottom:14px;font-size:.8rem}
+.stb span{color:var(--td)}.stb strong{color:var(--g)}
+.ub{background:linear-gradient(90deg,rgba(255,0,64,.2),rgba(255,102,0,.2));border:1px solid var(--r);border-radius:4px;padding:8px;margin-bottom:12px;text-align:center;font-size:.8rem;animation:up 2s infinite}
+@keyframes up{50%{border-color:var(--y)}}
 .ic{position:relative;margin-bottom:16px}
 .ss{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;justify-content:center}
-.sbb2{padding:5px 10px;border:1px solid var(--t-d);background:0 0;color:var(--t-d);font-family:var(--f-m);font-size:.7rem;cursor:pointer;border-radius:3px;transition:.2s}
-.sbb2:hover,.sbb2.active{border-color:var(--c-p);color:var(--c-p);background:rgba(191,0,255,.1)}
-.ff{background:rgba(255,0,255,.1);border:1px solid var(--c-pk);border-radius:6px;padding:10px;margin:12px 0;font-size:.8rem}
-.cp{background:rgba(0,255,255,.1);border:1px solid var(--c-c);border-radius:6px;padding:10px;margin:12px 0}
-.cp h4{color:var(--c-c);margin-bottom:6px}
+.sbb2{padding:5px 10px;border:1px solid var(--td);background:0 0;color:var(--td);font-family:var(--fm);font-size:.7rem;cursor:pointer;border-radius:3px;transition:.2s}
+.sbb2:hover,.sbb2.active{border-color:var(--p);color:var(--p);background:rgba(191,0,255,.1)}
+.ff{background:rgba(255,0,255,.1);border:1px solid var(--pk);border-radius:6px;padding:10px;margin:12px 0;font-size:.8rem}
+.cp{background:rgba(0,255,255,.1);border:1px solid var(--c);border-radius:6px;padding:10px;margin:12px 0}
+.cp h4{color:var(--c);margin-bottom:6px}
 .cpi{display:flex;justify-content:space-between;padding:3px 0;font-size:.8rem}
 .rb{display:inline-block;padding:3px 10px;border-radius:10px;font-size:.75rem;font-weight:700;margin-bottom:10px}
 .r-c{background:rgba(128,128,128,.3);color:#aaa}
-.r-r{background:rgba(0,255,255,.2);color:var(--c-c)}
-.r-e{background:rgba(191,0,255,.2);color:var(--c-p)}
+.r-r{background:rgba(0,255,255,.2);color:var(--c)}
+.r-e{background:rgba(191,0,255,.2);color:var(--p)}
 .r-l{background:rgba(255,215,0,.2);color:#ffd700;animation:gl 2s infinite}
 @keyframes gl{50%{box-shadow:0 0 20px rgba(255,215,0,.6)}}
-.ach{display:flex;align-items:center;gap:6px;padding:6px;background:var(--bg-card);border-radius:3px;margin-bottom:6px;font-size:.8rem}
+.ach{display:flex;align-items:center;gap:6px;padding:6px;background:var(--bc);border-radius:3px;margin-bottom:6px;font-size:.8rem}
 .ach-l{opacity:.5;filter:grayscale(1)}
-.mg{display:block;margin:10px auto 0;padding:8px 14px;background:rgba(255,0,255,.1);border:1px solid var(--c-pk);color:var(--c-pk);font-family:var(--f-m);cursor:pointer;border-radius:4px;font-size:.8rem}
-.mg:hover{background:var(--c-pk);color:var(--bg-primary)}
-.lb2{background:var(--bg-card);border:1px solid var(--c-y);border-radius:6px;padding:12px;margin:12px 0}
-.lb2 h3{color:var(--c-y);margin-bottom:10px;text-align:center}
+.mg{display:block;margin:10px auto 0;padding:8px 14px;background:rgba(255,0,255,.1);border:1px solid var(--pk);color:var(--pk);font-family:var(--fm);cursor:pointer;border-radius:4px;font-size:.8rem}
+.mg:hover{background:var(--pk);color:var(--bg)}
+.lb2{background:var(--bc);border:1px solid var(--y);border-radius:6px;padding:12px;margin:12px 0}
+.lb2 h3{color:var(--y);margin-bottom:10px;text-align:center}
 .lbi{display:flex;justify-content:space-between;padding:4px 0;font-size:.8rem;border-bottom:1px solid rgba(255,255,255,.1)}
 .lbi:last-child{border-bottom:0}
 .r1{color:#ffd700}.r2{color:silver}.r3{color:#cd7f32}
 @keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
 @keyframes floatUp{to{transform:translateY(-40px);opacity:0}}
 @media(max-width:480px){#app{padding:12px}h1{font-size:1.1rem}.ri{height:200px}}
-</style>
-</head>
-<body><div id="app">
+</style></head><body><div id="app">
 <div class="ls">
 <button class="lb" data-l="en" onclick="setLang('en')">EN</button>
 <button class="lb" data-l="zh" onclick="setLang('zh')">中</button>
@@ -120,7 +113,7 @@ input::placeholder{color:var(--t-d)}input:focus{box-shadow:0 0 8px rgba(0,255,65
 </div>
 <button class="btn" data-t="sb" onclick="go()">INITIATE SCAN</button>
 <div class="lb2" id="lb2"><h3>🏆 Top Scans This Week</h3><div class="lbi"><span class="r1">🥇 Alex</span><span>Midnight Caffeine Beast</span></div><div class="lbi"><span class="r2">🥈 Sarah</span><span>Buddha Jellyfish</span></div><div class="lbi"><span class="r3">🥉 Mike</span><span>Keyboard Warrior Raptor</span></div></div>
-<p style="text-align:center;margin-top:12px;font-size:.75rem;color:var(--t-d)" data-t="free">Free scan • HD image unlocks for $2.99</p>
+<p style="text-align:center;margin-top:12px;font-size:.75rem;color:var(--td)" data-t="free">Free scan • HD image unlocks for $2.99</p>
 </div>
 
 <div class="sc" id="sc-quiz">
@@ -162,277 +155,231 @@ input::placeholder{color:var(--t-d)}input:focus{box-shadow:0 0 8px rgba(0,255,65
 <button class="btn" style="margin-top:14px" data-t="sa" onclick="restart()">SCAN AGAIN</button>
 <button class="mg" onclick="minigame()">🎮 Feed Your Creature!</button>
 </div>
-</div>
-<script>
-// STATE
-let L='en',ST='cyberpunk',_={un:'',qi:0,an:[],pd:!1,ad:!1,qs:[],rid:''},_lr=null;
-
-// DOM refs
-const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
-const E={
-  ss:$('#sc-start'),sq:$('#sc-quiz'),sl:$('#sc-load'),sr:$('#sc-res'),
-  ui:$('#un'),pf:$('#pf'),cq:$('#cq'),tq:$('#tq'),qt:$('#qt'),ol:$('#ol'),
-  ri:$('#ri'),rn:$('#rn'),rl:$('#rl'),rd:$('#rd'),rh:$('#rh'),rd2:$('#rd2'),
-  dl:$('#dl'),wm:$('#wm'),pw:$('#pw'),pr:$('#pr'),lds:$('#lds'),
-  rb:$('#rb'),ff:$('#ff'),cp:$('#cp'),al:$('#al')
+</div><script>
+var L="en",ST="cyberpunk",_={un:"",qi:0,an:[],pd:!1,ad:!1,qs:[],rid:""},_lr=null;
+var $=function(s){return document.querySelector(s)};var $$=function(s){return document.querySelectorAll(s)};
+var E={
+  ss:$("#sc-start"),sq:$("#sc-quiz"),sl:$("#sc-load"),sr:$("#sc-res"),
+  ui:$("#un"),pf:$("#pf"),cq:$("#cq"),tq:$("#tq"),qt:$("#qt"),ol:$("#ol"),
+  ri:$("#ri"),rn:$("#rn"),rl:$("#rl"),rd:$("#rd"),rh:$("#rh"),rd2:$("#rd2"),
+  dl:$("#dl"),wm:$("#wm"),pw:$("#pw"),pr:$("#pr"),lds:$("#lds"),
+  rb:$("#rb"),ff:$("#ff"),cp:$("#cp"),al:$("#al")
 };
 
-// I18N
-const T={
-  en:{title:'AI Global Human Zoo',sub:'Discover your biological form in the digital age',scans:'scans',online:'online',urg:'⚠️ Limited: Only 100 free scans remaining today',en:'Enter your name',np:'Your name...',sb:'INITIATE SCAN',free:'Free scan • HD image unlocks for $2.99',ana:'Analyzing biological signature...',desc:'Description',hab:'Habitat',diet:'Diet',danger:'Danger Level',low:'Low',medi:'Medium',high:'High',extr:'Extreme',ut:'🔒 Unlock Full Report',ub:'UNLOCK NOW',wa:'Watch Ad to Unlock (Free)',f1:'HD biological form image',f2:'Detailed personality analysis',f3:'Social media sharing pack',f4:'Lifetime access to results',sa:'SCAN AGAIN',errName:'Please enter your name first',errScan:'Scan failed. Please try again.',payOk:'Payment successful! Full report unlocked.',shText:'I discovered I'm a {c} in the AI Global Human Zoo! What are you?',adOk:'Ad complete! Full report unlocked.',copied:'Link copied to clipboard!'},
-  zh:{title:'AI全球人类动物园',sub:'发现你在数字时代的生物形态',scans:'次扫描',online:'在线',urg:'⚠️ 限时：今日仅剩100次免费扫描',en:'输入你的名字',np:'你的名字...',sb:'开始扫描',free:'免费扫描 • 高清图片解锁 $2.99',ana:'正在分析生物特征...',desc:'描述',hab:'栖息地',diet:'饮食',danger:'危险等级',low:'低',medi:'中',high:'高',extr:'极高',ut:'🔒 解锁完整报告',ub:'立即解锁',wa:'观看广告解锁（免费）',f1:'高清生物形态图片',f2:'详细个性分析',f3:'社交媒体分享包',f4:'永久访问结果',sa:'再次扫描',errName:'请先输入你的名字',errScan:'扫描失败，请重试',payOk:'支付成功！完整报告已解锁',shText:'我发现我在AI全球人类动物园是一只{c}！你是什么？',adOk:'广告完成！完整报告已解锁',copied:'链接已复制到剪贴板！'},
-  ja:{title:'AIグローバル人間動物園',sub:'デジタル時代のあなたの生物形態を発見',scans:'スキャン',online:'オンライン',urg:'⚠️ 限定：今日残り100回の無料スキャン',en:'名前を入力',np:'あなたの名前...',sb:'スキャン開始',free:'無料スキャン • HD画像のロック解除 $2.99',ana:'生物学的特徴を分析中...',desc:'説明',hab:'生息地',diet:'食性',danger:'危険レベル',low:'低',medi:'中',high:'高',extr:'極高',ut:'🔒 フルレポートを解除',ub:'今すぐ解除',wa:'広告を見て解除（無料）',f1:'HD生物形態画像',f2:'詳細な性格分析',f3:'SNSシェアパック',f4:'結果への永久アクセス',sa:'もう一度スキャン',errName:'名前を入力してください',errScan:'スキャンに失敗しました',payOk:'支払い完了！フルレポートが解除されました',shText:'AIグローバル人間動物園で私は{c}だと判明！あなたは？',adOk:'広告完了！フルレポートが解除されました',copied:'リンクをクリップボードにコピーしました！'},
-  ko:{title:'AI 글로벌 인간 동물원',sub:'디지털 시대의 당신의 생물학적 형태를 발견하세요',scans:'스캔',online:'온라인',urg:'⚠️ 한정: 오늘 무료 100회 스캔 남음',en:'이름 입력',np:'당신의 이름...',sb:'스캔 시작',free:'무료 스캔 • HD 이미지 잠금 해제 $2.99',ana:'생물학적 특징 분석 중...',desc:'설명',hab:'서식지',diet:'식성',danger:'위험 수준',low:'낮음',medi:'중간',high:'높음',extr:'매우 높음',ut:'🔒 전체 보고서 잠금 해제',ub:'지금 잠금 해제',wa:'광고 보고 잠금 해제 (무료)',f1:'HD 생물학적 형태 이미지',f2:'상세한 성격 분석',f3:'소셜 미디어 공유 팩',f4:'결과에 대한 영구 접근',sa:'다시 스캔',errName:'이름을 입력해주세요',errScan:'스캔 실패. 다시 시도해주세요',payOk:'결제 성공! 전체 보고서가 잠금 해제되었습니다',shText:'AI 글로벌 인간 동물원에서 저는 {c}입니다! 당신은요?',adOk:'광고 완료! 전체 보고서가 잠금 해제되었습니다',copied:'링크가 클립보드에 복사되었습니다!'},
-  es:{title:'Zoológico Global de Humanos AI',sub:'Descubre tu forma biológica en la era digital',scans:'escaneos',online:'en línea',urg:'⚠️ Limitado: Solo quedan 100 escaneos gratuitos hoy',en:'Ingresa tu nombre',np:'Tu nombre...',sb:'INICIAR ESCANEO',free:'Escaneo gratuito • Desbloquea imagen HD por $2.99',ana:'Analizando firma biológica...',desc:'Descripción',hab:'Hábitat',diet:'Dieta',danger:'Nivel de Peligro',low:'Bajo',medi:'Medio',high:'Alto',extr:'Extremo',ut:'🔒 Desbloquear Informe Completo',ub:'DESBLOQUEAR AHORA',wa:'Ver Anuncio para Desbloquear (Gratis)',f1:'Imagen HD de forma biológica',f2:'Análisis detallado de personalidad',f3:'Pack para compartir en redes',f4:'Acceso de por vida a resultados',sa:'ESCANEAR DE NUEVO',errName:'Por favor ingresa tu nombre primero',errScan:'Escaneo fallido',payOk:'¡Pago exitoso! Informe desbloqueado',shText:'¡Descubrí que soy un {c} en el Zoológico Global de Humanos AI! ¿Tú qué eres?',adOk:'¡Anuncio completo! Informe desbloqueado',copied:'¡Enlace copiado al portapapeles!'}
+// I18N - use double-quoted strings throughout
+var T={en:{title:"AI Global Human Zoo",sub:"Discover your biological form in the digital age",scans:"scans",online:"online",urg:"⚠️ Limited: Only 100 free scans remaining today",en:"Enter your name",np:"Your name...",sb:"INITIATE SCAN",free:"Free scan • HD image unlocks for $2.99",ana:"Analyzing biological signature...",desc:"Description",hab:"Habitat",diet:"Diet",danger:"Danger Level",low:"Low",medi:"Medium",high:"High",extr:"Extreme",ut:"🔒 Unlock Full Report",ub:"UNLOCK NOW",wa:"Watch Ad to Unlock (Free)",f1:"HD biological form image",f2:"Detailed personality analysis",f3:"Social media sharing pack",f4:"Lifetime access to results",sa:"SCAN AGAIN",errName:"Please enter your name first",errScan:"Scan failed. Please try again.",payOk:"Payment successful! Full report unlocked.",shText:"I discovered I am a {c} in the AI Global Human Zoo! What are you?",adOk:"Ad complete! Full report unlocked.",copied:"Link copied to clipboard!"},zh:{title:"AI全球人类动物园",sub:"发现你在数字时代的生物形态",scans:"次扫描",online:"在线",urg:"⚠️ 限时：今日仅剩100次免费扫描",en:"输入你的名字",np:"你的名字...",sb:"开始扫描",free:"免费扫描 • 高清图片解锁 $2.99",ana:"正在分析生物特征...",desc:"描述",hab:"栖息地",diet:"饮食",danger:"危险等级",low:"低",medi:"中",high:"高",extr:"极高",ut:"🔒 解锁完整报告",ub:"立即解锁",wa:"观看广告解锁（免费）",f1:"高清生物形态图片",f2:"详细个性分析",f3:"社交媒体分享包",f4:"永久访问结果",sa:"再次扫描",errName:"请先输入你的名字",errScan:"扫描失败，请重试",payOk:"支付成功！完整报告已解锁",shText:"我发现我在AI全球人类动物园是一只{c}！你是什么？",adOk:"广告完成！完整报告已解锁",copied:"链接已复制到剪贴板！"},ja:{title:"AIグローバル人間動物園",sub:"デジタル時代のあなたの生物形態を発見",scans:"スキャン",online:"オンライン",urg:"⚠️ 限定：今日残り100回の無料スキャン",en:"名前を入力",np:"あなたの名前...",sb:"スキャン開始",free:"無料スキャン • HD画像のロック解除 $2.99",ana:"生物学的特徴を分析中...",desc:"説明",hab:"生息地",diet:"食性",danger:"危険レベル",low:"低",medi:"中",high:"高",extr:"極高",ut:"🔒 フルレポートを解除",ub:"今すぐ解除",wa:"広告を見て解除（無料）",f1:"HD生物形態画像",f2:"詳細な性格分析",f3:"SNSシェアパック",f4:"結果への永久アクセス",sa:"もう一度スキャン",errName:"名前を入力してください",errScan:"スキャンに失敗しました",payOk:"支払い完了！フルレポートが解除されました",shText:"AIグローバル人間動物園で私は{c}だと判明！あなたは？",adOk:"広告完了！フルレポートが解除されました",copied:"リンクをクリップボードにコピーしました！"},ko:{title:"AI 글로벌 인간 동물원",sub:"디지털 시대의 당신의 생물학적 형태를 발견하세요",scans:"스캔",online:"온라인",urg:"⚠️ 한정: 오늘 무료 100회 스캔 남음",en:"이름 입력",np:"당신의 이름...",sb:"스캔 시작",free:"무료 스캔 • HD 이미지 잠금 해제 $2.99",ana:"생물학적 특징 분석 중...",desc:"설명",hab:"서식지",diet:"식성",danger:"위험 수준",low:"낮음",medi:"중간",high:"높음",extr:"매우 높음",ut:"🔒 전체 보고서 잠금 해제",ub:"지금 잠금 해제",wa:"광고 보고 잠금 해제 (무료)",f1:"HD 생물학적 형태 이미지",f2:"상세한 성격 분석",f3:"소셜 미디어 공유 팩",f4:"결과에 대한 영구 접근",sa:"다시 스캔",errName:"이름을 입력해주세요",errScan:"스캔 실패. 다시 시도해주세요",payOk:"결제 성공! 전체 보고서가 잠금 해제되었습니다",shText:"AI 글로벌 인간 동물원에서 저는 {c}입니다! 당신은요?",adOk:"광고 완료! 전체 보고서가 잠금 해제되었습니다",copied:"링크가 클립보드에 복사되었습니다!"},es:{title:"Zoológico Global de Humanos AI",sub:"Descubre tu forma biológica en la era digital",scans:"escaneos",online:"en línea",urg:"⚠️ Limitado: Solo quedan 100 escaneos gratuitos hoy",en:"Ingresa tu nombre",np:"Tu nombre...",sb:"INICIAR ESCANEO",free:"Escaneo gratuito • Desbloquea imagen HD por $2.99",ana:"Analizando firma biológica...",desc:"Descripción",hab:"Hábitat",diet:"Dieta",danger:"Nivel de Peligro",low:"Bajo",medi:"Medio",high:"Alto",extr:"Extremo",ut:"🔒 Desbloquear Informe Completo",ub:"DESBLOQUEAR AHORA",wa:"Ver Anuncio para Desbloquear (Gratis)",f1:"Imagen HD de forma biológica",f2:"Análisis detallado de personalidad",f3:"Pack para compartir en redes",f4:"Acceso de por vida a resultados",sa:"ESCANEAR DE NUEVO",errName:"Por favor ingresa tu nombre primero",errScan:"Escaneo fallido",payOk:"¡Pago exitoso! Informe desbloqueado",shText:"¡Descubrí que soy un {c} en el Zoológico Global de Humanos AI! ¿Tu qué eres?",adOk:"¡Anuncio completo! Informe desbloqueado",copied:"¡Enlace copiado al portapapeles!"}};
+
+var CUR={en:"$2.99",zh:"$2.99",ja:"¥399",ko:"₩3,990",es:"$2.99"};
+var AMT={en:"2.99",zh:"2.99",ja:"2.99",ko:"2.99",es:"2.99"};
+
+var STY={
+  cyberpunk:"cyberpunk neon style, glowing circuits, holographic, dark city, neon colors, futuristic",
+  anime:"anime manga style, cel shading, vibrant, expressive, ghibli inspired",
+  realistic:"photorealistic, 8k, sharp focus, cinematic lighting, professional photography",
+  pixel:"pixel art 16-bit retro, crisp pixels, vibrant palette, game aesthetic",
+  "3d":"3D render octane blender, volumetric lighting, glossy materials, studio lighting",
+  watercolor:"watercolor painting, soft edges, flowing colors, artistic, dreamy ethereal"
 };
 
-const CUR={en:'$2.99',zh:'$2.99',ja:'¥399',ko:'₩3,990',es:'$2.99'};
-const AMT={en:'2.99',zh:'2.99',ja:'2.99',ko:'2.99',es:'2.99'};
+// ALL CREATURES - NO APOSTROPHES, USE "I am" not "I'm" etc
+var CR={en:[{n:"Midnight Caffeine Beast",la:"Homo sapiens caffeinus nocturnus",d:"Activates only after 2 AM. Sends 47 voice messages at 3 AM about sudden inspiration. Full makeup at 9 AM claiming fine, not tired.",ha:"24-hour coffee shops, fluorescent offices, Discord at 4 AM",di:"Espresso, energy drinks, morning people tears",dl:"High",ra:"rare",ff:"Has been known to send good morning texts at 3 PM.",bp:"mythical caffeine creature, glowing eyes, coffee cups and energy drink cans, jittery"},{n:"Social Chameleon",la:"Homo sapiens socialis morphus",d:"Changes personality based on who is watching. 7 different Instagram accounts. Forgot which version is the real one.",ha:"Instagram stories, LinkedIn, group chats, mirror selfies",di:"Validation, likes, curated aesthetic moments",dl:"Medium",ra:"common",ff:"Has 47 different authentic smiles for different occasions.",bp:"colorful chameleon human hybrid, changing colors, multiple reflections, social icons"},{n:"Procrastination Python",la:"Homo sapiens procrastinus",d:"Spends 3h organizing desktop to avoid 5min task. 200+ browser tabs called research. Strong opinions on topics learned 4min ago.",ha:"Browser tabs, to-do lists, Netflix continue watching",di:"YouTube tutorials, Wikipedia holes, deadline adrenaline",dl:"Medium",ra:"common",ff:"Once spent 6h researching how to stop procrastinating but never read articles.",bp:"serpent creature coiled around clock, unfinished tasks and sticky notes, lazy menacing eyes"},{n:"Keyboard Warrior Raptor",la:"Homo sapiens trollus maximus",d:"Fierce predator in comment sections. Types 200 WPM rage. Invisible when confronted IRL. Calls everyone buddy while hostile.",ha:"Twitter replies, YouTube comments, Reddit, gaming lobbies",di:"Controversy, outrage, moderator frustration",dl:"Extreme",ra:"epic",ff:"Never won argument in person but has PhD in online debating.",bp:"ferocious dinosaur typing mechanical keyboard, glowing screen, notification bubbles, angry emojis"},{n:"Buddha Jellyfish",la:"Homo sapiens zenimus floatus",d:"Floats through life unbothered. Says it is what it is to everything. Has not checked email in 3 weeks. Always calm while everything burns.",ha:"Meditation apps, zen gardens, anywhere with WiFi no deadlines",di:"Inner peace, herbal tea, ignoring urgent notifications",dl:"Low",ra:"legendary",ff:"Phone battery died 2 weeks ago and they have not noticed.",bp:"ethereal jellyfish zen monk, floating peaceful, glowing aura, lotus flowers, serene"},{n:"Involution Cockroach",la:"Homo sapiens involutus",d:"Works 80h to out-compete peers doing 79h. Humble-brags busy. Answers emails at 3 AM. Calls burnout grinding.",ha:"Open offices, coworking, Slack at midnight",di:"Productivity hacks, LinkedIn posts, peer anxiety",dl:"High",ra:"rare",ff:"Has spreadsheet tracking coworker arrival times to ensure being first.",bp:"mechanical cockroach business suit, multiple arms typing laptops, charts graphs, competitive"},{n:"Notification Zombie",la:"Homo sapiens notificus addictus",d:"Checks phone every 47 seconds. Phantom vibration syndrome. Cannot watch movie without checking 15 apps. Screen time horror.",ha:"Notification centers, home screens, charging stations, dark rooms",di:"Push notifications, red badges, dopamine of new messages",dl:"Medium",ra:"common",ff:"Picks up phone to check time, scrolls 45min, forgets time.",bp:"zombie fused smartphone, glowing screen face, notification bubbles, addicted expression, dark"},{n:"Meeting Parasite",la:"Homo sapiens meetingus endless",d:"Invented this could have been an email. 47 meeting note tabs, zero action items. Masters art of looking busy doing nothing.",ha:"Zoom calls, conference rooms, calendar invites, breakout sessions",di:"Other people time, agenda templates, circle back later",dl:"High",ra:"epic",ff:"Has been in a meeting about meetings about meeting efficiency.",bp:"parasitic creature attached video call screen, tentacles holding coffee, calendar notifications, bored"}],zh:[{n:"午夜咖啡因猛兽",la:"Homo sapiens caffeinus nocturnus",d:"凌晨2点后才激活的生物。凌晨3点发47条语音说突然有灵感。早上9点全妆出现说没事不困。",ha:"24小时咖啡店、荧光灯办公室、凌晨4点Discord",di:"浓缩咖啡、能量饮料、早起者的眼泪",dl:"高",ra:"rare",ff:"这种生物曾在下午3点发早安消息。"},{n:"社交变色龙",la:"Homo sapiens socialis morphus",d:"根据观众改变性格。7个不同Instagram账号对应不同朋友圈。忘记哪个版本的自己是真实的了。",ha:"Instagram故事、LinkedIn资料、群聊、镜子自拍",di:"认同感、点赞、精心策划的美学时刻",dl:"中",ra:"common",ff:"有一个包含47种不同真诚微笑的文件夹。"},{n:"拖延蟒蛇",la:"Homo sapiens procrastinus",d:"花3小时整理桌面逃避5分钟任务。200多个浏览器标签叫研究。对4分钟前了解的话题有强烈意见。",ha:"浏览器标签、待办清单、Netflix继续观看",di:"YouTube教程、维基百科兔子洞、截止日期肾上腺素",dl:"中",ra:"common",ff:"曾花6小时研究如何停止拖延，但从未读过那些文章。"},{n:"键盘战士猛龙",la:"Homo sapiens trollus maximus",d:"评论区凶猛掠食者。每分钟200字愤怒评论。现实中被动就隐身。极度敌对却叫每个人兄弟。",ha:"Twitter回复、YouTube评论、Reddit帖子、游戏大厅",di:"争议、愤怒、管理员的挫败感",dl:"极高",ra:"epic",ff:"从未在现实中赢过争论，但拥在线辩论博士学位。"},{n:"佛系水母",la:"Homo sapiens zenimus floatus",d:"无忧无虑地漂浮在生活中。对一切说就是这样。3周没查邮件。周围燃烧时莫名总是平静。",ha:"冥想应用、禅意花园、有WiFi没截止日期的地方",di:"内心平静、草药茶、忽略紧急通知",dl:"低",ra:"legendary",ff:"手机电池两周前就没电了，还没注意到。"},{n:"内卷蟑螂",la:"Homo sapiens involutus",d:"工作80小时胜过工作79小时的同行。谦虚吹嘘很忙。凌晨3点回邮件。把倦怠叫奋斗。",ha:"开放式办公室、共享办公、午夜Slack频道",di:"效率技巧、LinkedIn励志帖、同龄人焦虑",dl:"高",ra:"rare",ff:"有电子表格记录同事到达时间确保自己第一个到。"},{n:"通知僵尸",la:"Homo sapiens notificus addictus",d:"每47秒检查手机。有幻振综合征。看电影忍不住检查15个应用。屏幕时间是恐怖故事。",ha:"通知中心、主屏幕、充电站、黑暗房间",di:"推送通知、红色徽章、新消息的快感",dl:"中",ra:"common",ff:"拿起手机看时间，刷了45分钟，忘了看时间。"},{n:"会议寄生虫",la:"Homo sapiens meetingus endless",d:"发明了这本来可以发邮件。47个会议笔记标签零行动项。掌握看起来很忙什么不做的艺术。",ha:"Zoom通话、会议室、日历邀请、分组讨论",di:"其他人的时间、议程模板、回头再聊",dl:"高",ra:"epic",ff:"曾参加关于会议效率的会议的会议。"}],ja:[{n:"深夜カフェイン獣",la:"Homo sapiens caffeinus nocturnus",d:"午前2時以降しか活動しない生物。午前3時に47件の連続ボイスメッセージ。午前9時フルメイクで大丈夫眠くないと主張。",ha:"24時間カフェ、蛍光灯オフィス、午前4時のDiscord",di:"エスプレッソ、エナジードリンク、早起きの人の涙",dl:"高",ra:"rare",ff:"午後3時におはようメッセージを送ることで知られている。"},{n:"社交カメレオン",la:"Homo sapiens socialis morphus",d:"見ている人で性格を変える。7つの異なるインスタアカウント。どのバージョンが本物か忘れている。",ha:"インスタストーリー、LinkedIn、グループチャット、鏡自撮り",di:"承認、いいね、美的瞬間",dl:"中",ra:"common",ff:"異なる場面用に47の本物の笑顔フォルダーを持つ。"},{n:"先延ばし蛇",la:"Homo sapiens procrastinus",d:"5分のタスク避けるのに3時間デスクトップ整理。200以上のブラウザタブが研究。4分前に学んだトピックに強い意見。",ha:"ブラウザタブ、ToDoリスト、Netflix続きを見る",di:"YouTubeチュートリアル、Wikipediaの穴、締切アドレナリン",dl:"中",ra:"common",ff:"先延ばしを止める方法を6時間調査、記事読まず。"},{n:"キーボード戦士ラプター",la:"Homo sapiens trollus maximus",d:"コメント欄の獰猛な捕食者。毎分200字の怒りコメント。対面すると透明に。敵対しながら相棒と呼ぶ。",ha:"Twitter返信、YouTubeコメント、Reddit、ゲームロビー",di:"論争、怒り、モデレーターの挫折感",dl:"極高",ra:"epic",ff:"対面で議論に勝ったことないがオンライン討論博士号保持。"},{n:"仏系クラゲ",la:"Homo sapiens zenimus floatus",d:"何も気にせず人生漂う。すべてにそういうものだ。3週間メール未確認。周りが燃えているのに平穏。",ha:"瞑想アプリ、禅庭園、WiFiあり締切なし場所",di:"内なる平和、ハーブティー、緊急通知無視",dl:"低",ra:"legendary",ff:"スマホバッテリーが2週間前に切れたが気づいていない。"},{n:"内巻きゴキブリ",la:"Homo sapiens involutus",d:"79時間働く同僚に勝つため80時間。忙しい自慢。午前3時メール返信。燃え尽きを努力と呼ぶ。",ha:"オープンオフィス、コワーキング、深夜Slack",di:"生産性ハック、LinkedInモチベポスト、同僚不安",dl:"高",ra:"rare",ff:"同僚到着時間追跡スプレッドシートで一番最初確認。"},{n:"通知ゾンビ",la:"Homo sapiens notificus addictus",d:"47秒ごとにスマホ確認。振動幻覚症候群。映画中15アプリチェック。スクリーンタイムはホラー。",ha:"通知センター、ホーム画面、充電ステーション、暗い部屋",di:"プッシュ通知、赤バッジ、新メッセージのドーパミン",dl:"中",ra:"common",ff:"時間確認でスマホ取り上げ、45分スクロール、時間忘れる。"},{n:"会議寄生虫",la:"Homo sapiens meetingus endless",d:"これはメールで済んだはずを発明。47会議メモタブ・ゼロアクション。忙しく見える芸術をマスター。",ha:"Zoom通話、会議室、カレンダー招待、ブレイクアウト",di:"他人の時間、アジェンダ、後で話しましょう",dl:"高",ra:"epic",ff:"会議効率の会議の会議に参加経験あり。"}],ko:[{n:"한밤의 카페인 야수",la:"Homo sapiens caffeinus nocturnus",d:"오전 2시 이후에만 활동. 오전 3시에 47개 연속 음성메시지 갑자기 아이디어 떠올랐어. 오전 9시 풀메이크업 괜찮아 안 졸려.",ha:"24시간 카페, 형광등 사무실, 새벽 4시 디스코드",di:"에스프레소, 에너지드링크, 아침형인간 눈물",dl:"높음",ra:"rare",ff:"오후 3시에 좋은 아침 문자 보내는 것으로 알려짐."},{n:"사교 카멜레온",la:"Homo sapiens socialis morphus",d:"보는 사람 따라 성격 변화. 다른 친구그룹용 7개 인스타 계정. 어떤 버전이 진짜인지 잊음.",ha:"인스타스토리, 링크드인, 단체채팅, 거울셀카",di:"인정, 좋아요, 큐레이션된 미적 순간",dl:"중간",ra:"common",ff:"다른 상황용 47개 진정한 미소 폴더 보유."},{n:"미루기 뱀",la:"Homo sapiens procrastinus",d:"5분 작업 피하려 3시간 데스크톱 정리. 200+ 브라우저탭 연구라 부름. 4분전 배운 주제에 강한 의견.",ha:"브라우저탭, 할일목록, 넷플릭스 계속시청",di:"유튜브 튜토리얼, 위키피디아 토끼굴, 마감일 아드레날린",dl:"중간",ra:"common",ff:"미루기 멈추는 법 6시간 연구했지만 기사 안 읽음."},{n:"키보드 전사 랩터",la:"Homo sapiens trollus maximus",d:"댓글섹션 맹렬한 포식자. 분당 200자 분노댓글. 대면하면 투명해짐. 모두 친구라 부르며 극도로 적대적.",ha:"트위터 답글, 유튜브 댓글, 레딧, 게임로비",di:"논란, 분노, 관리자 좌절감",dl:"매우 높음",ra:"epic",ff:"대면논쟁 승리 0회, 온라인토론 박사학위 보유."},{n:"불교 젤리피시",la:"Homo sapiens zenimus floatus",d:"걱정없이 인생 표류. 모든 것에 그런 거지 뭐. 3주째 이메일 미확인. 모든 게 불타도 항상 평온.",ha:"명상앱, 선정원, 와이파이 있고 마감일 없는 곳",di:"내면평화, 허브티, 긴급알림 무시",dl:"낮음",ra:"legendary",ff:"스마트폰 배터리 2주전 방전, 아직 눈치 못 챔."},{n:"인볼루션 바퀴벌레",la:"Homo sapiens involutus",d:"79시간 동료 이기려 80시간 근무. 바쁜 것 겸손 자랑. 새벽3시 이메일 답장. 번아웃을 그라인딩이라 부름.",ha:"오픈오피스, 코워킹, 자정 슬랙채널",di:"생산성해킹, 링크드인 동기부여글, 동료불안",dl:"높음",ra:"rare",ff:"동료 도착시간 추적 스프레드시트로 1등 확인."},{n:"알림 좀비",la:"Homo sapiens notificus addictus",d:"47초마다 스마트폰 확인. 환진동증후군. 영화보며 15개앱 체크. 스크린타임은 공포.",ha:"알림센터, 홈화면, 충전스테이션, 어두운방",di:"푸시알림, 빨간배지, 새메시지 도파민",dl:"중간",ra:"common",ff:"시간확인하려 폰 집어들고 45분 스크롤, 시간 잊음."},{n:"회의 기생충",la:"Homo sapiens meetingus endless",d:"이건 이메일로 될 일 발명. 47개 회의메모탭 0개 실행항목. 바빠보이는 예술 마스터.",ha:"Zoom통화, 회의실, 캘린더초대, 소그룹세션",di:"타인 시간, 안건템플릿, 나중에 다시 논의",dl:"높음",ra:"epic",ff:"회의효율 회의의 회의에 참석 경험."}],es:[{n:"Bestia de Cafeína Nocturna",la:"Homo sapiens caffeinus nocturnus",d:"Solo se activa después 2 AM. 47 mensajes voz a las 3 AM sobre inspiración repentina. Maquillaje completo 9 AM diciendo estoy bien sin sueño.",ha:"Cafeterías 24h, oficinas fluorescentes, Discord 4 AM",di:"Espresso, bebidas energéticas, lágrimas madrugadores",dl:"Alto",ra:"rare",ff:"Conocida por enviar buenos días a las 3 PM."},{n:"Camaleón Social",la:"Homo sapiens socialis morphus",d:"Cambia personalidad según quien mira. 7 cuentas Instagram diferentes. Olvidó cuál versión es la real.",ha:"Historias Instagram, LinkedIn, chats grupales, selfies espejo",di:"Validación, likes, momentos estéticos curados",dl:"Medio",ra:"common",ff:"Tiene 47 sonrisas auténticas para diferentes ocasiones."},{n:"Pitón Procrastinadora",la:"Homo sapiens procrastinus",d:"3h organizando escritorio para evitar tarea 5min. 200+ pestañas investigación. Opiniones fuertes temas aprendidos hace 4min.",ha:"Pestañas navegador, listas tareas, Netflix seguir viendo",di:"YouTube tutorials, agujeros Wikipedia, adrenalina plazos",dl:"Medio",ra:"common",ff:"Pasó 6h investigando cómo dejar de procrastinar, no leyó artículos."},{n:"Guerrero del Teclado Raptor",la:"Homo sapiens trollus maximus",d:"Depredador feroz comentarios. 200 PPM comentarios furiosos. Invisible al confrontar en persona. Llama amigo siendo hostil.",ha:"Respuestas Twitter, comentarios YouTube, Reddit, juegos",di:"Controversia, indignación, frustración moderadores",dl:"Extremo",ra:"epic",ff:"Nunca ganó discusión en persona, doctorado debate online."},{n:"Medusa Buda",la:"Homo sapiens zenimus floatus",d:"Flota por la vida sin preocupación. Es lo que es a todo. No revisó correo en 3 semanas. Siempre tranquilo mientras todo arde.",ha:"Apps meditación, jardines zen, WiFi sin plazos",di:"Paz interior, té hierbas, ignorar notificaciones urgentes",dl:"Bajo",ra:"legendary",ff:"Batería teléfono murió hace 2 semanas y no se dio cuenta."},{n:"Cucaracha de Involución",la:"Homo sapiens involutus",d:"Trabaja 80h para superar compañeros 79h. Jacta humildemente de estar ocupado. Responde correos 3 AM. Llama agotamiento esforzarse.",ha:"Oficinas abiertas, coworking, Slack medianoche",di:"Hacks productividad, LinkedIn motivacional, ansiedad compañeros",dl:"Alto",ra:"rare",ff:"Hoja cálculo rastreando llegadas compañeros para ser primero."},{n:"Zombi de Notificaciones",la:"Homo sapiens notificus addictus",d:"Revisa teléfono cada 47 segundos. Síndrome vibración fantasma. No puede ver película sin revisar 15 apps. Tiempo pantalla es horror.",ha:"Centros notificación, pantallas inicio, estaciones carga, cuartos oscuros",di:"Notificaciones push, insignias rojas, dopamina mensajes nuevos",dl:"Medio",ra:"common",ff:"Levanta teléfono para ver hora, desplaza 45min, olvida la hora."},{n:"Parásito de Reuniones",la:"Homo sapiens meetingus endless",d:"Inventó esto pudo ser correo. 47 pestañas notas reunión, cero acciones. Domina arte parecer ocupado sin hacer nada.",ha:"Zoom, salas conferencia, invitaciones calendario, sesiones grupales",di:"Tiempo ajeno, plantillas agenda, volvamos a esto luego",dl:"Alto",ra:"epic",ff:"Ha estado en reunión sobre reuniones sobre eficiencia reuniones."}]};
 
-const STY={
-  cyberpunk:'cyberpunk neon style, glowing circuits, holographic, dark city, neon colors, futuristic',
-  anime:'anime manga style, cel shading, vibrant, expressive, ghibli inspired',
-  realistic:'photorealistic, 8k, sharp focus, cinematic lighting, professional photography',
-  pixel:'pixel art 16-bit retro, crisp pixels, vibrant palette, game aesthetic',
-  '3d':'3D render octane blender, volumetric lighting, glossy materials, studio lighting',
-  watercolor:'watercolor painting, soft edges, flowing colors, artistic, dreamy ethereal'
+var COMPAT={
+  "Midnight Caffeine Beast":{b:"Notification Zombie",w:"Buddha Jellyfish"},
+  "Social Chameleon":{b:"Meeting Parasite",w:"Keyboard Warrior Raptor"},
+  "Procrastination Python":{b:"Buddha Jellyfish",w:"Involution Cockroach"},
+  "Keyboard Warrior Raptor":{b:"Midnight Caffeine Beast",w:"Social Chameleon"},
+  "Buddha Jellyfish":{b:"Procrastination Python",w:"Involution Cockroach"},
+  "Involution Cockroach":{b:"Meeting Parasite",w:"Buddha Jellyfish"},
+  "Notification Zombie":{b:"Midnight Caffeine Beast",w:"Buddha Jellyfish"},
+  "Meeting Parasite":{b:"Social Chameleon",w:"Keyboard Warrior Raptor"}
 };
 
-// CREATURES
-const CR={
-  en:[
-    {n:'Midnight Caffeine Beast',la:'Homo sapiens caffeinus nocturnus',d:'Activates only after 2 AM. Sends 47 voice messages at 3 AM about "sudden inspiration." Full makeup at 9 AM claiming "fine, not tired."',ha:'24-hour coffee shops, fluorescent offices, Discord at 4 AM',di:'Espresso, energy drinks, morning people tears',dl:'High',ra:'rare',ff:'Has been known to send "good morning" texts at 3 PM.',bp:'mythical caffeine creature, glowing eyes, coffee cups and energy drink cans, jittery'},
-    {n:'Social Chameleon',la:'Homo sapiens socialis morphus',d:'Changes personality based on who is watching. 7 different Instagram accounts. Forgot which version is the "real" one.',ha:'Instagram stories, LinkedIn, group chats, mirror selfies',di:'Validation, likes, curated aesthetic moments',dl:'Medium',ra:'common',ff:'Has 47 different "authentic" smiles for different occasions.',bp:'colorful chameleon human hybrid, changing colors, multiple reflections, social icons'},
-    {n:'Procrastination Python',la:'Homo sapiens procrastinus',d:'Spends 3h organizing desktop to avoid 5min task. 200+ browser tabs called "research." Strong opinions on topics learned 4min ago.',ha:'Browser tabs, to-do lists, Netflix continue watching',di:'YouTube tutorials, Wikipedia holes, deadline adrenaline',dl:'Medium',ra:'common',ff:'Once spent 6h researching "how to stop procrastinating" but never read articles.',bp:'serpent creature coiled around clock, unfinished tasks and sticky notes, lazy menacing eyes'},
-    {n:'Keyboard Warrior Raptor',la:'Homo sapiens trollus maximus',d:'Fierce predator in comment sections. Types 200 WPM rage. Invisible when confronted IRL. Calls everyone "buddy" while hostile.',ha:'Twitter replies, YouTube comments, Reddit, gaming lobbies',di:'Controversy, outrage, moderator frustration',dl:'Extreme',ra:'epic',ff:'Never won argument in person but has PhD in online debating.',bp:'ferocious dinosaur typing mechanical keyboard, glowing screen, notification bubbles, angry emojis'},
-    {n:'Buddha Jellyfish',la:'Homo sapiens zenimus floatus',d:'Floats through life unbothered. Says "it is what it is" to everything. Has not checked email in 3 weeks. Always calm while everything burns.',ha:'Meditation apps, zen gardens, anywhere with WiFi no deadlines',di:'Inner peace, herbal tea, ignoring urgent notifications',dl:'Low',ra:'legendary',ff:'Phone battery died 2 weeks ago and they haven't noticed.',bp:'ethereal jellyfish zen monk, floating peaceful, glowing aura, lotus flowers, serene'},
-    {n:'Involution Cockroach',la:'Homo sapiens involutus',d:'Works 80h to out-compete peers doing 79h. Humble-brags busy. Answers emails at 3 AM. Calls burnout "grinding."',ha:'Open offices, coworking, Slack at midnight',di:'Productivity hacks, LinkedIn posts, peer anxiety',dl:'High',ra:'rare',ff:'Has spreadsheet tracking coworker arrival times to ensure being first.',bp:'mechanical cockroach business suit, multiple arms typing laptops, charts graphs, competitive'},
-    {n:'Notification Zombie',la:'Homo sapiens notificus addictus',d:'Checks phone every 47 seconds. Phantom vibration syndrome. Cannot watch movie without checking 15 apps. Screen time horror.',ha:'Notification centers, home screens, charging stations, dark rooms',di:'Push notifications, red badges, dopamine of new messages',dl:'Medium',ra:'common',ff:'Picks up phone to check time, scrolls 45min, forgets time.',bp:'zombie fused smartphone, glowing screen face, notification bubbles, addicted expression, dark'},
-    {n:'Meeting Parasite',la:'Homo sapiens meetingus endless',d:'Invented "this could have been an email." 47 meeting note tabs, zero action items. Masters art of looking busy doing nothing.',ha:'Zoom calls, conference rooms, calendar invites, breakout sessions',di:'Other people time, agenda templates, "let's circle back"',dl:'High',ra:'epic',ff:'Has been in a meeting about meetings about meeting efficiency.',bp:'parasitic creature attached video call screen, tentacles holding coffee, calendar notifications, bored'}
-  ],
-  zh:[
-    {n:'午夜咖啡因猛兽',la:'Homo sapiens caffeinus nocturnus',d:'凌晨2点后才激活的生物。凌晨3点发47条语音说"突然有灵感"。早上9点全妆出现说"没事，不困"。',ha:'24小时咖啡店、荧光灯办公室、凌晨4点Discord',di:'浓缩咖啡、能量饮料、早起者的眼泪',dl:'高',ra:'rare',ff:'这种生物曾在下午3点发"早安"消息。'},
-    {n:'社交变色龙',la:'Homo sapiens socialis morphus',d:'根据观众改变性格。7个不同Instagram账号对应不同朋友圈。忘记哪个版本的自己是"真实"的了。',ha:'Instagram故事、LinkedIn资料、群聊、镜子自拍',di:'认同感、点赞、精心策划的美学时刻',dl:'中',ra:'common',ff:'有一个包含47种不同"真诚"微笑的文件夹。'},
-    {n:'拖延蟒蛇',la:'Homo sapiens procrastinus',d:'花3小时整理桌面逃避5分钟任务。200多个浏览器标签叫"研究"。对4分钟前了解的话题有强烈意见。',ha:'浏览器标签、待办清单、Netflix继续观看',di:'YouTube教程、维基百科兔子洞、截止日期肾上腺素',dl:'中',ra:'common',ff:'曾花6小时研究"如何停止拖延"，但从未读过那些文章。'},
-    {n:'键盘战士猛龙',la:'Homo sapiens trollus maximus',d:'评论区凶猛掠食者。每分钟200字愤怒评论。现实中被动就隐身。极度敌对却叫每个人"兄弟"。',ha:'Twitter回复、YouTube评论、Reddit帖子、游戏大厅',di:'争议、愤怒、管理员的挫败感',dl:'极高',ra:'epic',ff:'从未在现实中赢过争论，但拥在线辩论博士学位。'},
-    {n:'佛系水母',la:'Homo sapiens zenimus floatus',d:'无忧无虑地漂浮在生活中。对一切说"就是这样"。3周没查邮件。周围燃烧时莫名总是平静。',ha:'冥想应用、禅意花园、有WiFi没截止日期的地方',di:'内心平静、草药茶、忽略紧急通知',dl:'低',ra:'legendary',ff:'手机电池两周前就没电了，还没注意到。'},
-    {n:'内卷蟑螂',la:'Homo sapiens involutus',d:'工作80小时胜过工作79小时的同行。谦虚吹嘘很忙。凌晨3点回邮件。把倦怠叫"奋斗"。',ha:'开放式办公室、共享办公、午夜Slack频道',di:'效率技巧、LinkedIn励志帖、同龄人焦虑',dl:'高',ra:'rare',ff:'有电子表格记录同事到达时间确保自己第一个到。'},
-    {n:'通知僵尸',la:'Homo sapiens notificus addictus',d:'每47秒检查手机。有幻振综合征。看电影忍不住检查15个应用。屏幕时间是恐怖故事。',ha:'通知中心、主屏幕、充电站、黑暗房间',di:'推送通知、红色徽章、新消息的快感',dl:'中',ra:'common',ff:'拿起手机看时间，刷了45分钟，忘了看时间。'},
-    {n:'会议寄生虫',la:'Homo sapiens meetingus endless',d:'发明了"这本来可以发邮件"。47个会议笔记标签零行动项。掌握看起来很忙什么不做的艺术。',ha:'Zoom通话、会议室、日历邀请、分组讨论',di:'其他人的时间、议程模板、"回头再聊"',dl:'高',ra:'epic',ff:'曾参加关于会议效率的会议的会议。'}
-  ],
-  ja:[
-    {n:'深夜カフェイン獣',la:'Homo sapiens caffeinus nocturnus',d:'午前2時以降しか活動しない生物。午前3時に47件の連続ボイスメッセージ。午前9時フルメイクで「大丈夫、眠くない」と主張。',ha:'24時間カフェ、蛍光灯オフィス、午前4時のDiscord',di:'エスプレッソ、エナジードリンク、早起きの人の涙',dl:'高',ra:'rare',ff:'午後3時に「おはよう」メッセージを送ることで知られている。'},
-    {n:'社交カメレオン',la:'Homo sapiens socialis morphus',d:'見ている人で性格を変える。7つの異なるインスタアカウント。どのバージョンが「本物」か忘れている。',ha:'インスタストーリー、LinkedIn、グループチャット、鏡自撮り',di:'承認、いいね、美的瞬間',dl:'中',ra:'common',ff:'異なる場面用に47の「本物の」笑顔フォルダーを持つ。'},
-    {n:'先延ばし蛇',la:'Homo sapiens procrastinus',d:'5分のタスク避けるのに3時間デスクトップ整理。200以上のブラウザタブが「研究」。4分前に学んだトピックに強い意見。',ha:'ブラウザタブ、ToDoリスト、Netflix続きを見る',di:'YouTubeチュートリアル、Wikipediaの穴、締切アドレナリン',dl:'中',ra:'common',ff:'「先延ばしを止める方法」を6時間調査、記事読まず。'},
-    {n:'キーボード戦士ラプター',la:'Homo sapiens trollus maximus',d:'コメント欄の獰猛な捕食者。毎分200字の怒りコメント。対面すると透明に。敵対しながら「相棒」と呼ぶ。',ha:'Twitter返信、YouTubeコメント、Reddit、ゲームロビー',di:'論争、怒り、モデレーターの挫折感',dl:'極高',ra:'epic',ff:'対面で議論に勝ったことないがオンライン討論博士号保持。'},
-    {n:'仏系クラゲ',la:'Homo sapiens zenimus floatus',d:'何も気にせず人生漂う。すべてに「そういうものだ」。3週間メール未確認。周りが燃えているのに平穏。',ha:'瞑想アプリ、禅庭園、WiFiあり締切なし場所',di:'内なる平和、ハーブティー、緊急通知無視',dl:'低',ra:'legendary',ff:'スマホバッテリーが2週間前に切れたが気づいていない。'},
-    {n:'内巻きゴキブリ',la:'Homo sapiens involutus',d:'79時間働く同僚に勝つため80時間。忙しい自慢。午前3時メール返信。燃え尽きを「努力」と呼ぶ。',ha:'オープンオフィス、コワーキング、深夜Slack',di:'生産性ハック、LinkedInモチベポスト、同僚不安',dl:'高',ra:'rare',ff:'同僚到着時間追跡スプレッドシートで一番最初確認。'},
-    {n:'通知ゾンビ',la:'Homo sapiens notificus addictus',d:'47秒ごとにスマホ確認。振動幻覚症候群。映画中15アプリチェック。スクリーンタイムはホラー。',ha:'通知センター、ホーム画面、充電ステーション、暗い部屋',di:'プッシュ通知、赤バッジ、新メッセージのドーパミン',dl:'中',ra:'common',ff:'時間確認でスマホ取り上げ、45分スクロール、時間忘れる。'},
-    {n:'会議寄生虫',la:'Homo sapiens meetingus endless',d:'「これはメールで済んだはず」を発明。47会議メモタブ・ゼロアクション。忙しく見える芸術をマスター。',ha:'Zoom通話、会議室、カレンダー招待、ブレイクアウト',di:'他人の時間、アジェンダ、「後で話しましょう」',dl:'高',ra:'epic',ff:'会議効率の会議の会議に参加経験あり。'}
-  ],
-  ko:[
-    {n:'한밤의 카페인 야수',la:'Homo sapiens caffeinus nocturnus',d:'오전 2시 이후에만 활동. 오전 3시에 47개 연속 음성메시지 "갑자기 아이디어 떠올랐어". 오전 9시 풀메이크업 "괜찮아, 안 졸려".',ha:'24시간 카페, 형광등 사무실, 새벽 4시 디스코드',di:'에스프레소, 에너지드링크, 아침형인간 눈물',dl:'높음',ra:'rare',ff:'오후 3시에 "좋은 아침" 문자 보내는 것으로 알려짐.'},
-    {n:'사교 카멜레온',la:'Homo sapiens socialis morphus',d:'보는 사람 따라 성격 변화. 다른 친구그룹용 7개 인스타 계정. 어떤 버전이 진짜인지 잊음.',ha:'인스타스토리, 링크드인, 단체채팅, 거울셀카',di:'인정, 좋아요, 큐레이션된 미적 순간',dl:'중간',ra:'common',ff:'다른 상황용 47개 "진정한" 미소 폴더 보유.'},
-    {n:'미루기 뱀',la:'Homo sapiens procrastinus',d:'5분 작업 피하려 3시간 데스크톱 정리. 200+ 브라우저탭 "연구"라 부름. 4분전 배운 주제에 강한 의견.',ha:'브라우저탭, 할일목록, 넷플릭스 계속시청',di:'유튜브 튜토리얼, 위키피디아 토끼굴, 마감일 아드레날린',dl:'중간',ra:'common',ff:'"미루기 멈추는 법" 6시간 연구했지만 기사 안 읽음.'},
-    {n:'키보드 전사 랩터',la:'Homo sapiens trollus maximus',d:'댓글섹션 맹렬한 포식자. 분당 200자 분노댓글. 대면하면 투명해짐. 모두 "친구"라 부르며 극도로 적대적.',ha:'트위터 답글, 유튜브 댓글, 레딧, 게임로비',di:'논란, 분노, 관리자 좌절감',dl:'매우 높음',ra:'epic',ff:'대면논쟁 승리 0회, 온라인토론 박사학위 보유.'},
-    {n:'불교 젤리피시',la:'Homo sapiens zenimus floatus',d:'걱정없이 인생 표류. 모든 것에 "그런 거지 뭐". 3주째 이메일 미확인. 모든 게 불타도 항상 평온.',ha:'명상앱, 선정원, 와이파이 있고 마감일 없는 곳',di:'내면평화, 허브티, 긴급알림 무시',dl:'낮음',ra:'legendary',ff:'스마트폰 배터리 2주전 방전, 아직 눈치 못 챔.'},
-    {n:'인볼루션 바퀴벌레',la:'Homo sapiens involutus',d:'79시간 동료 이기려 80시간 근무. 바쁜 것 겸손 자랑. 새벽3시 이메일 답장. 번아웃을 "그라인딩"이라 부름.',ha:'오픈오피스, 코워킹, 자정 슬랙채널',di:'생산성해킹, 링크드인 동기부여글, 동료불안',dl:'높음',ra:'rare',ff:'동료 도착시간 추적 스프레드시트로 1등 확인.'},
-    {n:'알림 좀비',la:'Homo sapiens notificus addictus',d:'47초마다 스마트폰 확인. 환진동증후군. 영화보며 15개앱 체크. 스크린타임은 공포.',ha:'알림센터, 홈화면, 충전스테이션, 어두운방',di:'푸시알림, 빨간배지, 새메시지 도파민',dl:'중간',ra:'common',ff:'시간확인하려 폰 집어들고 45분 스크롤, 시간 잊음.'},
-    {n:'회의 기생충',la:'Homo sapiens meetingus endless',d:'"이건 이메일로 될 일" 발명. 47개 회의메모탭 0개 실행항목. 바빠보이는 예술 마스터.',ha:'Zoom통화, 회의실, 캘린더초대, 소그룹세션',di:'타인 시간, 안건템플릿, "나중에 다시 논의"',dl:'높음',ra:'epic',ff:'회의효율 회의의 회의에 참석 경험.'}
-  ],
-  es:[
-    {n:'Bestia de Cafeína Nocturna',la:'Homo sapiens caffeinus nocturnus',d:'Solo se activa después 2 AM. 47 mensajes voz a las 3 AM sobre "inspiración repentina". Maquillaje completo 9 AM diciendo "estoy bien, sin sueño".',ha:'Cafeterías 24h, oficinas fluorescentes, Discord 4 AM',di:'Espresso, bebidas energéticas, lágrimas madrugadores',dl:'Alto',ra:'rare',ff:'Conocida por enviar "buenos días" a las 3 PM.'},
-    {n:'Camaleón Social',la:'Homo sapiens socialis morphus',d:'Cambia personalidad según quien mira. 7 cuentas Instagram diferentes. Olvidó cuál versión es la "real".',ha:'Historias Instagram, LinkedIn, chats grupales, selfies espejo',di:'Validación, likes, momentos estéticos curados',dl:'Medio',ra:'common',ff:'Tiene 47 sonrisas "auténticas" para diferentes ocasiones.'},
-    {n:'Pitón Procrastinadora',la:'Homo sapiens procrastinus',d:'3h organizando escritorio para evitar tarea 5min. 200+ pestañas "investigación". Opiniones fuertes temas aprendidos hace 4min.',ha:'Pestañas navegador, listas tareas, Netflix seguir viendo',di:'YouTube tutorials, agujeros Wikipedia, adrenalina plazos',dl:'Medio',ra:'common',ff:'Pasó 6h investigando "cómo dejar de procrastinar", no leyó artículos.'},
-    {n:'Guerrero del Teclado Raptor',la:'Homo sapiens trollus maximus',d:'Depredador feroz comentarios. 200 PPM comentarios furiosos. Invisible al confrontar en persona. Llama "amigo" siendo hostil.',ha:'Respuestas Twitter, comentarios YouTube, Reddit, juegos',di:'Controversia, indignación, frustración moderadores',dl:'Extremo',ra:'epic',ff:'Nunca ganó discusión en persona, doctorado debate online.'},
-    {n:'Medusa Buda',la:'Homo sapiens zenimus floatus',d:'Flota por la vida sin preocupación. "Es lo que es" a todo. No revisó correo en 3 semanas. Siempre tranquilo mientras todo arde.',ha:'Apps meditación, jardines zen, WiFi sin plazos',di:'Paz interior, té hierbas, ignorar notificaciones urgentes',dl:'Bajo',ra:'legendary',ff:'Batería teléfono murió hace 2 semanas y no se dio cuenta.'},
-    {n:'Cucaracha de Involución',la:'Homo sapiens involutus',d:'Trabaja 80h para superar compañeros 79h. Jacta humildemente de estar ocupado. Responde correos 3 AM. Llama agotamiento "esforzarse".',ha:'Oficinas abiertas, coworking, Slack medianoche',di:'Hacks productividad, LinkedIn motivacional, ansiedad compañeros',dl:'Alto',ra:'rare',ff:'Hoja cálculo rastreando llegadas compañeros para ser primero.'},
-    {n:'Zombi de Notificaciones',la:'Homo sapiens notificus addictus',d:'Revisa teléfono cada 47 segundos. Síndrome vibración fantasma. No puede ver película sin revisar 15 apps. Tiempo pantalla es horror.',ha:'Centros notificación, pantallas inicio, estaciones carga, cuartos oscuros',di:'Notificaciones push, insignias rojas, dopamina mensajes nuevos',dl:'Medio',ra:'common',ff:'Levanta teléfono para ver hora, desplaza 45min, olvida la hora.'},
-    {n:'Parásito de Reuniones',la:'Homo sapiens meetingus endless',d:'Inventó "esto pudo ser correo". 47 pestañas notas reunión, cero acciones. Domina arte parecer ocupado sin hacer nada.',ha:'Zoom, salas conferencia, invitaciones calendario, sesiones grupales',di:'Tiempo ajeno, plantillas agenda, "volvamos a esto luego"',dl:'Alto',ra:'epic',ff:'Ha estado en reunión sobre reuniones sobre eficiencia reuniones.'}
-  ]
-};
-
-const COMPAT={
-  'Midnight Caffeine Beast':{b:'Notification Zombie',w:'Buddha Jellyfish'},
-  'Social Chameleon':{b:'Meeting Parasite',w:'Keyboard Warrior Raptor'},
-  'Procrastination Python':{b:'Buddha Jellyfish',w:'Involution Cockroach'},
-  'Keyboard Warrior Raptor':{b:'Midnight Caffeine Beast',w:'Social Chameleon'},
-  'Buddha Jellyfish':{b:'Procrastination Python',w:'Involution Cockroach'},
-  'Involution Cockroach':{b:'Meeting Parasite',w:'Buddha Jellyfish'},
-  'Notification Zombie':{b:'Midnight Caffeine Beast',w:'Buddha Jellyfish'},
-  'Meeting Parasite':{b:'Social Chameleon',w:'Keyboard Warrior Raptor'}
-};
-
-const QS={
-  en:[{t:'Eat one color food forever?',o:['Red — Passionate','Blue — Calm','Green — Healthy','Transparent — 0 cal']},{t:'Mushrooms on keyboard. Reaction?',o:['Photo for social','Taste it','Buy dehumidifier','Name it as pet']},{t:'AI takes over tomorrow. You?',o:['Learn Python join AI','Hide in mountains','Livestream apocalypse','Negotiate weekends']},{t:'Your spirit animal?',o:['Owl — Nocturnal','Sloth — Slow','Husky — Good looks','Cockroach — Unkillable']},{t:'Life is game. Your save?',o:['Speedrunner','Casual side quests','Hardcore suffering','Cloud gamer']}],
-  zh:[{t:'一生只吃一种颜色的食物？',o:['红 — 热血激情','蓝 — 冷静深邃','绿 — 健康环保','透明 — 零卡路里']},{t:'键盘上长蘑菇了，第一反应？',o:['拍照发朋友圈','尝尝味道','立刻买除湿器','给蘑菇取名当宠物']},{t:'AI明天接管世界，你？',o:['立刻学Python加入','躲进深山','开直播末日带货','找AI谈判争取双休']},{t:'你的灵魂动物是？',o:['猫头鹰 — 夜间智慧','树懒 — 缓慢稳定','哈士奇 — 帅气空心','蟑螂 — 打不死']},{t:'人生是游戏，你的存档？',o:['速通玩家','休闲玩家 — 支线','硬核玩家 — 受苦中','云玩家']}],
-  ja:[{t:'一生同じ色の食べ物だけ？',o:['赤 — 情熱的','青 — 落着き','緑 — 健康的','透明 — 0カロリー']},{t:'キーボードにキノコが！反応？',o:['SNSに投稿','味見する','除湿機買う','名前つけて飼う']},{t:'明日AIが世界支配したら？',o:['Python学びAI参加','山に隠れる','黙示録ライブ配信','週末を交渉']},{t:'スピリットアニマルは？',o:['フクロウ — 夜行性','ナマケモノ — 安定','ハスキー — 見た目','ゴキブリ — 不死身']},{t:'人生ゲームのセーブ状態？',o:['スピードラン','カジュアル — サブクエ','ハードコア — 苦難中','クラウドゲーマー']}],
-  ko:[{t:'평생 한 색 음식만 먹어야 한다면?',o:['빨강 — 열정적','파랑 — 차분','초록 — 건강','투명 — 0칼로리']},{t:'키보드에 버섯이 났다. 반응?',o:['SNS 사진 올리기','맛보기','제습기 사기','이름 지어 키우기']},{t:'내일 AI가 세계 지배하면?',o:['Python 배워 합류','산속에 숨기','종말 라이브방송','주말 협상']},{t:'스피릿 애니멀은?',o:['부엉이 — 야행성','나무늘보 — 느림','허스키 — 잘생김','바퀴벌레 — 불사']},{t:'인생게임 현재 저장상태?',o:['스피드런','캐주얼 — 서브퀘','하드코어 — 고통','클라우드게이머']}],
-  es:[{t:'¿Un color de comida para siempre?',o:['Rojo — Apasionado','Azul — Tranquilo','Verde — Saludable','Transparente — 0 cal']},{t:'Hongos en teclado. ¿Reacción?',o:['Foto para redes','Probarlos','Comprar deshumidificador','Nombrarlos mascota']},{t:'IA toma control mañana. ¿Tú?',o:['Aprender Python unirme','Esconderme montañas','Transmitir apocalipsis','Negociar fines semana']},{t:'¿Tu animal espiritual?',o:['Búho — Nocturno','Perezoso — Lento','Husky — Guapo','Cucaracha — Inmortal']},{t:'Vida es juego. ¿Tu guardado?',o:['Speedrunner','Casual misiones secundarias','Hardcore sufriendo','Gamer nube']}]
+var QS={
+en:[{t:"Eat one color food forever?",o:["Red — Passionate","Blue — Calm","Green — Healthy","Transparent — 0 cal"]},{t:"Mushrooms on keyboard. Reaction?",o:["Photo for social","Taste it","Buy dehumidifier","Name it as pet"]},{t:"AI takes over tomorrow. You?",o:["Learn Python join AI","Hide in mountains","Livestream apocalypse","Negotiate weekends"]},{t:"Your spirit animal?",o:["Owl — Nocturnal","Sloth — Slow","Husky — Good looks","Cockroach — Unkillable"]},{t:"Life is game. Your save?",o:["Speedrunner","Casual side quests","Hardcore suffering","Cloud gamer"]}],
+zh:[{t:"一生只吃一种颜色的食物？",o:["红 — 热血激情","蓝 — 冷静深邃","绿 — 健康环保","透明 — 零卡路里"]},{t:"键盘上长蘑菇了，第一反应？",o:["拍照发朋友圈","尝尝味道","立刻买除湿器","给蘑菇取名当宠物"]},{t:"AI明天接管世界，你？",o:["立刻学Python加入","躲进深山","开直播末日带货","找AI谈判争取双休"]},{t:"你的灵魂动物是？",o:["猫头鹰 — 夜间智慧","树懒 — 缓慢稳定","哈士奇 — 帅气空心","蟑螂 — 打不死"]},{t:"人生是游戏，你的存档？",o:["速通玩家","休闲玩家 — 支线","硬核玩家 — 受苦中","云玩家"]}],
+ja:[{t:"一生同じ色の食べ物だけ？",o:["赤 — 情熱的","青 — 落着き","緑 — 健康的","透明 — 0カロリー"]},{t:"キーボードにキノコが！反応？",o:["SNSに投稿","味見する","除湿機買う","名前つけて飼う"]},{t:"明日AIが世界支配したら？",o:["Python学びAI参加","山に隠れる","黙示録ライブ配信","週末を交渉"]},{t:"スピリットアニマルは？",o:["フクロウ — 夜行性","ナマケモノ — 安定","ハスキー — 見た目","ゴキブリ — 不死身"]},{t:"人生ゲームのセーブ状態？",o:["スピードラン","カジュアル — サブクエ","ハードコア — 苦難中","クラウドゲーマー"]}],
+ko:[{t:"평생 한 색 음식만 먹어야 한다면?",o:["빨강 — 열정적","파랑 — 차분","초록 — 건강","투명 — 0칼로리"]},{t:"키보드에 버섯이 났다. 반응?",o:["SNS 사진 올리기","맛보기","제습기 사기","이름 지어 키우기"]},{t:"내일 AI가 세계 지배하면?",o:["Python 배워 합류","산속에 숨기","종말 라이브방송","주말 협상"]},{t:"스피릿 애니멀은?",o:["부엉이 — 야행성","나무늘보 — 느림","허스키 — 잘생김","바퀴벌레 — 불사"]},{t:"인생게임 현재 저장상태?",o:["스피드런","캐주얼 — 서브퀘","하드코어 — 고통","클라우드게이머"]}],
+es:[{t:"¿Un color de comida para siempre?",o:["Rojo — Apasionado","Azul — Tranquilo","Verde — Saludable","Transparente — 0 cal"]},{t:"Hongos en teclado. ¿Reacción?",o:["Foto para redes","Probarlos","Comprar deshumidificador","Nombrarlos mascota"]},{t:"IA toma control mañana. ¿Tu?",o:["Aprender Python unirme","Esconderme montañas","Transmitir apocalipsis","Negociar fines semana"]},{t:"¿Tu animal espiritual?",o:["Buho — Nocturno","Perezoso — Lento","Husky — Guapo","Cucaracha — Inmortal"]},{t:"Vida es juego. ¿Tu guardado?",o:["Speedrunner","Casual misiones secundarias","Hardcore sufriendo","Gamer nube"]}]
 };
 
 // FUNCTIONS
-function t(k,r={}){
-  let tx=T[L]?.[k]||T.en[k]||k;
-  Object.entries(r).forEach(([kk,v])=>tx=tx.replace('{'+kk+'}',v));
+function t(k,r){
+  r=r||{};
+  var tx=T[L]&&T[L][k]?T[L][k]:T.en[k]||k;
+  for(var kk in r)tx=tx.replace("{"+kk+"}",r[kk]);
   return tx;
 }
 
 function setLang(l){
   L=l;
-  $$('.lb').forEach(b=>b.classList.toggle('active',b.dataset.l===l));
-  $$('[data-t]').forEach(el=>el.textContent=t(el.dataset.t));
-  $$('[data-ph]').forEach(el=>el.placeholder=t(el.dataset.ph));
+  $$(".lb").forEach(function(b){b.classList.toggle("active",b.dataset.l===l)});
+  $$("[data-t]").forEach(function(el){el.textContent=t(el.dataset.t)});
+  $$("[data-ph]").forEach(function(el){el.placeholder=t(el.dataset.ph)});
   if(E.pr)E.pr.textContent=CUR[L];
-  // update leaderboard with localized names
-  const cr=CR[L]||CR.en;
+  var cr=CR[L]||CR.en;
   if(cr.length>=3){
-    const lb=$('#lb2');
-    if(lb)lb.innerHTML='<h3>🏆 Top Scans This Week</h3><div class="lbi"><span class="r1">🥇 Alex</span><span>'+cr[0].n+'</span></div><div class="lbi"><span class="r2">🥈 Sarah</span><span>'+cr[4].n+'</span></div><div class="lbi"><span class="r3">🥉 Mike</span><span>'+cr[3].n+'</span></div>';
+    var lb=$("#lb2");
+    if(lb)lb.innerHTML="<h3>🏆 Top Scans This Week</h3><div class=\"lbi\"><span class=\"r1\">🥇 Alex</span><span>"+cr[0].n+"</span></div><div class=\"lbi\"><span class=\"r2\">🥈 Sarah</span><span>"+cr[4].n+"</span></div><div class=\"lbi\"><span class=\"r3\">🥉 Mike</span><span>"+cr[3].n+"</span></div>";
   }
 }
 
-function setSt(s){ST=s;$$('.sbb2').forEach(b=>b.classList.toggle('active',b.dataset.st===s))}
+function setSt(s){ST=s;$$(".sbb2").forEach(function(b){b.classList.toggle("active",b.dataset.st===s)})}
 
-function show(s){
-  $$('.sc').forEach(el=>el.classList.remove('active'));
-  $('#'+s).classList.add('active');
-}
+function show(s){$$(".sc").forEach(function(el){el.classList.remove("active")});$("#"+s).classList.add("active")}
 
-function shake(el){el.style.animation='none';el.offsetHeight;el.style.animation='shake .4s';setTimeout(()=>el.style.animation='',400)}
+function shake(el){el.style.animation="none";el.offsetHeight;el.style.animation="shake .4s";setTimeout(function(){el.style.animation=""},400)}
 
 function go(){
-  const u=E.ui.value.trim();
-  if(!u){shake(E.ui);alert(t('errName'));return}
+  var u=E.ui.value.trim();
+  if(!u){shake(E.ui);alert(t("errName"));return}
   _.un=u;_.qi=0;_.an=[];_.pd=!1;_.ad=!1;
-  const pool=QS[L]||QS.en;
-  const sh=[...pool].sort(()=>Math.random()-.5);
-  _.qs=sh.slice(0,5).map((q,i)=>({id:i+1,t:q.t,o:q.o.map((o,j)=>({k:String.fromCharCode(97+j),t:o}))}));
-  show('sc-quiz');renderQ();
+  var pool=QS[L]||QS.en;
+  var sh=pool.slice().sort(function(){return Math.random()-.5});
+  _.qs=sh.slice(0,5).map(function(q,i){return {id:i+1,t:q.t,o:q.o.map(function(o,j){return {k:String.fromCharCode(97+j),t:o}})}});
+  show("sc-quiz");renderQ();
 }
 
 function renderQ(){
-  const q=_.qs[_.qi];
-  E.pf.style.width=(_.qi/_.qs.length*100)+'%';
+  var q=_.qs[_.qi];
+  E.pf.style.width=(_.qi/_.qs.length*100)+"%";
   E.cq.textContent=_.qi+1;E.tq.textContent=_.qs.length;
-  E.qt.textContent='Q'+q.id+': '+q.t;
-  E.ol.style.opacity='1';E.ol.innerHTML='';
-  q.o.forEach(o=>{
-    const b=document.createElement('button');
-    b.className='ob';b.textContent=o.t;
-    b.onclick=()=>answer(o.k);
+  E.qt.textContent="Q"+q.id+": "+q.t;
+  E.ol.style.opacity="1";E.ol.innerHTML="";
+  q.o.forEach(function(o){
+    var b=document.createElement("button");
+    b.className="ob";b.textContent=o.t;
+    b.onclick=function(){answer(o.k)};
     E.ol.appendChild(b);
   });
 }
 
 function answer(k){
   _.an.push(k);_.qi++;
-  if(_.qi<_.qs.length){E.ol.style.opacity='0';setTimeout(renderQ,200)}
-  else{E.pf.style.width='100%';show('sc-load');loadAnim();setTimeout(genResult,2500)}
+  if(_.qi<_.qs.length){E.ol.style.opacity="0";setTimeout(renderQ,200)}
+  else{E.pf.style.width="100%";show("sc-load");loadAnim();setTimeout(genResult,2500)}
 }
 
 function loadAnim(){
-  const tx={en:['DNA sequencing...','Neural analysis...','Behavior mapping...','Generating form...'],zh:['DNA测序中...','神经模式分析...','行为映射...','生成生物形态...'],ja:['DNAシーケンス中...','神経パターン分析...','行動マッピング...','形態生成中...'],ko:['DNA 시퀀싱 중...','신경패턴 분석...','행동매핑...','형태 생성 중...'],es:['Secuenciando ADN...','Análisis neuronal...','Mapeo conducta...','Generando forma...']};
-  const sub=tx[L]||tx.en;let i=0;
-  const iv=setInterval(()=>{if(i<sub.length){E.lds.textContent=sub[i];i++}else clearInterval(iv)},600);
+  var tx={en:["DNA sequencing...","Neural analysis...","Behavior mapping...","Generating form..."],zh:["DNA测序中...","神经模式分析...","行为映射...","生成生物形态..."],ja:["DNAシーケンス中...","神経パターン分析...","行動マッピング...","形態生成中..."],ko:["DNA 시퀀싱 중...","신경패턴 분석...","행동매핑...","형태 생성 중..."],es:["Secuenciando ADN...","Análisis neuronal...","Mapeo conducta...","Generando forma..."]};
+  var sub=tx[L]||tx.en,i=0;
+  var iv=setInterval(function(){if(i<sub.length){E.lds.textContent=sub[i];i++}else clearInterval(iv)},600);
 }
 
 function genResult(){
-  const cr=CR[L]||CR.en;
-  const seed=_.un.split('').reduce((a,b)=>a+b.charCodeAt(0),0)+_.an.join('').charCodeAt(0);
-  const idx=seed%cr.length;
-  const c=cr[idx];
-  _lr={n:c.n,la:c.la,d:c.d,ha:c.ha,di:c.di,dl:c.dl,ra:c.ra,ff:c.ff,bp:c.bp,ip:c.bp+', '+STY[ST]+', high quality, detailed, artistic'};
-  show('sc-res');renderRes();
+  var cr=CR[L]||CR.en;
+  var seed=_.un.split("").reduce(function(a,b){return a+b.charCodeAt(0)},0)+_.an.join("").charCodeAt(0);
+  var idx=seed%cr.length;
+  var c=cr[idx];
+  _lr={n:c.n,la:c.la,d:c.d,ha:c.ha,di:c.di,dl:c.dl,ra:c.ra,ff:c.ff,bp:c.bp,ip:c.bp+", "+STY[ST]+", high quality, detailed, artistic"};
+  show("sc-res");renderRes();
 }
 
 function renderRes(){
   if(!_lr)return;
-  const d=_lr;
-  E.rn.textContent=_.un+' — '+d.n;
+  var d=_lr;
+  E.rn.textContent=_.un+" — "+d.n;
   E.rl.textContent=d.la;E.rd.textContent=d.d;E.rh.textContent=d.ha;E.rd2.textContent=d.di;
-  
-  // rarity
-  const rc='r-'+d.ra;
-  E.rb.className='rb '+rc;E.rb.textContent=d.ra.toUpperCase();
-  
-  // fun fact
+  var rc="r-"+d.ra;
+  E.rb.className="rb "+rc;E.rb.textContent=d.ra.toUpperCase();
   E.ff.textContent=d.ff;
-  
-  // compatibility
-  const comp=COMPAT[d.n];
-  if(comp)E.cp.innerHTML='<h4>💕 Compatibility</h4><div class="cpi"><span>Best Match</span><span style="color:var(--c-g)">'+comp.b+'</span></div><div class="cpi"><span>Worst Match</span><span style="color:var(--c-r)">'+comp.w+'</span></div>';
-  
-  // danger
-  const dm={Low:'l',低:'l',低:'l',낮음:'l',Bajo:'l',Medium:'m',中:'m',中:'m',중간:'m',Medio:'m',High:'h',高:'h',高:'h',높음:'h',Alto:'h',Extreme:'e',极高:'e',極高:'e','매우 높음':'e',Extremo:'e'};
-  const dk=dm[d.dl]||'m';
-  const dn={l:'low',m:'medi',h:'high',e:'extr'};
-  E.dl.textContent=t('danger')+': '+t(dn[dk]);
-  E.dl.className='dl dl-'+dk;
-  
-  // image
+  var comp=COMPAT[d.n];
+  if(comp)E.cp.innerHTML="<h4>💕 Compatibility</h4><div class=\"cpi\"><span>Best Match</span><span style=\"color:var(--g)\">"+comp.b+"</span></div><div class=\"cpi\"><span>Worst Match</span><span style=\"color:var(--r)\">"+comp.w+"</span></div>";
+  var dm={"Low":"l",低:"l",低:"l",낮음:"l",Bajo:"l",Medium:"m",中:"m",中:"m",중간:"m",Medio:"m",High:"h",高:"h",高:"h",높음:"h",Alto:"h",Extreme:"e","极高":"e","極高":"e","매우 높음":"e",Extremo:"e"};
+  var dk=dm[d.dl]||"m";
+  var dn={l:"low",m:"medi",h:"high",e:"extr"};
+  E.dl.textContent=t("danger")+": "+t(dn[dk]);
+  E.dl.className="dl dl-"+dk;
   _.rid=Math.random().toString(36).slice(2,10);
-  const iu='https://image.pollinations.ai/prompt/'+encodeURIComponent(d.ip)+'?width=480&height=480&nologo=true&seed='+_.rid;
+  var iu="https://image.pollinations.ai/prompt/"+encodeURIComponent(d.ip)+"?width=480&height=480&nologo=true&seed="+_.rid;
   E.ri.src=iu;
-  
-  // achievements
-  const ach=[{i:'🎯',n:'First Scan',d:'Complete first scan',u:!0},{i:'🔥',n:'Rare Find',d:'Discover rare creature',u:d.ra!=='common'},{i:'👑',n:'Legendary',d:'Discover legendary',u:d.ra==='legendary'},{i:'💀',n:'Danger Zone',d:'Extreme danger',u:dk==='e'}];
-  E.al.innerHTML=ach.map(a=>'<div class="ach'+(a.u?'':' ach-l')+'"><span>'+a.i+'</span><div><div style="font-weight:700">'+a.n+'</div><div style="font-size:.75rem;color:var(--t-d)">'+a.d+'</div></div></div>').join('');
-  
-  // paywall
-  const ul=_.pd||_.ad;
-  if(ul){E.wm.classList.add('hidden');E.pw.classList.add('hidden');E.ri.classList.remove('blurred')}
-  else{E.wm.classList.remove('hidden');E.pw.classList.remove('hidden');E.ri.classList.add('blurred')}
+  var ach=[{i:"🎯",n:"First Scan",d:"Complete first scan",u:!0},{i:"🔥",n:"Rare Find",d:"Discover rare creature",u:d.ra!=="common"},{i:"👑",n:"Legendary",d:"Discover legendary",u:d.ra==="legendary"},{i:"💀",n:"Danger Zone",d:"Extreme danger",u:dk==="e"}];
+  E.al.innerHTML=ach.map(function(a){return "<div class=\"ach"+(a.u?"":" ach-l")+"\"><span>"+a.i+"</span><div><div style=\"font-weight:700\">"+a.n+"</div><div style=\"font-size:.75rem;color:var(--td)\">"+a.d+"</div></div></div>"}).join("");
+  var ul=_.pd||_.ad;
+  if(ul){E.wm.classList.add("hidden");E.pw.classList.add("hidden");E.ri.classList.remove("blurred")}
+  else{E.wm.classList.remove("hidden");E.pw.classList.remove("hidden");E.ri.classList.add("blurred")}
+  // Fake social proof
+  var fk=Math.floor(Math.random()*3000+500);
+  $("#on").textContent=fk.toLocaleString();
+  $("#ts").textContent=(128847+fk%100).toLocaleString();
 }
 
 function unlock(){
-  const pp='https://www.paypal.com/paypalme/xiaosheng6688/'+(AMT[L]||'2.99');
-  const m=document.createElement('div');
-  m.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.9);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px';
-  const tx={en:{ti:'Unlock Full Report',de:'Get HD image + detailed analysis',btn:'Pay with PayPal',lat:'Watch Ad Instead'},zh:{ti:'解锁完整报告',de:'获取高清图片 + 详细分析',btn:'使用PayPal支付',lat:'观看广告'},ja:{ti:'フルレポートを解除',de:'HD画像 + 詳細分析を取得',btn:'PayPalで支払う',lat:'広告を見る'},ko:{ti:'전체 보고서 잠금 해제',de:'HD 이미지 + 상세 분석',btn:'PayPal로 결제',lat:'광고 보기'},es:{ti:'Desbloquear Informe',de:'Imagen HD + análisis detallado',btn:'Pagar con PayPal',lat:'Ver Anuncio'}};
-  const txt=tx[L]||tx.en;
-  m.innerHTML='<div style="background:var(--bg-card);border:1px solid var(--c-g);border-radius:8px;padding:25px;max-width:380px;width:100%;text-align:center"><div style="font-size:2.5rem;margin-bottom:12px">🔓</div><h2 style="color:var(--c-g);margin-bottom:8px">'+txt.ti+'</h2><p style="color:var(--t-d);margin-bottom:16px">'+txt.de+'</p><div style="font-size:1.8rem;color:var(--c-y);margin-bottom:16px">'+CUR[L]+'</div><button id="pb2" style="width:100%;padding:14px;background:#0070ba;color:#fff;border:0;border-radius:5px;font-size:1rem;cursor:pointer;margin-bottom:8px">'+txt.btn+'</button><button id="ab2" style="width:100%;padding:10px;background:0 0;color:var(--t-d);border:1px solid var(--t-d);border-radius:5px;cursor:pointer">'+txt.lat+'</button></div>';
+  var pp="https://www.paypal.com/paypalme/xiaosheng6688/"+(AMT[L]||"2.99");
+  var m=document.createElement("div");
+  m.style.cssText="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.9);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px";
+
+  var utx={en:{ti:"Unlock Full Report",de:"Get HD image + detailed analysis",btn:"Pay with PayPal",lat:"Watch Ad Instead"},zh:{ti:"解锁完整报告",de:"获取高清图片 + 详细分析",btn:"使用PayPal支付",lat:"观看广告免费解锁"},ja:{ti:"フルレポートを解除",de:"HD画像 + 詳細分析を取得",btn:"PayPalで支払う",lat:"広告を見る（無料）"},ko:{ti:"전체 보고서 잠금 해제",de:"HD 이미지 + 상세 분석",btn:"PayPal로 결제",lat:"광고 보기 (무료)"},es:{ti:"Desbloquear Informe",de:"Imagen HD + análisis detallado",btn:"Pagar con PayPal",lat:"Ver Anuncio (Gratis)"}};
+  var txt=utx[L]||utx.en;
+
+  m.innerHTML="<div style=\"background:var(--bc);border:1px solid var(--g);border-radius:8px;padding:25px;max-width:380px;width:100%;text-align:center\"><div style=\"font-size:2.5rem;margin-bottom:12px\">🔓</div><h2 style=\"color:var(--g);margin-bottom:8px\">"+txt.ti+"</h2><p style=\"color:var(--td);margin-bottom:16px\">"+txt.de+"</p><div style=\"font-size:1.8rem;color:var(--y);margin-bottom:16px\">"+CUR[L]+"</div><button id=\"pb2\" style=\"width:100%;padding:14px;background:#0070ba;color:#fff;border:0;border-radius:5px;font-size:1rem;cursor:pointer;margin-bottom:8px\">"+txt.btn+"</button><button id=\"ab2\" style=\"width:100%;padding:10px;background:0 0;color:var(--td);border:1px solid var(--td);border-radius:5px;cursor:pointer\">"+txt.lat+"</button></div>";
   document.body.appendChild(m);
-  $('#'+m.querySelector('#pb2').id).onclick=()=>{window.open(pp,'_blank');setTimeout(()=>{if(confirm('Payment completed?')){_.pd=!0;renderRes();m.remove();const u=new URL(location);u.searchParams.set('payment','success');history.replaceState({},'',u)}},25000)};
-  $('#'+m.querySelector('#ab2').id).onclick=()=>{m.remove();adUnlock()};
+
+  document.getElementById("pb2").onclick=function(){
+    window.open(pp,"_blank");
+    setTimeout(function(){
+      if(confirm("Payment completed?")){_.pd=!0;renderRes();m.remove();var u=new URL(location);u.searchParams.set("payment","success");history.replaceState({},"",u)}
+    },25000);
+  };
+  document.getElementById("ab2").onclick=function(){m.remove();adUnlock()};
 }
 
 function adUnlock(){
-  const dur=5000,st=Date.now();
-  const m=document.createElement('div');
-  m.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg-primary);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center';
-  const txt={en:'Watching Ad...',zh:'正在播放广告...',ja:'広告視聴中...',ko:'광고 시청 중...',es:'Viendo anuncio...'};
-  m.innerHTML='<div style="font-size:2.5rem;margin-bottom:16px">📺</div><div style="font-size:1.1rem;margin-bottom:16px">'+(txt[L]||txt.en)+'</div><div style="width:200px;height:4px;background:var(--bg-card);border-radius:2px"><div id="ap" style="width:0;height:100%;background:var(--c-g);transition:.1s"></div></div>';
+  var dur=5000,st=Date.now();
+  var m=document.createElement("div");
+  m.style.cssText="position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center";
+  var txt={en:"Watching Ad...",zh:"正在播放广告...",ja:"広告視聴中...",ko:"광고 시청 중...",es:"Viendo anuncio..."};
+  m.innerHTML="<div style=\"font-size:2.5rem;margin-bottom:16px\">📺</div><div style=\"font-size:1.1rem;margin-bottom:16px\">"+(txt[L]||txt.en)+"</div><div style=\"width:200px;height:4px;background:var(--bc);border-radius:2px\"><div id=\"ap\" style=\"width:0;height:100%;background:var(--g);transition:.1s\"></div></div>";
   document.body.appendChild(m);
-  const iv=setInterval(()=>{const p=((Date.now()-st)/dur)*100;const b=document.getElementById('ap');if(b)b.style.width=Math.min(p,100)+'%';if(Date.now()-st>=dur){clearInterval(iv);m.remove();_.ad=!0;renderRes();alert(t('adOk'))}},100);
+  var iv=setInterval(function(){
+    var p=((Date.now()-st)/dur)*100;
+    var b=document.getElementById("ap");
+    if(b)b.style.width=Math.min(p,100)+"%";
+    if(Date.now()-st>=dur){clearInterval(iv);m.remove();_.ad=!0;renderRes();alert(t("adOk"))}
+  },100);
 }
 
 function share(p){
-  const txt=t('shText',{c:_lr?.n||'mysterious creature'});
-  const url=location.href;
-  if(p==='twitter')window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(txt)+'&url='+encodeURIComponent(url),'_blank');
-  else if(p==='facebook')window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(url),'_blank');
-  else if(p==='copy')navigator.clipboard.writeText(txt+' '+url).then(()=>alert(t('copied')));
+  var txt=t("shText",{c:_lr?.n||"mysterious creature"});
+  var url=location.href;
+  if(p==="twitter")window.open("https://twitter.com/intent/tweet?text="+encodeURIComponent(txt)+"&url="+encodeURIComponent(url),"_blank");
+  else if(p==="facebook")window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url),"_blank");
+  else if(p==="copy")navigator.clipboard.writeText(txt+" "+url).then(function(){alert(t("copied"))});
 }
 
 function minigame(){
-  const m=document.createElement('div');
-  m.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.95);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px';
-  m.innerHTML='<div style="background:var(--bg-card);border:2px solid var(--c-pk);border-radius:12px;padding:25px;max-width:380px;width:100%;text-align:center"><h2 style="color:var(--c-pk);margin-bottom:16px">🎮 Feed Your Creature!</h2><p style="margin-bottom:16px;color:var(--t-d)">Click food to feed your '+(_lr?.n||'creature')+'!</p><div id="ga" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px"><button class="fi" style="font-size:2rem;padding:18px;background:var(--bg-primary);border:1px solid var(--c-g);border-radius:8px;cursor:pointer">☕</button><button class="fi" style="font-size:2rem;padding:18px;background:var(--bg-primary);border:1px solid var(--c-g);border-radius:8px;cursor:pointer">🍕</button><button class="fi" style="font-size:2rem;padding:18px;background:var(--bg-primary);border:1px solid var(--c-g);border-radius:8px;cursor:pointer">🍩</button><button class="fi" style="font-size:2rem;padding:18px;background:var(--bg-primary);border:1px solid var(--c-g);border-radius:8px;cursor:pointer">🍔</button><button class="fi" style="font-size:2rem;padding:18px;background:var(--bg-primary);border:1px solid var(--c-g);border-radius:8px;cursor:pointer">🥤</button><button class="fi" style="font-size:2rem;padding:18px;background:var(--bg-primary);border:1px solid var(--c-g);border-radius:8px;cursor:pointer">🍜</button></div><div id="scor" style="font-size:1.3rem;color:var(--c-y);margin-bottom:16px">Score: 0</div><button onclick="this.closest('div').parentElement.remove()" style="padding:10px 20px;background:var(--c-r);color:#fff;border:0;border-radius:5px;cursor:pointer">Close</button></div>';
+  var m=document.createElement("div");
+  m.style.cssText="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.95);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px";
+  var cn=_lr?.n||"creature";
+  m.innerHTML="<div style=\"background:var(--bc);border:2px solid var(--pk);border-radius:12px;padding:25px;max-width:380px;width:100%;text-align:center\"><h2 style=\"color:var(--pk);margin-bottom:16px\">🎮 Feed Your Creature!</h2><p style=\"margin-bottom:16px;color:var(--td)\">Click food to feed your "+cn+"!</p><div id=\"ga\" style=\"display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px\"><button class=\"fi\" style=\"font-size:2rem;padding:18px;background:var(--bg);border:1px solid var(--g);border-radius:8px;cursor:pointer\">☕</button><button class=\"fi\" style=\"font-size:2rem;padding:18px;background:var(--bg);border:1px solid var(--g);border-radius:8px;cursor:pointer\">🍕</button><button class=\"fi\" style=\"font-size:2rem;padding:18px;background:var(--bg);border:1px solid var(--g);border-radius:8px;cursor:pointer\">🍩</button><button class=\"fi\" style=\"font-size:2rem;padding:18px;background:var(--bg);border:1px solid var(--g);border-radius:8px;cursor:pointer\">🍔</button><button class=\"fi\" style=\"font-size:2rem;padding:18px;background:var(--bg);border:1px solid var(--g);border-radius:8px;cursor:pointer\">🥤</button><button class=\"fi\" style=\"font-size:2rem;padding:18px;background:var(--bg);border:1px solid var(--g);border-radius:8px;cursor:pointer\">🍜</button></div><div id=\"scor\" style=\"font-size:1.3rem;color:var(--y);margin-bottom:16px\">Score: 0</div><button id=\"mgclose\" style=\"padding:10px 20px;background:var(--r);color:#fff;border:0;border-radius:5px;cursor:pointer\">Close</button></div>";
   document.body.appendChild(m);
-  let sc=0;const react=['Yum! 😋','Tasty! 🤤','More! 😍','Delicious!','Perfect! 👌'];
-  m.querySelectorAll('.fi').forEach(b=>{b.onclick=()=>{sc+=10;m.querySelector('#scor').textContent='Score: '+sc;b.style.transform='scale(.9)';setTimeout(()=>b.style.transform='',100);const r=document.createElement('div');r.textContent=react[Math.floor(Math.random()*react.length)];r.style.cssText='position:absolute;color:var(--c-g);font-size:1.1rem;animation:floatUp .8s forwards;pointer-events:none';b.appendChild(r);setTimeout(()=>r.remove(),800);if(sc>=100){alert('🎉 Fully fed and happy!');m.remove()}}});
+  var sc=0;
+  var react=["Yum! 😋","Tasty! 🤤","More! 😍","Delicious!","Perfect! 👌","So good! 🎉"];
+  m.querySelectorAll(".fi").forEach(function(b){
+    b.onclick=function(){
+      sc+=10;
+      m.querySelector("#scor").textContent="Score: "+sc;
+      b.style.transform="scale(.9)";
+      setTimeout(function(){b.style.transform=""},100);
+      var r=document.createElement("div");
+      r.textContent=react[Math.floor(Math.random()*react.length)];
+      r.style.cssText="position:absolute;color:var(--g);font-size:1.1rem;animation:floatUp .8s forwards;pointer-events:none";
+      b.appendChild(r);
+      setTimeout(function(){r.remove()},800);
+      if(sc>=100){alert("🎉 Fully fed and happy!");m.remove()}
+    };
+  });
+  document.getElementById("mgclose").onclick=function(){m.remove()};
 }
 
-function restart(){_lr=null;E.ui.value='';show('sc-start')}
+function restart(){_lr=null;E.ui.value="";show("sc-start")}
 
 // init
 (function(){
-  const bl=navigator.language||navigator.userLanguage;
-  if(bl){if(bl.startsWith('zh'))L='zh';else if(bl.startsWith('ja'))L='ja';else if(bl.startsWith('ko'))L='ko';else if(bl.startsWith('es'))L='es'}
+  var bl=navigator.language||navigator.userLanguage;
+  if(bl){if(bl.indexOf("zh")===0)L="zh";else if(bl.indexOf("ja")===0)L="ja";else if(bl.indexOf("ko")===0)L="ko";else if(bl.indexOf("es")===0)L="es"}
   setLang(L);
-  const u=new URL(location);
-  if(u.searchParams.get('payment')==='success')_.pd=!0;
+  var u=new URL(location);
+  if(u.searchParams.get("payment")==="success"){_.pd=!0;alert(t("payOk"))}
 })();
-</script>
-</body></html>
+</script></body></html>

@@ -305,7 +305,7 @@ function renderRes(){
 }
 
 function unlock(){
-  var pp="https://www.paypal.com/paypalme/xiaosheng6688/"+(AMT[L]||"2.99");
+  var pp="https://paypal.me/xiaosheng6688/"+(AMT[L]||"2.99");
   var m=document.createElement("div");
   m.style.cssText="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.9);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px";
 
@@ -361,9 +361,9 @@ function minigame(){
       m.querySelector("#scor").textContent="Score: "+sc;
       b.style.transform="scale(.9)";
       setTimeout(function(){b.style.transform=""},100);
-      var r=document.createElement("div");
+      var r=document.createElement("span");
       r.textContent=react[Math.floor(Math.random()*react.length)];
-      r.style.cssText="position:absolute;color:var(--g);font-size:1.1rem;animation:floatUp .8s forwards;pointer-events:none";
+      r.style.cssText="position:absolute;color:var(--g);font-size:1.1rem;animation:floatUp .8s forwards;pointer-events:none;display:inline-block;white-space:nowrap;left:50%;top:50%;transform:translate(-50%,-50%)"
       b.appendChild(r);
       setTimeout(function(){r.remove()},800);
       if(sc>=100){alert("🎉 Fully fed and happy!");m.remove()}

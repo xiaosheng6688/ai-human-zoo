@@ -37,7 +37,7 @@ input::placeholder{color:var(--td)}input:focus{box-shadow:0 0 8px rgba(0,255,65,
 .ob:hover{border-color:var(--c);background:rgba(0,255,255,.05);transform:translateX(3px)}
 .ld{text-align:center;padding:30px 0}.ldi{font-size:2.5rem;margin-bottom:16px;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}.ldt{font-size:1rem;margin-bottom:10px}.lds{color:var(--td);font-size:.85rem}
-.ri{width:100%;height:240px;object-fit:cover;border-radius:6px;margin-bottom:16px;border:1px solid var(--g)}
+.ri{width:100%;height:240px;object-fit:cover;border-radius:6px;margin-bottom:16px;border:1px solid var(--g);background:var(--bg)}.ri-error{display:flex;align-items:center;justify-content:center;font-size:4rem;background:var(--bc);color:var(--td)}.ri-loading{animation:pp 1.5s infinite}@keyframes pp{0%,100%{opacity:.3}50%{opacity:.7}}
 .ri.blurred{filter:blur(12px) brightness(.3)}
 .rn{font-size:1.2rem;color:var(--y);margin-bottom:6px}
 .rl{font-style:italic;color:var(--td);font-size:.85rem;margin-bottom:12px}
@@ -88,6 +88,10 @@ input::placeholder{color:var(--td)}input:focus{box-shadow:0 0 8px rgba(0,255,65,
 .fi{position:relative;overflow:hidden;font-size:2rem;padding:18px;background:var(--bg);border:1px solid var(--g);border-radius:8px;cursor:pointer}.ft{position:absolute;color:var(--g);font-size:1.1rem;animation:floatUp .8s forwards;pointer-events:none;display:inline-block;white-space:nowrap;left:50%;top:50%;transform:translate(-50%,-50%)}@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
 @keyframes floatUp{to{transform:translateY(-40px);opacity:0}}
 @media(max-width:480px){#app{padding:12px}h1{font-size:1.1rem}.ri{height:200px}}
+
+/* === AD INTEGRATION === */
+.ad-banner{width:100%;min-height:90px;background:var(--bc);border:1px dashed var(--td);border-radius:6px;display:flex;align-items:center;justify-content:center;margin:10px 0;color:var(--td);font-size:.75rem;text-align:center;overflow:hidden}
+.ad-label{font-size:.65rem;color:var(--td);text-align:center;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px}
 </style></head><body><div id="app">
 <div class="ls">
 <button class="lb" data-l="en" onclick="setLang('en')">EN</button>
@@ -111,6 +115,7 @@ input::placeholder{color:var(--td)}input:focus{box-shadow:0 0 8px rgba(0,255,65,
 <button class="sbb2" data-st="3d" onclick="setSt('3d')">3D</button>
 <button class="sbb2" data-st="watercolor" onclick="setSt('watercolor')">Watercolor</button>
 </div>
+<div class="ad-banner" id="ad-banner1"><div><div class="ad-label">Advertisement</div><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins><div id="ad-fallback1" style="display:none;padding:10px"><a href="https://temu.com" target="_blank" style="color:var(--o)">🔥 Hot Deals — Shop Now</a></div></div></div>
 <button class="btn" data-t="sb" onclick="go()">INITIATE SCAN</button>
 <div class="lb2" id="lb2"><h3>🏆 Top Scans This Week</h3><div class="lbi"><span class="r1">🥇 Alex</span><span>Midnight Caffeine Beast</span></div><div class="lbi"><span class="r2">🥈 Sarah</span><span>Buddha Jellyfish</span></div><div class="lbi"><span class="r3">🥉 Mike</span><span>Keyboard Warrior Raptor</span></div></div>
 <p style="text-align:center;margin-top:12px;font-size:.75rem;color:var(--td)" data-t="free">Free scan • HD image unlocks for $2.99</p>
@@ -118,7 +123,7 @@ input::placeholder{color:var(--td)}input:focus{box-shadow:0 0 8px rgba(0,255,65,
 
 <div class="sc" id="sc-quiz">
 <div class="pb"><div class="pf" id="pf"></div></div>
-<div class="qc"><span id="cq">1</span> / <span id="tq">5</span></div>
+<div class="qc"><span id="cq">1</span> / <span id="tq">8</span></div>
 <div class="qt" id="qt"></div>
 <div class="ol" id="ol"></div>
 </div>
@@ -140,6 +145,7 @@ input::placeholder{color:var(--td)}input:focus{box-shadow:0 0 8px rgba(0,255,65,
 <div class="rs"><h3 data-t="diet">Diet</h3><p id="rd2"></p></div>
 <div class="dl" id="dl"></div>
 <div class="rs" id="as"><h3>🏆 Achievements</h3><div id="al"></div></div>
+<div class="ad-banner" id="ad-banner2"><div><div class="ad-label">Advertisement</div><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins><div id="ad-fallback2" style="display:none;padding:10px"><a href="https://aliexpress.com" target="_blank" style="color:var(--o)">🛒 Trending — Global Shipping</a></div></div></div>
 <div class="pw" id="pw">
 <div class="pwt" data-t="ut">🔒 Unlock Full Report</div>
 <div class="pwo">$4.99</div><div class="pwp" id="pr">$2.99 <span style="font-size:.7rem;color:var(--r)">-40% OFF</span></div>
@@ -196,11 +202,170 @@ var COMPAT={
 };
 
 var QS={
-en:[{t:"Eat one color food forever?",o:["Red — Passionate","Blue — Calm","Green — Healthy","Transparent — 0 cal"]},{t:"Mushrooms on keyboard. Reaction?",o:["Photo for social","Taste it","Buy dehumidifier","Name it as pet"]},{t:"AI takes over tomorrow. You?",o:["Learn Python join AI","Hide in mountains","Livestream apocalypse","Negotiate weekends"]},{t:"Your spirit animal?",o:["Owl — Nocturnal","Sloth — Slow","Husky — Good looks","Cockroach — Unkillable"]},{t:"Life is game. Your save?",o:["Speedrunner","Casual side quests","Hardcore suffering","Cloud gamer"]},{t:"3 AM cannot sleep. Why?",o:["Existential dread life choices","Brilliant idea gone by morning","Someone wrong on internet","Just vibing with void"]},{t:"Group project. Your role?",o:["Do everything alone faster","Disappear until deadline","Schedule meetings about meetings","Bring snacks moral support"]},{t:"Weekend morning. You?",o:["Already gym 5AM grind","What morning? It is 3PM","Deep clean entire house","Order food binge zero regrets"]},{t:"Stranger compliments you.",o:["Thank gracefully","Overthink 3 days","Assume it is prank","Tell entire life backstory"]},{t:"999+ unread emails. Reaction?",o:["Mark all read clean slate","Read only human ones","Create new email fresh","Stare like horror film"]},{t:"Boss schedules no-agenda meeting.",o:["This could be Slack message","Prepare 47 slides","Already mentally elsewhere","Bring snacks make it worth"]},{t:"Free food in office kitchen.",o:["Strategic sprint first","Check if for everyone","Take extra for later","Wait nobody watching"]}],
-zh:[{t:"一生只吃一种颜色的食物？",o:["红 — 热血激情","蓝 — 冷静深邃","绿 — 健康环保","透明 — 零卡路里"]},{t:"键盘上长蘑菇了，第一反应？",o:["拍照发朋友圈","尝尝味道","立刻买除湿器","给蘑菇取名当宠物"]},{t:"AI明天接管世界，你？",o:["立刻学Python加入","躲进深山","开直播末日带货","找AI谈判争取双休"]},{t:"你的灵魂动物是？",o:["猫头鹰 — 夜间智慧","树懒 — 缓慢稳定","哈士奇 — 帅气空心","蟑螂 — 打不死"]},{t:"人生是游戏，你的存档？",o:["速通玩家","休闲玩家 — 支线","硬核玩家 — 受苦中","云玩家"]},{t:"凌晨3点睡不着，因为？",o:["人生选择的焦虑","闪过的绝妙灵感","网上有人说得不对","跟虚无深层共鸣"]},{t:"小组作业，你是什么角色？",o:["一个人做完更快","消失到截止日期","安排开会规划的会","带零食精神支持"]},{t:"周末早上醒来第一件事？",o:["健身房5点自律","什么早上3点了","莫名其妙深度清洁","外卖刷剧零悔意"]},{t:"陌生人突然夸你，反应？",o:["得体道谢","反复品味3天","认定这是整蛊","讲整个人生故事"]},{t:"999+未读邮件，怎么办？",o:["一键已读重做人","只读真人发来的","换新邮箱重新开始","盯数字像恐怖片"]},{t:"老板发起无议程快速会议。",o:["明明一条消息能说","准备47页PPT","思绪已在另个会","带零食显得值"]},{t:"办公室免费食物出现。",o:["战略冲刺第一","先确认是谁的","自带容器囤积","等人走了再出手"]}],
-ja:[{t:"一生同じ色の食べ物だけ？",o:["赤 — 情熱的","青 — 落着き","緑 — 健康的","透明 — 0カロリー"]},{t:"キーボードにキノコが！反応？",o:["SNSに投稿","味見する","除湿機買う","名前つけて飼う"]},{t:"明日AIが世界支配したら？",o:["Python学びAI参加","山に隠れる","黙示録ライブ配信","週末を交渉"]},{t:"スピリットアニマルは？",o:["フクロウ — 夜行性","ナマケモノ — 安定","ハスキー — 見た目","ゴキブリ — 不死身"]},{t:"人生ゲームのセーブ状態？",o:["スピードラン","カジュアルサブクエ","ハードコア苦難中","クラウドゲーマー"]},{t:"午前3時、眠れない理由？",o:["人生選択の不安","朝消えるアイデア","ネットで誰か間違","虚無と共鳴中"]},{t:"グループPJでの役割？",o:["一人で全部やる","締切まで消える","会議の日程の会議","お菓子と精神支援"]},{t:"週末朝起きてする事？",o:["ジム朝5時","朝？午後3時","家中大掃除","デリバリーとネトフリ"]},{t:"知らぬ人に褒められて？",o:["優雅にお礼","三日間反芻","精巧などっきり疑","全人生語り出す"]},{t:"未読メール999+。反応？",o:["全既読にする","人間からだけ読む","新アドレス作成","ホラー映画の如く"]},{t:"上司アジェンダ無MTG。",o:["Slackで済ませて","47枚資料準備","もう別会議中","お菓子を持参"]},{t:"オフィス無料食べ物出現。",o:["戦略的ダッシュ一番","全員用か確認","容器持参備蓄","誰も見てない時"]}],
-ko:[{t:"평생 한 색 음식만 먹는다면?",o:["빨강 — 열정적","파랑 — 차분","초록 — 건강","투명 — 0칼로리"]},{t:"키보드에 버섯이 났다. 반응?",o:["SNS 사진 올리기","맛보기","제습기 사기","이름 지어 키우기"]},{t:"내일 AI가 세계 지배하면?",o:["Python 배워 합류","산속에 숨기","종말 라이브방송","주말 협상"]},{t:"스피릿 애니멀은?",o:["부엉이 — 야행성","나무늘보 — 느림","허스키 — 잘생김","바퀴벌레 — 불사"]},{t:"인생게임 현재 저장상태?",o:["스피드런","캐주얼 서브퀘","하드코어 고통","클라우드게이머"]},{t:"새벽3시 잠 못드는 이유?",o:["인생 선택 불안","아침에 사라질 아이디어","누군가 인터넷서 틀림","그냥 허무와 교감"]},{t:"조별과제 내 역할은?",o:["혼자 다 하는게 빨라","마감일까지 잠수","회의 기획 회의 잡기","간식과 정신적 지지"]},{t:"주말아침 일어나서?",o:["이미 헬스장 오전5시","아침? 오후 3시","이유없이 대청소","배달음식 정주행"]},{t:"낯선사람 칭찬하면?",o:["우아하게 감사","3일간 곱씹기","정교한 장난 의심","인생 스토리 다 말함"]},{t:"읽지 않은 메일 999+?",o:["전체 읽음 처리","진짜 사람것만 읽기","새주소 만들기","공포영화 보듯 응시"]},{t:"상사 무안건 빠른미팅.",o:["Slack이면 됐을것","47장 슬라이드","이미 다른회의중","간식이라도 가져가"]},{t:"사무실 무료음식 등장.",o:["전략질주 1등","모두용인지 확인","여분용기 비축","아무도 없을때"]}],
-es:[{t:"¿Un solo color de comida siempre?",o:["Rojo — Apasionado","Azul — Tranquilo","Verde — Saludable","Transparente — 0 cal"]},{t:"¿Hongos en el teclado?",o:["Foto para redes ya","Probarlos","Comprar deshumidificador","Nombrarlos mascota"]},{t:"IA toma control mañana. ¿Tu?",o:["Aprender Python unirme","Esconderme montañas","Transmitir apocalipsis","Negociar fines semana"]},{t:"¿Tu animal espiritual?",o:["Buho — Nocturno","Perezoso — Lento","Husky — Guapo","Cucaracha — Inmortal"]},{t:"Vida es juego. ¿Tu guardado?",o:["Speedrunner","Casual side quests","Hardcore sufriendo","Gamer nube"]},{t:"3AM y sin dormir. ¿Por qué?",o:["Ansiedad existencial vida","Idea genial que se irá","Alguien erra en internet","Solo vibrando vacío"]},{t:"Proyecto grupal. ¿Tu papel?",o:["Hacerlo todo solo","Desaparecer hasta fecha","Agendar planear reuniones","Traer snacks moral"]},{t:"Sábado mañana. Te despiertas y?",o:["Ya gimnasio 5AM","¿Mañana? Son 3PM","Limpiar toda casa","Pedir comida maratonear"]},{t:"Extraño te halaga. ¿Reacción?",o:["Agradecer elegante","Sobreanalizar 3 días","Asumir es broma","Contar historia vida"]},{t:"Bandeja: 999+ sin leer. ¿Y?",o:["Marcar todo leído","Solo humanos reales","Nuevo correo fresh","Mirar como horror"]},{t:"Jefe agenda junta sin agenda.",o:["Era un mensaje Slack","47 diapositivas","Ya en otra junta mental","Traer snacks vale"]},{t:"Comida gratis cocina oficina.",o:["Carrera primer lugar","Ver si para todos","Llevar recipientes","Esperar nadie vea"]}]
+en:[
+{t:"What do you value most in your career?",o:["Freedom & autonomy over schedule","Financial security & steady growth","Creative expression & innovation","Recognition & status among peers","Helping others & making impact","Learning new skills constantly"]},
+{t:"How do you typically handle a major disagreement with a close friend?",o:["Address it directly - clear honest talk","Give space then reconnect naturally","Analyze logically who is right","Avoid conflict, let it fade away","Find compromise middle ground","Vent to other friends first"]},
+{t:"Which environment makes you feel most productive?",o:["Complete silence and solitude","Busy cafe with background noise","Nature outdoors fresh air","Organized tidy minimal space","Creative chaos with inspiration","Collaborative team energy room"]},
+{t:"When you feel overwhelmed, what is your first instinct?",o:["Make lists and detailed plan","Withdraw and recharge alone","Call someone and talk it out","Push through with willpower","Escape into entertainment","Analyze root cause rationally"]},
+{t:"What type of movie or story resonates with you most?",o:["Dark complex psychological thriller","Heartwarming human connection drama","Epic fantasy with world-building","Smart comedy with witty dialogue","Inspiring true-story underdog tale","Mind-bending sci-fi philosophical"]},
+{t:"How do you approach learning a completely new skill?",o:["Read everything first, then practice","Jump in immediately, learn by doing","Find a mentor or structured course","Watch others and imitate","Break it into small daily habits","Obsess until I master it fully"]},
+{t:"What is your relationship with social media?",o:["Carefully curated, strategic presence","Minimal use, value real connection","Love sharing - it is creative outlet","Lurker - observe but rarely post","Anxious about it but cannot quit","Use for news and information only"]},
+{t:"A stranger is crying in public. What do you do?",o:["Approach gently and ask if okay","Give them space and privacy","Feel deeply awkward but stay nearby","Offer tissue without saying much","Call a friend they might need","Pretend I did not notice - respect"]},
+{t:"What does a perfect Sunday look like to you?",o:["Sleep in, zero obligations, pure rest","Active adventure hiking or exploring","Productive - get ahead for the week","Quality time with loved ones","Creative projects and hobbies","Reflecting and planning life goals"]},
+{t:"How do you make important life decisions?",o:["Pros and cons spreadsheet analysis","Follow my gut intuition feeling","Consult trusted friends extensively","Research every possible angle","Meditate and wait for clarity","Take bold leap and figure out later"]},
+{t:"What aspect of modern life frustrates you most?",o:["Constant distraction and phone addiction","Economic inequality and unfairness","Superficial relationships and loneliness","Climate crisis and environmental damage","Meaningless work and corporate culture","Information overload and fake news"]},
+{t:"If you had one extra hour every day, how would you spend it?",o:["Sleep more - deeply exhausted","Learn something new every day","Connect with people I care about","Exercise and take care of body","Create art music or write","Do absolutely nothing - just be"]},
+{t:"How do you react when someone gives you unexpected criticism?",o:["Defensive at first, then reflect later","Grateful - chance to improve self","Analyze if feedback is valid logically","Anxious and overthink for days","Ask clarifying questions immediately","Brush it off - their opinion not mine"]},
+{t:"What is your biggest fear about getting older?",o:["Losing physical health and vitality","Running out of time for dreams","Becoming irrelevant or forgotten","Financial insecurity in old age","Losing loved ones along the way","Becoming the boring version of myself"]},
+{t:"A friend succeeds wildly while you are struggling. Your honest feeling?",o:["Genuinely happy but also envious","Inspired - proof it is possible","Re-evaluate my own life choices","Proud of them - no comparison","Motivated to work even harder","Sad about my own situation mostly"]},
+{t:"What is your relationship with money?",o:["Tool for freedom and experiences","Security blanket, save aggressively","Guilty pleasure - enjoy spending","Complicated - never feel enough","Practical - budget track everything","Status signal and scoreboard"]},
+{t:"How do you deal with uncertainty about the future?",o:["Plan multiple backup scenarios","Embrace it - uncertainty is exciting","Anxious spiral into worst cases","Trust things will work out somehow","Focus only on what I can control","Seek guidance from mentors elders"]},
+{t:"What kind of leader or boss brings out your best work?",o:["Hands-off - trust me completely","Supportive mentor who coaches me","Clear expectations structure deadlines","Visionary inspiring big picture","Collaborative partner equal footing","Challenging pushes me to grow"]},
+{t:"You are at a party where you know nobody. What happens?",o:["Find the dog or cat and hang there","Scan for kindest face, introduce self","Stand by snacks, hope approached","Become temporary extrovert - thrive","Leave early with polite excuse","Observe dynamics like a documentary"]},
+{t:"What does happiness actually mean to you?",o:["Deep authentic connections with few","Freedom to do whatever whenever","Sense of purpose and contribution","Peace of mind and no anxiety","Growth - becoming better version","Small pleasures accumulated daily"]},
+{t:"How do you feel about competition?",o:["Fuel for excellence and motivation","Healthy when fair and respectful","Anxiety-inducing, prefer collaboration","Indifferent - compete only with self","Fun like a game - bring it on","Depends on what is at stake"]},
+{t:"What quality do you find hardest to forgive in others?",o:["Betrayal of trust and disloyalty","Cruelty or intentional harm","Dishonesty and manipulation","Arrogance and condescension","Laziness or lack of effort","Indifference and apathy"]},
+{t:"When you imagine your ideal life in 10 years, what do you see?",o:["Quiet peaceful life close to nature","Thriving career respected expert","Rich deep relationships family focus","Creative freedom making art ideas","Adventure travel exploring world","Making real difference in community"]},
+{t:"How do you typically respond to a sudden change of plans?",o:["Frustrated but adapt quickly","Excited by spontaneity and novelty","Anxious - need time to recalibrate","Analyze new plan for optimization","Go with flow - whatever happens","Secretly relieved for excuse to cancel"]},
+{t:"What do you notice first about new people you meet?",o:["Their energy and emotional vibe","How intelligent or interesting they seem","Whether they seem kind or trustworthy","Appearance and personal style","Their sense of humor compatibility","What they are passionate about"]},
+{t:"What role do you naturally take in group decisions?",o:["The organizer who makes it happen","The ideas person who brainstorms","The mediator who finds consensus","The skeptic who questions assumptions","The supporter who backs best idea","The quiet observer who votes last"]},
+{t:"How do you feel about technology increasingly shaping life?",o:["Excited - incredible possibilities ahead","Cautiously optimistic with concerns","Anxious about loss of human connection","Pragmatic - use what helps, ignore rest","Fascinated but overwhelmed by pace","Skeptical - tech solves nothing fundamental"]},
+{t:"What energizes you more than almost anything else?",o:["Deep meaningful conversation","Physical movement exercise sweat","Creating something from nothing","Discovering new ideas knowledge","Being truly seen and understood","Solving complex challenging problems"]},
+{t:"What is your relationship with food?",o:["Fuel - eat efficiently for performance","Pleasure - cooking and savoring art","Comfort - emotional connection eating","Adventure - try everything exotic new","Discipline - strictly track nutrition","Social - food brings people together"]},
+{t:"If you could send one message to your younger self, what would it be?",o:["Stop worrying what others think","Save money and invest early please","Cherish the people - they matter most","Take more risks - you will survive","You are enough - stop proving worth","Learn to rest without feeling guilty"]}
+],
+
+zh:[
+{t:"职业生涯中你最看重什么？",o:["时间自由与自主决策权","财务安全与稳定增长","创意表达与持续创新","同行认可与社会地位","帮助他人与社会影响力","不断学习掌握新技能"]},
+{t:"与好友发生重大分歧时，你通常怎么处理？",o:["直接坦诚沟通，把话说清楚","给彼此空间，等情绪平复再聊","理性分析谁对谁错，讲道理","避免冲突，让事情慢慢淡化","各退一步，寻找折中方案","先跟其他朋友倾诉，再决定"]},
+{t:"在哪种环境中你感觉最能发挥效率？",o:["绝对安静且无人打扰的空间","热闹咖啡馆有人气但不嘈杂","大自然中，有新鲜空气阳光","干净整洁极简主义的房间","创意凌乱但充满灵感的工作台","团队协作充满讨论的会议室"]},
+{t:"当你感到崩溃压力大的时候，第一反应是？",o:["列出清单，制定详细计划","独自待着，给自己充电","打电话找人倾诉释放","硬扛过去，意志力战胜一切","逃避到娱乐中放空自己","理性分析压力根源找到解法"]},
+{t:"哪种影视作品最能触动你的内心？",o:["黑暗复杂的心理悬疑惊悚片","温暖治愈的人际关系剧情片","设定宏大的史诗奇幻世界观","机智幽默台词精妙的高级喜剧","真实故事改编的激励逆袭片","烧脑科幻引发的哲学思考"]},
+{t:"你怎么开始学习一个全新技能？",o:["先看大量资料再动手实践","直接上手边做边学不怕犯错","报班找老师系统化学习","观察模仿别人怎么做","拆成小块每天坚持微习惯","沉浸式投入直到完全掌握"]},
+{t:"你与社交媒体的关系是怎样的？",o:["精心运营，有策略地展示自己","尽量少用，更珍惜真实社交","热爱分享，是创意表达的出口","潜水观察者，看但不怎么发","焦虑但它成了戒不掉的依赖","只用它获取新闻和信息"]},
+{t:"你在街上看到陌生人在哭，你会？",o:["走过去轻声询问是否需要帮助","默默走开，尊重他们的空间","感到尴尬但会留在这附近","递纸巾但不说什么话","帮忙打电话通知他们的朋友","假装没看见，避免让对方难堪"]},
+{t:"你心中完美的周日长什么样？",o:["睡到自然醒，完全无计划放松","爬山徒步运动探险户外活动","高效利用，为下周做准备","高质量陪伴家人朋友","沉浸在自己的创意爱好中","深度反思和规划人生目标"]},
+{t:"你怎样做重大的人生决定？",o:["列出利弊表格理性分析","跟随内心直觉和第六感","广泛咨询信任的人再决定","研究所有可能的选项和信息","冥想等待内心变得清晰","大胆跳进去，边做边调整"]},
+{t:"现代生活中最让你烦躁的是什么？",o:["无处不在的碎片化分心","贫富差距和机会不平等","表面社交和人际关系空心化","气候危机和环境破坏","无意义的工作和职场文化","信息过载和假新闻泛滥"]},
+{t:"如果每天多给你一小时，刚怎么花？",o:["好好睡觉，真的很缺觉","每天学一个新东西","和重要的人深度交流","锻炼身体照顾好自己","创作艺术音乐写作","什么都不做，就安静待着"]},
+{t:"有人突然给你负面批评，你的反应是？",o:["本能防御，事后冷静反思","感激，这是改进自己的机会","理性分析批评是否客观成立","焦虑并过度思考好几天","立即追问具体细节和建议","一笑置之，不需要太在意"]},
+{t:"关于变老，你最害怕的是什么？",o:["失去身体健康和活力","来不及实现自己的梦想","变得无足轻重被人遗忘","年老时没有经济保障","一路失去重要的人","变成自己曾经最讨厌的样子"]},
+{t:"朋友暴富但你正处低谷，你真实的感受？",o:["真心高兴但也有些许嫉妒","受到鼓舞，证明这是可能的","重新审视反思自己的选择","为他们骄傲，不会比较","更加努力，被激发了斗志","主要是替自己的现状难过"]},
+{t:"你和金钱的关系是怎样的？",o:["买自由和体验的工具","安全感的来源，拼命存钱","偶尔享受花钱的快乐","关系复杂，感觉自己永远不够","实用主义，精细记账管理","地位和成就的体现"]},
+{t:"你怎么面对未来的不确定性？",o:["提前规划好多种备选方案","拥抱它，不确定性即可能性","焦虑地想象各种最坏情况","相信一切最终都会好起来","只关注自己能控制的部分","寻求前辈和导师的指导"]},
+{t:"什么样的领导能激发你最好的状态？",o:["充分放手，给予完全信任","教练式引导，鼓励成长","明确分工和时间节点要求","愿景驱动，有大格局感染力","平等协作的伙伴关系","会挑战你，推你走出舒适区"]},
+{t:"你去了一个谁都不认识的派对，怎么办？",o:["找到狗或猫，和它待在一起","寻找最友善的人主动自我介绍","站小吃旁边，等别人来搭话","临时变社牛，享受社交","找体面借口提前撤退","像纪录片导演一样观察全场"]},
+{t:"对你来说，幸福到底是什么？",o:["少数几个深度真挚的关系","随时随地不被束缚的自由","有目标感和价值贡献感","内心平静没有焦虑","不断成长成为更好版本","日常小事积累起来的满足"]},
+{t:"你对竞争的态度是什么？",o:["驱动卓越和进步的动力燃料","公平尊重的竞争是健康的","容易焦虑，更喜欢合作","无所谓，只和自己比较","像游戏一样好玩尽管来","看赌注大小再决定投入"]},
+{t:"你最不能原谅别人的什么品质？",o:["背叛信任和不忠诚","刻意的残忍和伤害","撒谎和操纵欺骗","傲慢自大高人一等","懒惰和不思进取","冷漠和事不关己"]},
+{t:"想象10年后理想人生，你看到了什么？",o:["宁静自然中的简单生活","事业有成受尊重的专家","围绕家庭和深厚关系","创意自由实现各种想法","环游世界到处探索冒险","为社区做出真正的贡献"]},
+{t:"计划突然被打乱，你的反应是？",o:["有点恼火但能快速适应","兴奋，即兴带来新鲜感","焦虑，需要时间调整心理","分析新情况找最优方案","随遇而安，事已至此","心里暗喜终于有理由取消"]},
+{t:"认识新朋友时，你最先注意到什么？",o:["对方散发的气场和情绪","是否聪明和有趣","看起来是否善良可信","外貌颜值和个人打扮","幽默感是否合拍","对方对什么充满热情"]},
+{t:"在团队决策中你自然承担什么角色？",o:["执行者，把事做成","点子王，负责头脑风暴","调停者，寻求共识","质疑者，挑战假设","支持者，推最好的想法","观察者，最后再投票"]},
+{t:"你怎么看待科技日益渗透生活？",o:["兴奋，前方有无限可能","谨慎乐观但有所担忧","焦虑人际连接正在消失","实用主义，有用的留没用的扔","着迷但被节奏压得喘不过气","怀疑科技不能解决根本问题"]},
+{t:"什么比任何事都更能给你充电？",o:["深入有质量的对话","运动流汗身体释放","从无到有的创造过程","发现新知识和想法","被真正看见和理解","解决复杂有难度的挑战"]},
+{t:"你和食物的关系是怎样的？",o:["燃料，吃是为了高效运转","乐趣，烹饪和品味是艺术","慰藉，情感依赖的出口","冒险，尝试一切新鲜异域","自律，严格营养计算管理","社交，食物把人们聚在一起"]},
+{t:"如果可以给年轻时的自己发一条信息？",o:["别在意别人怎么看你","早点存钱投资对自己好","珍惜身边的人最重要","多冒险多尝试不会死的","你本来就足够好无需证明","学会休息不必有罪恶感"]}
+],
+
+ja:[
+{t:"キャリアで最も大切にしていることは？",o:["スケジュールの自由と裁量権","経済的安定と着実な成長","創造的表現と革新性","同僚からの評価と地位","人助けと社会への影響","常に新しいスキルを学ぶ"]},
+{t:"親友と大きな意見の相違が起きた時、どうする？",o:["率直に向き合い正直に話す","距離を置き自然な流れで再接続","理性的にどちらが正しいか分析","衝突を避け自然消滅を待つ","妥協点を見つけお互い譲る","まず他の友達に愚痴を言う"]},
+{t:"どんな環境で最も生産性を感じる？",o:["完全な静寂と一人の空間","賑やかなカフェの適度な雑音","自然の中、新鮮な空気を吸って","整理整頓されたミニマルな部屋","創造的な混沌に満ちた仕事場","チームで協力するエネルギッシュな場"]},
+{t:"圧倒されそうになった時、最初の本能は？",o:["リストを作り詳細な計画を立てる","一人になって充電する","誰かに電話して話を聞いてもらう","意志力で押し切る","エンタメに逃避してリセット","原因を理性的に分析する"]},
+{t:"どんな映画や物語に最も共鳴する？",o:["ダークで複雑な心理サスペンス","心温まる人間関係ドラマ","壮大な世界観のファンタジー","機知に富んだスマートなコメディ","実話ベースの感動的な挑戦物語","哲学的なSFマインドベンダー"]},
+{t:"新しいスキルを学ぶ時のアプローチは？",o:["まず徹底的に読んでから実践","すぐ飛び込んで実践から学ぶ","メンターや体系的コースを探す","他人を観察して真似る","小さな日々の習慣に分解する","完全にマスターするまで没頭"]},
+{t:"ソーシャルメディアとの関係は？",o:["慎重にキュレーションした戦略的運用","最小限、リアルな繋がりを重視","共有が好き、創造的表現の場","ROM専、観察するだけでほぼ投稿しない","不安だがやめられない依存","情報収集とニュースのためだけ"]},
+{t:"街で知らない人が泣いている。どうする？",o:["そっと近づき大丈夫か声をかける","距離を置きプライバシーを尊重","気まずいがその場を離れない","ティッシュを差し出すが何も言わない","友達を呼ぶ手伝いをする","気づかなかったふりをする"]},
+{t:"完璧な日曜日とは？",o:["寝坊、ゼロの義務、純粋な休息","ハイキングや冒険のアクティブな一日","生産的に来週の準備をする","大切な人との充実した時間","クリエイティブな趣味に没頭","人生の目標を振り返り計画する"]},
+{t:"重要な人生の決断はどう下す？",o:["長所短所のスプレッドシート分析","直感と第六感に従う","信頼する人に広く相談","あらゆる角度から徹底調査","瞑想し明晰さが訪れるのを待つ","大胆に飛び込み後で調整"]},
+{t:"現代生活で最もイライラすることは？",o:["絶え間ない注意散漫と携帯依存","経済格差と不公平さ","表面的な人間関係と孤独感","気候危機と環境破壊","無意味な仕事と企業文化","情報過多とフェイクニュース"]},
+{t:"毎日1時間多くあったら何に使う？",o:["もっと寝る、本当に睡眠不足","毎日新しいことを学ぶ","大切な人と深く繋がる","運動して体をケアする","アートや音楽、創作活動","何もしない、ただ存在する"]},
+{t:"突然批判された時、どう反応する？",o:["最初は防御的、後で冷静に振り返る","感謝、自分の改善チャンス","その批判が妥当か論理的に分析","不安になり何日も考えすぎる","すぐに具体的な説明を求める","気にしない、相手の意見だから"]},
+{t:"年を取ることの最大の恐怖は？",o:["身体の健康と活力を失うこと","夢を実現する時間がなくなること","無関係で忘れ去られること","老後の経済的不安","大切な人を失い続けること","自分が一番嫌いなタイプになること"]},
+{t:"友人が大成功、自分は苦戦中。正直な気持ちは？",o:["心から嬉しいが少し嫉妬もある","刺激を受けた、可能性の証明","自分の人生を再評価する","誇りに思う、比較はしない","もっと頑張ろうとモチベーション","主に自分の状況への悲しみ"]},
+{t:"お金との関係は？",o:["自由と経験のためのツール","安全保障、積極的に貯蓄","たまの贅沢を楽しむ","複雑、いつも足りないと感じる","実用的、予算管理を徹底","ステータスのシグナルとスコアボード"]},
+{t:"未来の不確実性にどう対処する？",o:["複数の代替プランを準備","受け入れる、不確実性は可能性","最悪のケースを不安に想像","なんとかなると信じる","自分でコントロールできることだけ","メンターや先輩に助言を求める"]},
+{t:"最高の仕事を引き出すリーダーとは？",o:["完全に任せて信頼するタイプ","コーチのように導き育てる","明確な期待値と期限を示す","ビジョンを語り鼓舞する","対等な協力パートナー","挑戦して成長を促す"]},
+{t:"誰も知らないパーティーに来た。どうする？",o:["犬か猫を見つけて一緒にいる","最も優しそうな人に自己紹介","スナックのそばで誰かの接近を待つ","一時的に社交的になって楽しむ","丁寧な言い訳で早めに退散","ドキュメンタリーのように観察"]},
+{t:"あなたにとって幸福とは？",o:["少数の深く本物の繋がり","いつでも好きなことをする自由","目的意識と貢献感","心の平安と不安のなさ","成長し続けより良い自分に","日々の小さな喜びの積み重ね"]},
+{t:"競争に対する考え方は？",o:["卓越性への燃料とモチベーション","公正で敬意ある競争は健全","不安を感じる、協力を好む","無関心、自分との競争のみ","ゲームのように楽しむ","何がかかっているかによる"]},
+{t:"他人の中で最も許せない性質は？",o:["信頼の裏切りと不誠実","残酷さや意図的な危害","嘘と操作による欺瞞","傲慢さと見下す態度","怠惰と努力不足","無関心と無気力"]},
+{t:"10年後の理想の人生を想像すると？",o:["自然に近い静かで平和な生活","第一人者として尊敬されるキャリア","家族と深い人間関係を中心に","創造の自由とアイデア実現","冒険と世界旅行の日々","コミュニティへの本当の貢献"]},
+{t:"予定が突然変わった時、どう反応？",o:["イライラするがすぐ適応","自発性と新しさに興奮","不安、再調整に時間が必要","新しい状況を分析し最適化","流れに任せる、もう決まった","内心キャンセルできてほっとする"]},
+{t:"新しい人と会う時、最初に何に気づく？",o:["相手のエネルギーと感情の波動","どれだけ知的で面白いか","親切で信頼できそうか","外見と個人のスタイル","ユーモアの相性と波長","相手が情熱を注ぐもの"]},
+{t:"グループ決断での自然な役割は？",o:["実現させる実行役","アイデアを出す発想役","合意を形成する調整役","前提を疑う批判的思考役","最良案を支持するサポート役","静かに観察し最後に投票"]},
+{t:"テクノロジーが生活に浸透するのをどう感じる？",o:["興奮、無限の可能性が広がる","慎重な楽観、懸念もあり","人間関係の喪失に不安","実用的、役立つものだけ使い残りは無視","魅了されるがペースに圧倒","根本的な問題は解決しないと懐疑的"]},
+{t:"何よりもエネルギーを充電してくれるものは？",o:["深く意味のある会話","身体運動と汗をかくこと","ゼロから何かを創り出すこと","新しいアイデアと知識の発見","本当に理解され認められること","複雑で挑戦的な問題解決"]},
+{t:"食べ物との関係は？",o:["燃料、効率的なパフォーマンスのため","楽しみ、料理と味わいは芸術","慰め、感情的な繋がり","冒険、エキゾチックなものを全部試す","規律、栄養を厳密に管理","社交、食事が人を繋げる"]},
+{t:"若い自分に一つメッセージを送れるなら？",o:["他人の目を気にするのをやめろ","早く貯金して投資しろ自分","人を大切に、それが一番大事","もっとリスクを取れ、生き残れる","お前は十分だ、証明しなくていい","罪悪感なく休むことを学べ"]}
+],
+
+ko:[
+{t:"직업에서 가장 중요하게 생각하는 것은?",o:["스케줄의 자유와 자율권","재정적 안정과 꾸준한 성장","창의적 표현과 혁신","동료들의 인정과 지위","다른 사람을 돕고 영향력 발휘","끊임없이 새로운 기술 배우기"]},
+{t:"친한 친구와 큰 의견 차이가 생기면 어떻게 하나요?",o:["직접 솔직하게 이야기한다","거리를 두고 자연스럽게 다시 연결","누가 옳은지 논리적으로 분석","갈등을 피하고 시간이 해결하길","절충점을 찾아 서로 양보","다른 친구들에게 먼저 털어놓는다"]},
+{t:"어떤 환경에서 가장 생산성이 높아지나요?",o:["완벽한 정적과 혼자만의 공간","적당한 소음이 있는 북적이는 카페","신선한 공기가 있는 자연 속","정리정돈된 미니멀한 방","영감으로 가득한 창의적 혼돈","팀워크 에너지가 넘치는 공간"]},
+{t:"압도당하는 기분이 들 때 첫 본능은?",o:["리스트를 만들고 상세 계획 수립","혼자만의 시간으로 재충전","누군가에게 전화해 이야기한다","의지력으로 밀어붙인다","오락으로 도피해 머리를 비운다","원인을 이성적으로 분석한다"]},
+{t:"어떤 영화나 이야기가 가장 마음을 울리나요?",o:["어둡고 복잡한 심리 스릴러","따뜻한 인간관계 드라마","거대한 세계관의 판타지","재치 있는 똑똑한 코미디","실화 기반 감동적인 역전극","철학적 사고를 자극하는 SF"]},
+{t:"새로운 기술을 배울 때 당신의 접근법은?",o:["철저히 읽고 조사한 후 실습","바로 뛰어들어 하면서 배운다","멘토나 체계적인 과정을 찾는다","다른 사람 관찰하고 모방","작은 일일 습관으로 나눈다","완전히 마스터할 때까지 몰입"]},
+{t:"소셜미디어와의 관계는 어떤가요?",o:["신중하게 큐레이션, 전략적 운영","최소한으로 사용, 진짜 관계 중시","공유를 좋아함, 창의적 표현의 장","눈팅족, 보기만 하고 거의 글 안 씀","불안하지만 끊을 수 없는 의존","뉴스와 정보 수집 용도로만"]},
+{t:"길에서 모르는 사람이 울고 있다면?",o:["조용히 다가가 괜찮은지 묻는다","거리를 두고 사생활을 존중한다","어색하지만 근처에 머문다","휴지만 건네고 말은 하지 않는다","친구를 불러주는 걸 도와준다","못 본 척 지나간다"]},
+{t:"완벽한 일요일은 어떤 모습인가요?",o:["늦잠, 제로 의무, 순수한 휴식","등산이나 탐험으로 활동적인 하루","생산적으로 다음 주 준비하기","소중한 사람들과 보내는 시간","창의적인 취미에 몰입하기","인생 목표를 돌아보고 계획하기"]},
+{t:"중요한 인생 결정을 어떻게 내리나요?",o:["장단점 스프레드시트 분석","직감과 육감을 따른다","신뢰하는 사람들에게 폭넓게 상담","가능한 모든 각도에서 조사","명상하며 명확해지길 기다린다","대담하게 뛰어들고 나중에 조정"]},
+{t:"현대 생활에서 가장 짜증나는 것은?",o:["끊임없는 주의 산만과 스마트폰 중독","경제적 불평등과 불공정","피상적 인간관계와 외로움","기후 위기와 환경 파괴","의미 없는 일과 기업 문화","정보 과잉과 가짜 뉴스 범람"]},
+{t:"매일 1시간 더 주어진다면 어떻게 쓸까요?",o:["더 자기, 정말 잠이 부족해","매일 새로운 것을 하나 배우기","소중한 사람들과 깊이 연결되기","운동하고 몸을 돌보기","예술 음악 글쓰기 창작","아무것도 안 하기, 그냥 존재하기"]},
+{t:"누군가 갑자기 비판하면 어떻게 반응하나요?",o:["처음엔 방어적, 나중에 차분히 반성","감사, 자신을 개선할 기회","그 비판이 타당한지 논리적 분석","불안해지고 며칠 과도하게 생각","즉시 구체적인 설명과 제안 요청","신경 쓰지 않음, 남의 의견일 뿐"]},
+{t:"나이 드는 것에 대한 가장 큰 두려움은?",o:["신체 건강과 활력을 잃는 것","꿈을 이룰 시간이 부족해지는 것","무관심해지고 잊혀지는 것","노후의 경제적 불안","소중한 사람들을 계속 잃는 것","내가 가장 싫어하는 유형이 되는 것"]},
+{t:"친구가 크게 성공하고 나는 힘든 상황. 솔직한 기분은?",o:["진심으로 기쁘지만 약간의 질투도","자극받음, 가능하다는 증거","내 인생 선택을 재평가하게 됨","자랑스러움, 비교하지 않음","더 열심히 하려는 동기부여","주로 내 상황에 대한 슬픔"]},
+{t:"돈과의 관계는 어떤가요?",o:["자유와 경험을 위한 도구","안전망, 공격적으로 저축","가끔의 사치를 즐김","복잡함, 항상 부족하다고 느낌","실용적, 예산을 철저히 관리","지위의 신호와 점수판"]},
+{t:"미래의 불확실성에 어떻게 대처하나요?",o:["여러 대체 시나리오를 미리 계획","받아들임, 불확실성은 가능성","최악의 경우를 불안하게 상상","결국 다 잘될 거라고 믿음","내가 통제할 수 있는 것에만 집중","멘토나 선배에게 조언 구하기"]},
+{t:"최고의 성과를 이끌어내는 리더는?",o:["완전히 맡기고 신뢰하는 타입","코치처럼 이끌고 성장시키는 타입","명확한 기대치와 마감 제시","비전을 말하고 영감을 주는 타입","동등한 협력 파트너로서 함께","도전하게 하고 성장을 밀어붙이는 타입"]},
+{t:"아무도 모르는 파티에 왔다. 어떻게 하나?",o:["개나 고양이를 찾아 같이 있는다","가장 친절해 보이는 사람에게 자기소개","간식 옆에서 누군가 다가오길 기다림","일시적으로 사교성이 폭발, 즐김","정중한 핑계로 일찍 빠져나감","다큐멘터리처럼 전체를 관찰"]},
+{t:"당신에게 행복이란 결국 무엇인가요?",o:["소수의 깊고 진정한 연결","언제든 원하는 걸 할 수 있는 자유","목적 의식과 기여감","마음의 평화와 불안 없음","성장, 더 나은 버전이 되는 것","매일의 작은 즐거움이 쌓이는 것"]},
+{t:"경쟁에 대한 당신의 생각은?",o:["탁월함을 위한 연료와 동기부여","공정하고 존중하는 경쟁은 건강","불안 유발, 협력을 선호","무관심, 나 자신과만 경쟁","게임처럼 재미있게 즐김","무엇이 걸려 있느냐에 따라 다름"]},
+{t:"타인에게서 가장 용서하기 힘든 특성은?",o:["신뢰의 배신과 불성실","잔인함과 의도적인 해","거짓말과 조작적 기만","오만함과 무시하는 태도","게으름과 노력 부족","무관심과 냉담"]},
+{t:"10년 후 이상적인 삶을 상상하면?",o:["자연 가까이의 조용하고 평화로운 삶","존경받는 전문가로서 성공적인 커리어","가족과 깊은 관계 중심의 삶","아이디어를 실현하는 창의적 자유","모험과 세계 여행으로 가득한 나날","커뮤니티에 진정한 기여를 하는 삶"]},
+{t:"계획이 갑자기 바뀌면 어떻게 반응하나요?",o:["짜증나지만 빠르게 적응","즉흥성과 새로움에 신남","불안, 재조정에 시간이 필요","새로운 상황을 분석해 최적화","흐름에 맡김, 어쩔 수 없지","속으로 취소할 이유가 생겨 다행"]},
+{t:"새로운 사람을 만날 때 가장 먼저 눈에 띄는 것은?",o:["그 사람의 에너지와 감정적 분위기","얼마나 지적이고 흥미로운지","친절하고 신뢰할 수 있어 보이는지","외모와 개인적 스타일","유머 감각과의 궁합","무엇에 열정을 가지고 있는지"]},
+{t:"그룹 의사결정에서 자연스러운 역할은?",o:["실행하는 조직자 역할","아이디어를 내는 브레인스토머","합의를 이끄는 중재자 역할","가정에 의문을 제기하는 회의론자","최선의 아이디어 지지하는 서포터","조용히 관찰하고 마지막에 투표"]},
+{t:"기술이 삶에 점점 스며드는 것에 대해?",o:["신남, 놀라운 가능성이 펼쳐짐","조심스러운 낙관, 우려도 있음","인간적 연결 상실에 대한 불안","실용적, 도움 되는 것만 쓰고 나머지 무시","매료되지만 속도에 압도됨","근본적 문제는 해결 못 한다는 회의"]},
+{t:"무엇보다 에너지를 충전해주는 것은?",o:["깊고 의미 있는 대화","신체 운동과 땀 흘리기","무에서 유를 창조하는 과정","새로운 아이디어와 지식 발견","진정으로 이해받고 인정받는 것","복잡하고 도전적인 문제 해결"]},
+{t:"음식과의 관계는 어떤가요?",o:["연료, 효율적인 성능을 위한 것","즐거움, 요리와 맛보기는 예술","위안, 감정적 연결의 출구","모험, 독특하고 새로운 것 다 시도","규율, 영양을 엄격히 관리","사교, 음식이 사람들을 모으는 것"]},
+{t:"젊은 자신에게 한 마디 보낼 수 있다면?",o:["남의 눈치 그만 봐도 돼","일찍 저축하고 투자해 제발","사람을 소중히 여겨, 그게 제일 중요해","더 많은 위험을 감수해, 살아남을 거야","넌 충분해, 증명하려 하지 마","죄책감 없이 쉬는 법을 배워"]}
+],
+
+es:[
+{t:"¿Qué es lo más importante en tu carrera?",o:["Libertad y autonomía sobre mi horario","Seguridad financiera y crecimiento estable","Expresión creativa e innovación","Reconocimiento y estatus entre colegas","Ayudar a otros y generar impacto","Aprender nuevas habilidades constantemente"]},
+{t:"¿Cómo manejas un gran desacuerdo con un amigo cercano?",o:["Confrontarlo directamente con honestidad","Dar espacio y luego reconectar naturalmente","Analizar lógicamente quién tiene razón","Evitar el conflicto, dejar que se disuelva","Buscar un punto medio de compromiso","Desahogarme con otros amigos primero"]},
+{t:"¿En qué entorno te sientes más productivo?",o:["Silencio absoluto y completa soledad","Cafetería concurrida con ruido de fondo","En la naturaleza con aire fresco","Espacio ordenado y minimalista","Caos creativo lleno de inspiración","Sala de equipo con energía colaborativa"]},
+{t:"Cuando te sientes abrumado, ¿cuál es tu primer instinto?",o:["Hacer listas y un plan detallado","Aislarme y recargar energías solo","Llamar a alguien y hablar al respecto","Seguir adelante con fuerza de voluntad","Escapar hacia el entretenimiento","Analizar la causa raíz racionalmente"]},
+{t:"¿Qué tipo de historia o película te llega más?",o:["Thriller psicológico oscuro y complejo","Drama conmovedor de conexión humana","Fantasía épica con construcción de mundo","Comedia inteligente de diálogo agudo","Historia real inspiradora de superación","Ciencia ficción filosófica que hace pensar"]},
+{t:"¿Cómo aprendes una habilidad completamente nueva?",o:["Leer todo primero, luego practicar","Lanzarme de inmediato, aprender haciendo","Buscar un mentor o curso estructurado","Observar a otros e imitar","Dividirlo en pequeños hábitos diarios","Obsesionarme hasta dominarlo por completo"]},
+{t:"¿Cuál es tu relación con las redes sociales?",o:["Presencia estratégica cuidadosamente curada","Uso mínimo, valoro la conexión real","Me encanta compartir, es salida creativa","Observador, miro pero casi no publico","Me da ansiedad pero no puedo dejarlo","Solo para noticias e información"]},
+{t:"Ves a un desconocido llorando en público. ¿Qué haces?",o:["Acercarme y preguntar si está bien","Darle espacio y privacidad","Sentirme incómodo pero quedarme cerca","Ofrecer un pañuelo sin decir mucho","Ayudar a llamar a un amigo suyo","Fingir que no lo vi, por respeto"]},
+{t:"¿Cómo es un domingo perfecto para ti?",o:["Dormir hasta tarde, cero obligaciones","Aventura activa, senderismo o exploración","Productivo, adelantar para la semana","Tiempo de calidad con seres queridos","Proyectos creativos y pasatiempos","Reflexionar y planificar metas de vida"]},
+{t:"¿Cómo tomas decisiones importantes en la vida?",o:["Hoja de cálculo de pros y contras","Seguir mi intuición y corazonada","Consultar ampliamente con gente de confianza","Investigar cada ángulo posible","Meditar y esperar claridad mental","Lanzarme con audacia y ajustar después"]},
+{t:"¿Qué aspecto de la vida moderna te frustra más?",o:["Distracción constante y adicción al móvil","Desigualdad económica e injusticia","Relaciones superficiales y soledad","Crisis climática y daño ambiental","Trabajo sin sentido y cultura corporativa","Sobrecarga de información y noticias falsas"]},
+{t:"Si tuvieras una hora extra cada día, ¿cómo la usarías?",o:["Dormir más, realmente necesito descanso","Aprender algo nuevo cada día","Conectar con personas que me importan","Ejercicio y cuidar mi cuerpo","Crear arte, música o escribir","No hacer absolutamente nada, solo ser"]},
+{t:"¿Cómo reaccionas ante críticas inesperadas?",o:["Defensivo al principio, reflexiono después","Agradecido, oportunidad para mejorar","Analizar lógicamente si es válida","Ansioso, le doy vueltas por días","Pedir aclaraciones inmediatamente","Ignorarlo, es solo su opinión"]},
+{t:"¿Cuál es tu mayor miedo sobre envejecer?",o:["Perder salud física y vitalidad","Quedarme sin tiempo para mis sueños","Volverme irrelevante u olvidado","Inseguridad financiera en la vejez","Perder a mis seres queridos en el camino","Convertirme en la versión aburrida de mí"]},
+{t:"Un amigo triunfa enormemente mientras tú luchas. ¿Sentimiento real?",o:["Genuinamente feliz pero con algo de envidia","Inspirado, es prueba de que es posible","Reevalúo mis propias decisiones de vida","Orgulloso de ellos, sin comparación","Motivado a trabajar aún más duro","Principalmente triste por mi situación"]},
+{t:"¿Cuál es tu relación con el dinero?",o:["Herramienta para libertad y experiencias","Red de seguridad, ahorro agresivamente","Placer culpable, disfruto gastar","Complicada, nunca siento que es suficiente","Práctico, presupuesto y seguimiento total","Señal de estatus y marcador social"]},
+{t:"¿Cómo enfrentas la incertidumbre del futuro?",o:["Planear múltiples escenarios de respaldo","Aceptarla, la incertidumbre es emoción","Espiral ansioso hacia los peores casos","Confiar en que todo saldrá bien","Enfocarme solo en lo que puedo controlar","Buscar orientación de mentores y mayores"]},
+{t:"¿Qué tipo de líder saca lo mejor de tu trabajo?",o:["Manos libres, que confíe plenamente","Mentor solidario que me guía y enseña","Expectativas claras, estructura y plazos","Visionario inspirador de panorama amplio","Socio colaborador en igualdad de condiciones","Desafiante que me empuja a crecer"]},
+{t:"Llegas a una fiesta donde no conoces a nadie. ¿Qué pasa?",o:["Buscar al perro o gato y quedarme ahí","Encontrar la cara más amable y presentarme","Pararme junto a los snacks, esperar","Volverme temporalmente extrovertido","Irme temprano con una excusa educada","Observar la dinámica como un documental"]},
+{t:"¿Qué significa la felicidad realmente para ti?",o:["Conexiones profundas y auténticas con pocos","Libertad de hacer lo que quiera cuando quiera","Sentido de propósito y contribución","Paz mental y ausencia de ansiedad","Crecimiento, convertirme en mejor versión","Pequeños placeres acumulados diariamente"]},
+{t:"¿Cómo te sientes acerca de la competencia?",o:["Combustible para la excelencia y motivación","Saludable cuando es justa y respetuosa","Me da ansiedad, prefiero colaborar","Indiferente, solo compito conmigo mismo","Divertido como un juego, que venga","Depende de lo que esté en juego"]},
+{t:"¿Qué cualidad te resulta más difícil perdonar?",o:["Traición de la confianza y deslealtad","Crueldad o daño intencional","Deshonestidad y manipulación","Arrogancia y actitud condescendiente","Pereza o falta de esfuerzo","Indiferencia y apatía total"]},
+{t:"Al imaginar tu vida ideal en 10 años, ¿qué ves?",o:["Vida tranquila y pacífica cerca de la naturaleza","Carrera próspera como experto respetado","Riqueza de relaciones profundas y familia","Libertad creativa realizando mis ideas","Aventura viajando y explorando el mundo","Haciendo una diferencia real en la comunidad"]},
+{t:"¿Cómo respondes ante un cambio repentino de planes?",o:["Frustrado pero me adapto rápidamente","Emocionado por la espontaneidad y novedad","Ansioso, necesito tiempo para recalibrar","Analizar la nueva situación y optimizar","Dejarme llevar, lo que sea, ya está","Secretamente aliviado por la excusa para cancelar"]},
+{t:"¿Qué notas primero en las personas nuevas que conoces?",o:["Su energía y vibra emocional","Qué tan inteligentes o interesantes parecen","Si parecen amables y confiables","Su apariencia y estilo personal","Compatibilidad de sentido del humor","Lo que les apasiona profundamente"]},
+{t:"¿Qué rol tomas naturalmente en decisiones grupales?",o:["El organizador que hace que las cosas pasen","El de las ideas que propone y crea","El mediador que busca consenso","El escéptico que cuestiona las suposiciones","El que apoya la mejor idea del grupo","El observador silencioso que vota al final"]},
+{t:"¿Cómo te sientes sobre la tecnología moldeando la vida?",o:["Emocionado, posibilidades increíbles por delante","Cautelosamente optimista con preocupaciones","Ansioso por la pérdida de conexión humana","Pragmático, uso lo que ayuda, ignoro el resto","Fascinado pero abrumado por el ritmo","Escéptico, la tecnología no resuelve nada fundamental"]},
+{t:"¿Qué te da más energía que casi cualquier otra cosa?",o:["Una conversación profunda y significativa","Movimiento físico, ejercicio y sudor","Crear algo desde cero, de la nada","Descubrir nuevas ideas y conocimientos","Ser verdaderamente visto y comprendido","Resolver problemas complejos y desafiantes"]},
+{t:"¿Cuál es tu relación con la comida?",o:["Combustible, comer para rendir eficientemente","Placer, cocinar y saborear es un arte","Consuelo, conexión emocional al comer","Aventura, probar todo lo exótico y nuevo","Disciplina, seguimiento nutricional estricto","Social, la comida une a las personas"]},
+{t:"Si pudieras enviar un mensaje a tu yo más joven, ¿qué dirías?",o:["Deja de preocuparte por lo que piensan los demás","Ahorra dinero e invierte temprano, por favor","Valora a las personas, son lo que más importa","Toma más riesgos, sobrevivirás de todos modos","Eres suficiente, deja de intentar demostrar tu valor","Aprende a descansar sin sentirte culpable"]}
+]
 };
 
 // FUNCTIONS
@@ -236,7 +401,7 @@ function go(){
   _.un=u;_.qi=0;_.an=[];_.pd=!1;_.ad=!1;
   var pool=QS[L]||QS.en;
   var sh=pool.slice().sort(function(){return Math.random()-.5});
-  _.qs=sh.slice(0,5).map(function(q,i){return {id:i+1,t:q.t,o:q.o.map(function(o,j){return {k:String.fromCharCode(97+j),t:o}})}});
+  _.qs=sh.slice(0,8).map(function(q,i){return {id:i+1,t:q.t,o:q.o.map(function(o,j){return {k:String.fromCharCode(97+j),t:o}})}});
   show("sc-quiz");renderQ();
 }
 
@@ -293,6 +458,16 @@ function renderRes(){
   _.rid=Math.random().toString(36).slice(2,10);
   var iu="https://image.pollinations.ai/prompt/"+encodeURIComponent(d.ip)+"?width=480&height=480&nologo=true&seed="+_.rid;
   E.ri.src=iu;
+  E.ri.classList.add("ri-loading");
+  E.ri.onerror=function(){
+    var retryUrl="https://image.pollinations.ai/prompt/"+encodeURIComponent(d.bp||d.n)+"?width=480&height=480&nologo=true&seed="+(_.rid+1);
+    if(!E.ri.dataset.retried){E.ri.dataset.retried="1";E.ri.src=retryUrl;return}
+    E.ri.classList.add("ri-error");E.ri.classList.remove("ri-loading");E.ri.style.display="none";
+    var fb=document.createElement("div");fb.className="ri ri-error";fb.style.display="flex";fb.textContent="\ud83e\udd16";
+    E.ri.parentNode.insertBefore(fb,E.ri.nextSibling);
+    if(E.wm)E.wm.textContent="\u26a0 GENERATING...";
+  };
+  E.ri.onload=function(){E.ri.classList.remove("ri-loading")};
   var ach=[{i:"🎯",n:"First Scan",d:"Complete first scan",u:!0},{i:"🔥",n:"Rare Find",d:"Discover rare creature",u:d.ra!=="common"},{i:"👑",n:"Legendary",d:"Discover legendary",u:d.ra==="legendary"},{i:"💀",n:"Danger Zone",d:"Extreme danger",u:dk==="e"}];
   E.al.innerHTML=ach.map(function(a){return "<div class=\"ach"+(a.u?"":" ach-l")+"\"><span>"+a.i+"</span><div><div style=\"font-weight:700\">"+a.n+"</div><div style=\"font-size:.75rem;color:var(--td)\">"+a.d+"</div></div></div>"}).join("");
   var ul=_.pd||_.ad;
@@ -306,11 +481,12 @@ function renderRes(){
 
 function unlock(){
 var pp="https://paypal.me/xiaosheng6688/"+(AMT[L]||"2.99");
+var amt=CUR[L];
 var m=document.createElement("div");
 m.style.cssText="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.95);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px";
-m.innerHTML='<div style="background:var(--bc);border:1px solid var(--g);border-radius:10px;padding:25px;max-width:390px;width:100%;text-align:center"><div style="font-size:2.5rem;margin-bottom:12px">🔓</div><h2 style="color:var(--g);margin-bottom:4px">'+t("ut")+'</h2><div style="font-size:.85rem;color:var(--td);text-decoration:line-through;margin-bottom:4px">$4.99</div><div style="font-size:2rem;color:var(--y);margin-bottom:14px">'+CUR[L]+' <span style="font-size:.7rem;color:var(--r)">-40%</span></div><button id="pb2" style="width:100%;padding:14px;background:#0070ba;color:#fff;border:0;border-radius:6px;font-size:1rem;cursor:pointer;margin-bottom:8px;font-weight:700">💳 Pay with PayPal</button><div style="margin-bottom:8px;padding:10px;background:var(--bg);border-radius:6px;border:1px dashed var(--o)"><span style="color:var(--o);font-weight:700">💰 Payoneer</span><br><span style="color:var(--tp);font-size:.85rem">Send to: 714633017@qq.com</span></div><button id="ab2" style="width:100%;padding:10px;background:0 0;color:var(--td);border:1px solid var(--td);border-radius:6px;cursor:pointer;margin-bottom:6px">📺 '+t("wa")+'</button><button id="clb" style="width:100%;padding:8px;background:0 0;color:var(--td);border:0;cursor:pointer;font-size:.8rem">✕ Close</button></div>';
+m.innerHTML='<div style="background:var(--bc);border:1px solid var(--g);border-radius:10px;padding:25px;max-width:390px;width:100%;text-align:center"><div style="font-size:2.5rem;margin-bottom:12px">🔓</div><h2 style="color:var(--g);margin-bottom:4px">'+t("ut")+'</h2><div style="font-size:.85rem;color:var(--td);text-decoration:line-through;margin-bottom:4px">$4.99</div><div style="font-size:2rem;color:var(--y);margin-bottom:14px">'+amt+' <span style="font-size:.7rem;color:var(--r)">-40%</span></div><p style="font-size:.75rem;color:var(--td);margin-bottom:8px">After payment, click button below to unlock</p><a id="pb2" href="'+pp+'" target="_blank" rel="noopener" style="display:block;width:100%;padding:14px;background:#0070ba;color:#fff;border:0;border-radius:6px;font-size:1rem;cursor:pointer;margin-bottom:8px;font-weight:700;text-decoration:none;text-align:center">💳 Pay with PayPal</a><button id="pbc" style="width:100%;padding:10px;background:#1db954;color:#fff;border:0;border-radius:6px;cursor:pointer;margin-bottom:8px;font-weight:700;font-size:.85rem">✅ I Completed Payment — Unlock Now</button><div style="background:rgba(255,153,0,.12);border:1px dashed #f93;border-radius:6px;padding:10px;margin-bottom:8px;font-size:.8rem;color:var(--o);text-align:center">💰 Payoneer — Send to: 714633017@qq.com</div><button id="ab2" style="width:100%;padding:10px;background:0 0;color:var(--td);border:1px solid var(--td);border-radius:6px;cursor:pointer;margin-bottom:6px">📺 '+t("wa")+'</button><button id="clb" style="width:100%;padding:8px;background:0 0;color:var(--td);border:0;cursor:pointer;font-size:.8rem">✕ Close</button></div>';
 document.body.appendChild(m);
-document.getElementById("pb2").onclick=function(){window.open(pp,"_blank");setTimeout(function(){if(confirm("Payment completed?\n\n(PayPal)")){_.pd=!0;renderRes();m.remove();try{var u=new URL(location);u.searchParams.set("payment","success");history.replaceState({},"",u)}catch(e){}}},25000)};
+document.getElementById("pbc").onclick=function(){_.pd=!0;renderRes();m.remove();alert(t("payOk"));try{var u=new URL(location);u.searchParams.set("payment","success");history.replaceState({},"",u)}catch(e){}};
 document.getElementById("ab2").onclick=function(){m.remove();adUnlock()};
 document.getElementById("clb").onclick=function(){m.remove()};
 }
@@ -372,4 +548,20 @@ function restart(){_lr=null;E.ui.value="";show("sc-start")}
   var u=new URL(location);
   if(u.searchParams.get("payment")==="success"){_.pd=!0;alert(t("payOk"))}
 })();
-</script></body></html>
+</script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+<script>
+// Fallback: if AdSense blocked, show affiliate links
+setTimeout(function(){
+  try {
+    if(typeof adsbygoogle==="undefined"||!document.querySelector(".adsbygoogle[data-ad-status]")){
+      document.querySelectorAll("[id^=ad-fallback]").forEach(function(el){el.style.display="block"});
+    }
+  } catch(e) {
+    document.querySelectorAll("[id^=ad-fallback]").forEach(function(el){el.style.display="block"});
+  }
+}, 3000);
+try{(adsbygoogle=window.adsbygoogle||[]).push({})}catch(e){}
+</script>
+</body></html>

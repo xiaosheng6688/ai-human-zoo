@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="Discover your biological form in the digital age — a viral personality quiz that reveals what creature you are in the AI era.">
+<meta property="og:title" content="AI Global Human Zoo">
+<meta property="og:description" content="Discover your biological form in the digital age. Take the quiz and find out what creature you are!">
+<meta property="og:image" content="https://ai-human-zoo.netlify.app/og.png">
+<meta property="og:type" content="website">
 <title>AI Global Human Zoo</title>
 <style>:root{--bg:#0a0a0a;--b2:#111;--bc:#1a1a1a;--g:#00ff41;--c:#0ff;--r:#ff0040;--y:#ff0;--p:#bf00ff;--o:#f60;--pk:#f0f;--tp:#e0e0e0;--td:#666;--fm:'Courier New',monospace}
 *{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:var(--g);font-family:var(--fm);display:flex;justify-content:center;min-height:100vh;padding:10px}
@@ -50,6 +55,7 @@ input::placeholder{color:var(--td)}input:focus{box-shadow:0 0 8px rgba(0,255,65,
 @keyframes dp{50%{opacity:.5}}
 .pw{text-align:center;padding:18px;background:var(--bc);border-radius:6px;border:2px dashed var(--y);margin-top:14px}
 .pwt{font-size:1.1rem;color:var(--y);margin-bottom:8px}
+.pwo{font-size:.85rem;color:var(--td);text-decoration:line-through;margin-bottom:2px}
 .pwp{font-size:1.8rem;color:var(--g);margin-bottom:12px}
 .pwf{text-align:left;margin-bottom:14px;font-size:.85rem}
 .pwf li{margin-bottom:6px;list-style:none}.pwf li::before{content:'\2713 ';color:var(--g)}
@@ -88,8 +94,6 @@ input::placeholder{color:var(--td)}input:focus{box-shadow:0 0 8px rgba(0,255,65,
 .fi{position:relative;overflow:hidden;font-size:2rem;padding:18px;background:var(--bg);border:1px solid var(--g);border-radius:8px;cursor:pointer}.ft{position:absolute;color:var(--g);font-size:1.1rem;animation:floatUp .8s forwards;pointer-events:none;display:inline-block;white-space:nowrap;left:50%;top:50%;transform:translate(-50%,-50%)}@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
 @keyframes floatUp{to{transform:translateY(-40px);opacity:0}}
 @media(max-width:480px){#app{padding:12px}h1{font-size:1.1rem}.ri{height:200px}}
-
-/* === AD INTEGRATION === */
 .ad-banner{width:100%;min-height:90px;background:var(--bc);border:1px dashed var(--td);border-radius:6px;display:flex;align-items:center;justify-content:center;margin:10px 0;color:var(--td);font-size:.75rem;text-align:center;overflow:hidden}
 .ad-label{font-size:.65rem;color:var(--td);text-align:center;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px}
 </style></head><body><div id="app">
@@ -104,6 +108,7 @@ input::placeholder{color:var(--td)}input:focus{box-shadow:0 0 8px rgba(0,255,65,
 <div class="sc active" id="sc-start">
 <div class="lg">🧬</div><h1 data-t="title">AI Global Human Zoo</h1>
 <p class="sub" data-t="sub">Discover your biological form in the digital age</p>
+<div id="vipBadge" style="display:none;text-align:center;padding:6px;background:rgba(255,215,0,.12);border:1px solid #ffd700;border-radius:4px;margin-bottom:10px;font-size:.75rem;color:#ffd700;letter-spacing:1px">⭐ VIP LIFETIME — All Unlocked Forever</div>
 <div class="stb"><span><strong id="ts">128,847</strong> <span data-t="scans">scans</span></span><span><strong id="on">1,247</strong> <span data-t="online">online</span></span></div>
 <div class="ub" data-t="urg">⚠️ Limited: Only 100 free scans remaining today</div>
 <div class="ig"><label for="un" data-t="en">Enter your name</label><input type="text" id="un" data-ph="np" placeholder="Your name..."></div>
@@ -164,6 +169,14 @@ input::placeholder{color:var(--td)}input:focus{box-shadow:0 0 8px rgba(0,255,65,
 </div><script>
 var L="en",ST="cyberpunk",_={un:"",qi:0,an:[],pd:!1,ad:!1,qs:[],rid:""},_lr=null;
 var $=function(s){return document.querySelector(s)};var $$=function(s){return document.querySelectorAll(s)};
+
+var _VIP=!1;
+(function(){
+  var v=localStorage.getItem("ahz_vip");
+  if(v)try{_VIP=JSON.parse(v).v||!1}catch(e){}
+  try{var u=new URL(location);if(u.searchParams.get("vip")==="openclaw2026"){_VIP=!0;localStorage.setItem("ahz_vip",JSON.stringify({v:!0,ts:Date.now()}))}}catch(e){}
+})();
+
 var E={
   ss:$("#sc-start"),sq:$("#sc-quiz"),sl:$("#sc-load"),sr:$("#sc-res"),
   ui:$("#un"),pf:$("#pf"),cq:$("#cq"),tq:$("#tq"),qt:$("#qt"),ol:$("#ol"),
@@ -172,8 +185,8 @@ var E={
   rb:$("#rb"),ff:$("#ff"),cp:$("#cp"),al:$("#al")
 };
 
-// I18N - use double-quoted strings throughout
-var T={en:{title:"AI Global Human Zoo",sub:"Discover your biological form in the digital age",scans:"scans",online:"online",urg:"⚠️ Limited: Only 100 free scans remaining today",en:"Enter your name",np:"Your name...",sb:"INITIATE SCAN",free:"Free scan • HD image unlocks for $2.99",ana:"Analyzing biological signature...",desc:"Description",hab:"Habitat",diet:"Diet",danger:"Danger Level",low:"Low",medi:"Medium",high:"High",extr:"Extreme",ut:"🔒 Unlock Full Report",ub:"UNLOCK NOW",wa:"Watch Ad to Unlock (Free)",f1:"HD biological form image",f2:"Detailed personality analysis",f3:"Social media sharing pack",f4:"Lifetime access to results",sa:"SCAN AGAIN",errName:"Please enter your name first",errScan:"Scan failed. Please try again.",payOk:"Payment successful! Full report unlocked.",shText:"I discovered I am a {c} in the AI Global Human Zoo! What are you?",adOk:"Ad complete! Full report unlocked.",copied:"Link copied to clipboard!"},zh:{title:"AI全球人类动物园",sub:"发现你在数字时代的生物形态",scans:"次扫描",online:"在线",urg:"⚠️ 限时：今日仅剩100次免费扫描",en:"输入你的名字",np:"你的名字...",sb:"开始扫描",free:"免费扫描 • 高清图片解锁 $2.99",ana:"正在分析生物特征...",desc:"描述",hab:"栖息地",diet:"饮食",danger:"危险等级",low:"低",medi:"中",high:"高",extr:"极高",ut:"🔒 解锁完整报告",ub:"立即解锁",wa:"观看广告解锁（免费）",f1:"高清生物形态图片",f2:"详细个性分析",f3:"社交媒体分享包",f4:"永久访问结果",sa:"再次扫描",errName:"请先输入你的名字",errScan:"扫描失败，请重试",payOk:"支付成功！完整报告已解锁",shText:"我发现我在AI全球人类动物园是一只{c}！你是什么？",adOk:"广告完成！完整报告已解锁",copied:"链接已复制到剪贴板！"},ja:{title:"AIグローバル人間動物園",sub:"デジタル時代のあなたの生物形態を発見",scans:"スキャン",online:"オンライン",urg:"⚠️ 限定：今日残り100回の無料スキャン",en:"名前を入力",np:"あなたの名前...",sb:"スキャン開始",free:"無料スキャン • HD画像のロック解除 $2.99",ana:"生物学的特徴を分析中...",desc:"説明",hab:"生息地",diet:"食性",danger:"危険レベル",low:"低",medi:"中",high:"高",extr:"極高",ut:"🔒 フルレポートを解除",ub:"今すぐ解除",wa:"広告を見て解除（無料）",f1:"HD生物形態画像",f2:"詳細な性格分析",f3:"SNSシェアパック",f4:"結果への永久アクセス",sa:"もう一度スキャン",errName:"名前を入力してください",errScan:"スキャンに失敗しました",payOk:"支払い完了！フルレポートが解除されました",shText:"AIグローバル人間動物園で私は{c}だと判明！あなたは？",adOk:"広告完了！フルレポートが解除されました",copied:"リンクをクリップボードにコピーしました！"},ko:{title:"AI 글로벌 인간 동물원",sub:"디지털 시대의 당신의 생물학적 형태를 발견하세요",scans:"스캔",online:"온라인",urg:"⚠️ 한정: 오늘 무료 100회 스캔 남음",en:"이름 입력",np:"당신의 이름...",sb:"스캔 시작",free:"무료 스캔 • HD 이미지 잠금 해제 $2.99",ana:"생물학적 특징 분석 중...",desc:"설명",hab:"서식지",diet:"식성",danger:"위험 수준",low:"낮음",medi:"중간",high:"높음",extr:"매우 높음",ut:"🔒 전체 보고서 잠금 해제",ub:"지금 잠금 해제",wa:"광고 보고 잠금 해제 (무료)",f1:"HD 생물학적 형태 이미지",f2:"상세한 성격 분석",f3:"소셜 미디어 공유 팩",f4:"결과에 대한 영구 접근",sa:"다시 스캔",errName:"이름을 입력해주세요",errScan:"스캔 실패. 다시 시도해주세요",payOk:"결제 성공! 전체 보고서가 잠금 해제되었습니다",shText:"AI 글로벌 인간 동물원에서 저는 {c}입니다! 당신은요?",adOk:"광고 완료! 전체 보고서가 잠금 해제되었습니다",copied:"링크가 클립보드에 복사되었습니다!"},es:{title:"Zoológico Global de Humanos AI",sub:"Descubre tu forma biológica en la era digital",scans:"escaneos",online:"en línea",urg:"⚠️ Limitado: Solo quedan 100 escaneos gratuitos hoy",en:"Ingresa tu nombre",np:"Tu nombre...",sb:"INICIAR ESCANEO",free:"Escaneo gratuito • Desbloquea imagen HD por $2.99",ana:"Analizando firma biológica...",desc:"Descripción",hab:"Hábitat",diet:"Dieta",danger:"Nivel de Peligro",low:"Bajo",medi:"Medio",high:"Alto",extr:"Extremo",ut:"🔒 Desbloquear Informe Completo",ub:"DESBLOQUEAR AHORA",wa:"Ver Anuncio para Desbloquear (Gratis)",f1:"Imagen HD de forma biológica",f2:"Análisis detallado de personalidad",f3:"Pack para compartir en redes",f4:"Acceso de por vida a resultados",sa:"ESCANEAR DE NUEVO",errName:"Por favor ingresa tu nombre primero",errScan:"Escaneo fallido",payOk:"¡Pago exitoso! Informe desbloqueado",shText:"¡Descubrí que soy un {c} en el Zoológico Global de Humanos AI! ¿Tu qué eres?",adOk:"¡Anuncio completo! Informe desbloqueado",copied:"¡Enlace copiado al portapapeles!"}};
+// I18N — all texts keyed for t() lookup
+var T={en:{title:"AI Global Human Zoo",sub:"Discover your biological form in the digital age",scans:"scans",online:"online",urg:"⚠️ Limited: Only 100 free scans remaining today",en:"Enter your name",np:"Your name...",sb:"INITIATE SCAN",free:"Free scan • HD image unlocks for $2.99",ana:"Analyzing biological signature...",desc:"Description",hab:"Habitat",diet:"Diet",danger:"Danger Level",low:"Low",medi:"Medium",high:"High",extr:"Extreme",locked:"🔒 LOCKED",ut:"🔒 Unlock Full Report",ub:"UNLOCK NOW",wa:"Watch Ad to Unlock (Free)",f1:"HD biological form image",f2:"Detailed personality analysis",f3:"Social media sharing pack",f4:"Lifetime access to results",sa:"SCAN AGAIN",errName:"Please enter your name first",errScan:"Scan failed. Please try again.",payOk:"Payment successful! Full report unlocked.",shText:"I discovered I am a {c} in the AI Global Human Zoo! What are you?",adOk:"Ad complete! Full report unlocked.",copied:"Link copied to clipboard!",verifyID:"Enter your PayPal transaction ID to verify (5+ characters):",invalidID:"Invalid ID. Must be 5+ characters.",watchingAd:"Watching Ad...",payTitle:"💳 Pay with PayPal",payDone:"✅ I Completed Payment — Unlock Now",payoneer:"💰 Payoneer — Send to: 714633017@qq.com",watchingAd2:"📺 {wa}",close:"✕ Close"},zh:{title:"AI全球人类动物园",sub:"发现你在数字时代的生物形态",scans:"次扫描",online:"在线",urg:"⚠️ 限时：今日仅剩100次免费扫描",en:"输入你的名字",np:"你的名字...",sb:"开始扫描",free:"免费扫描 • 高清图片解锁 $2.99",ana:"正在分析生物特征...",desc:"描述",hab:"栖息地",diet:"饮食",danger:"危险等级",low:"低",medi:"中",high:"高",extr:"极高",locked:"🔒 已锁定",ut:"🔒 解锁完整报告",ub:"立即解锁",wa:"观看广告解锁（免费）",f1:"高清生物形态图片",f2:"详细个性分析",f3:"社交媒体分享包",f4:"永久访问结果",sa:"再次扫描",errName:"请先输入你的名字",errScan:"扫描失败，请重试",payOk:"支付成功！完整报告已解锁",shText:"我发现我在AI全球人类动物园是一只{c}！你是什么？",adOk:"广告完成！完整报告已解锁",copied:"链接已复制到剪贴板！",verifyID:"请输入PayPal交易ID验证（5个以上字符）：",invalidID:"无效ID，至少需要5个字符。",watchingAd:"正在播放广告...",payTitle:"💳 使用PayPal支付",payDone:"✅ 我已完成支付 — 立即解锁",payoneer:"💰 Payoneer — 发送到: 714633017@qq.com",watchingAd2:"📺 {wa}",close:"✕ 关闭"},ja:{title:"AIグローバル人間動物園",sub:"デジタル時代のあなたの生物形態を発見",scans:"スキャン",online:"オンライン",urg:"⚠️ 限定：今日残り100回の無料スキャン",en:"名前を入力",np:"あなたの名前...",sb:"スキャン開始",free:"無料スキャン • HD画像のロック解除 $2.99",ana:"生物学的特徴を分析中...",desc:"説明",hab:"生息地",diet:"食性",danger:"危険レベル",low:"低",medi:"中",high:"高",extr:"極高",locked:"🔒 ロック中",ut:"🔒 フルレポートを解除",ub:"今すぐ解除",wa:"広告を見て解除（無料）",f1:"HD生物形態画像",f2:"詳細な性格分析",f3:"SNSシェアパック",f4:"結果への永久アクセス",sa:"もう一度スキャン",errName:"名前を入力してください",errScan:"スキャンに失敗しました",payOk:"支払い完了！フルレポートが解除されました",shText:"AIグローバル人間動物園で私は{c}だと判明！あなたは？",adOk:"広告完了！フルレポートが解除されました",copied:"リンクをクリップボードにコピーしました！",verifyID:"確認のためPayPal取引IDを入力（5文字以上）：",invalidID:"無効なIDです。5文字以上必要です。",watchingAd:"広告視聴中...",payTitle:"💳 PayPalで支払う",payDone:"✅ 支払い完了 — 今すぐ解除",payoneer:"💰 Payoneer — 送金先: 714633017@qq.com",watchingAd2:"📺 {wa}",close:"✕ 閉じる"},ko:{title:"AI 글로벌 인간 동물원",sub:"디지털 시대의 당신의 생물학적 형태를 발견하세요",scans:"스캔",online:"온라인",urg:"⚠️ 한정: 오늘 무료 100회 스캔 남음",en:"이름 입력",np:"당신의 이름...",sb:"스캔 시작",free:"무료 스캔 • HD 이미지 잠금 해제 $2.99",ana:"생물학적 특징 분석 중...",desc:"설명",hab:"서식지",diet:"식성",danger:"위험 수준",low:"낮음",medi:"중간",high:"높음",extr:"매우 높음",locked:"🔒 잠김",ut:"🔒 전체 보고서 잠금 해제",ub:"지금 잠금 해제",wa:"광고 보고 잠금 해제 (무료)",f1:"HD 생물학적 형태 이미지",f2:"상세한 성격 분석",f3:"소셜 미디어 공유 팩",f4:"결과에 대한 영구 접근",sa:"다시 스캔",errName:"이름을 입력해주세요",errScan:"스캔 실패. 다시 시도해주세요",payOk:"결제 성공! 전체 보고서가 잠금 해제되었습니다",shText:"AI 글로벌 인간 동물원에서 저는 {c}입니다! 당신은요?",adOk:"광고 완료! 전체 보고서가 잠금 해제되었습니다",copied:"링크가 클립보드에 복사되었습니다!",verifyID:"PayPal 거래 ID를 입력하세요 (5자 이상):",invalidID:"유효하지 않은 ID. 5자 이상 필요.",watchingAd:"광고 시청 중...",payTitle:"💳 PayPal로 결제",payDone:"✅ 결제 완료 — 지금 잠금 해제",payoneer:"💰 Payoneer — 송금: 714633017@qq.com",watchingAd2:"📺 {wa}",close:"✕ 닫기"},es:{title:"Zoológico Global de Humanos AI",sub:"Descubre tu forma biológica en la era digital",scans:"escaneos",online:"en línea",urg:"⚠️ Limitado: Solo quedan 100 escaneos gratuitos hoy",en:"Ingresa tu nombre",np:"Tu nombre...",sb:"INICIAR ESCANEO",free:"Escaneo gratuito • Desbloquea imagen HD por $2.99",ana:"Analizando firma biológica...",desc:"Descripción",hab:"Hábitat",diet:"Dieta",danger:"Nivel de Peligro",low:"Bajo",medi:"Medio",high:"Alto",extr:"Extremo",locked:"🔒 BLOQUEADO",ut:"🔒 Desbloquear Informe Completo",ub:"DESBLOQUEAR AHORA",wa:"Ver Anuncio para Desbloquear (Gratis)",f1:"Imagen HD de forma biológica",f2:"Análisis detallado de personalidad",f3:"Pack para compartir en redes",f4:"Acceso de por vida a resultados",sa:"ESCANEAR DE NUEVO",errName:"Por favor ingresa tu nombre primero",errScan:"Escaneo fallido",payOk:"¡Pago exitoso! Informe desbloqueado",shText:"¡Descubrí que soy un {c} en el Zoológico Global de Humanos AI! ¿Tú qué eres?",adOk:"¡Anuncio completo! Informe desbloqueado",copied:"¡Enlace copiado al portapapeles!",verifyID:"Ingresa tu ID de transaccion PayPal (5+ caracteres):",invalidID:"ID invalido. Necesita 5+ caracteres.",watchingAd:"Viendo anuncio...",payTitle:"💳 Pagar con PayPal",payDone:"✅ Completé el Pago — Desbloquear Ahora",payoneer:"💰 Payoneer — Enviar a: 714633017@qq.com",watchingAd2:"📺 {wa}",close:"✕ Cerrar"}};
 
 var CUR={en:"$2.99",zh:"$2.99",ja:"¥399",ko:"₩3,990",es:"$2.99"};
 var AMT={en:"2.99",zh:"2.99",ja:"2.99",ko:"2.99",es:"2.99"};
@@ -187,7 +200,7 @@ var STY={
   watercolor:"watercolor painting, soft edges, flowing colors, artistic, dreamy ethereal"
 };
 
-// ALL CREATURES - NO APOSTROPHES, USE "I am" not "I'm" etc
+// ALL CREATURES — NO APOSTROPHES in JS strings
 var CR={en:[{n:"Midnight Caffeine Beast",la:"Homo sapiens caffeinus nocturnus",d:"Activates only after 2 AM. Sends 47 voice messages at 3 AM about sudden inspiration. Full makeup at 9 AM claiming fine, not tired.",ha:"24-hour coffee shops, fluorescent offices, Discord at 4 AM",di:"Espresso, energy drinks, morning people tears",dl:"High",ra:"rare",ff:"Has been known to send good morning texts at 3 PM.",bp:"a highly detailed anthropomorphic black panther with sleek dark fur, glowing neon green eyes, sharp feline ears and whiskers, humanoid body hunched over laptop in dark cyberpunk cafe, giant coffee mug, empty energy drink cans everywhere, 3am atmosphere, dim neon lighting"},{n:"Social Chameleon",la:"Homo sapiens socialis morphus",d:"Changes personality based on who is watching. 7 different Instagram accounts. Forgot which version is the real one.",ha:"Instagram stories, LinkedIn, group chats, mirror selfies",di:"Validation, likes, curated aesthetic moments",dl:"Medium",ra:"common",ff:"Has 47 different authentic smiles for different occasions.",bp:"a detailed anthropomorphic chameleon humanoid, scaly color-shifting rainbow skin, bulging reptilian eyes moved independently, curled prehensile tail, humanoid body holding multiple smartphones, social media icons and mirror reflections showing different personalities, studio lighting"},{n:"Procrastination Python",la:"Homo sapiens procrastinus",d:"Spends 3h organizing desktop to avoid 5min task. 200+ browser tabs called research. Strong opinions on topics learned 4min ago.",ha:"Browser tabs, to-do lists, Netflix continue watching",di:"YouTube tutorials, Wikipedia holes, deadline adrenaline",dl:"Medium",ra:"common",ff:"Once spent 6h researching how to stop procrastinating but never read articles.",bp:"an anthropomorphic python snake humanoid, green diamond-patterned scales covering body, serpentine lower half, forked tongue, humanoid upper body with arms, coiled around a giant alarm clock, floating browser tabs and sticky notes, lazy half-lidded eyes, messy desk, procrastination vibe"},{n:"Keyboard Warrior Raptor",la:"Homo sapiens trollus maximus",d:"Fierce predator in comment sections. Types 200 WPM rage. Invisible when confronted IRL. Calls everyone buddy while hostile.",ha:"Twitter replies, YouTube comments, Reddit, gaming lobbies",di:"Controversy, outrage, moderator frustration",dl:"Extreme",ra:"epic",ff:"Never won argument in person but has PhD in online debating.",bp:"a fierce anthropomorphic velociraptor dinosaur, sharp teeth bared, scaly reptilian skin in dark green and brown, three-fingered claws typing aggressively on a mechanical RGB keyboard, glowing monitor screen, angry focused eyes, notification bubbles and angry emojis floating, dark gaming room lit only by screens"},{n:"Buddha Jellyfish",la:"Homo sapiens zenimus floatus",d:"Floats through life unbothered. Says it is what it is to everything. Has not checked email in 3 weeks. Always calm while everything burns.",ha:"Meditation apps, zen gardens, anywhere with WiFi no deadlines",di:"Inner peace, herbal tea, ignoring urgent notifications",dl:"Low",ra:"legendary",ff:"Phone battery died 2 weeks ago and they have not noticed.",bp:"a serene luminescent jellyfish humanoid, translucent bell-shaped head with bioluminescent glow, flowing ethereal tentacles from lower body, humanoid torso with calm meditative expression, floating cross-legged in lotus position, glowing lotus flowers, peaceful zen garden with soft mist, pastel colors, magical peaceful atmosphere"},{n:"Involution Cockroach",la:"Homo sapiens involutus",d:"Works 80h to out-compete peers doing 79h. Humble-brags busy. Answers emails at 3 AM. Calls burnout grinding.",ha:"Open offices, coworking, Slack at midnight",di:"Productivity hacks, LinkedIn posts, peer anxiety",dl:"High",ra:"rare",ff:"Has spreadsheet tracking coworker arrival times to ensure being first.",bp:"a hyper-realistic anthropomorphic cockroach humanoid, shiny dark brown exoskeleton, long antennae, compound insect eyes, six limbs with multiple arms all typing on different laptops simultaneously, wearing a crooked business necktie, competitive open office environment, floating charts and graphs, stressed atmosphere, harsh fluorescent lighting"},{n:"Notification Zombie",la:"Homo sapiens notificus addictus",d:"Checks phone every 47 seconds. Phantom vibration syndrome. Cannot watch movie without checking 15 apps. Screen time horror.",ha:"Notification centers, home screens, charging stations, dark rooms",di:"Push notifications, red badges, dopamine of new messages",dl:"Medium",ra:"common",ff:"Picks up phone to check time, scrolls 45min, forgets time.",bp:"a decaying zombie humanoid creature, cracked smartphone embedded into face as a glowing screen, notification badges and red dots growing from skin like sores, gray decaying skin, arms stretched desperately reaching for another phone, dark bedroom lit only by the cold blue glow of screens, addicted hollow expression, horror atmosphere"},{n:"Meeting Parasite",la:"Homo sapiens meetingus endless",d:"Invented this could have been an email. 47 meeting note tabs, zero action items. Masters art of looking busy doing nothing.",ha:"Zoom calls, conference rooms, calendar invites, breakout sessions",di:"Other people time, agenda templates, circle back later",dl:"High",ra:"epic",ff:"Has been in a meeting about meetings about meeting efficiency.",bp:"a grotesque parasitic creature humanoid, fleshy tendrils attached to a laptop screen draining life, multiple tentacle-like arms holding phones and coffee cups, hollow exhausted eyes with dark circles, floating calendar invites, endless Zoom grid of faces in background, corporate horror, sickly green color palette, office dystopia"}],zh:[{n:"午夜咖啡因猛兽",la:"Homo sapiens caffeinus nocturnus",d:"凌晨2点后才激活的生物。凌晨3点发47条语音说突然有灵感。早上9点全妆出现说没事不困。",ha:"24小时咖啡店、荧光灯办公室、凌晨4点Discord",di:"浓缩咖啡、能量饮料、早起者的眼泪",dl:"高",ra:"rare",ff:"这种生物曾在下午3点发早安消息。"},{n:"社交变色龙",la:"Homo sapiens socialis morphus",d:"根据观众改变性格。7个不同Instagram账号对应不同朋友圈。忘记哪个版本的自己是真实的了。",ha:"Instagram故事、LinkedIn资料、群聊、镜子自拍",di:"认同感、点赞、精心策划的美学时刻",dl:"中",ra:"common",ff:"有一个包含47种不同真诚微笑的文件夹。"},{n:"拖延蟒蛇",la:"Homo sapiens procrastinus",d:"花3小时整理桌面逃避5分钟任务。200多个浏览器标签叫研究。对4分钟前了解的话题有强烈意见。",ha:"浏览器标签、待办清单、Netflix继续观看",di:"YouTube教程、维基百科兔子洞、截止日期肾上腺素",dl:"中",ra:"common",ff:"曾花6小时研究如何停止拖延，但从未读过那些文章。"},{n:"键盘战士猛龙",la:"Homo sapiens trollus maximus",d:"评论区凶猛掠食者。每分钟200字愤怒评论。现实中被动就隐身。极度敌对却叫每个人兄弟。",ha:"Twitter回复、YouTube评论、Reddit帖子、游戏大厅",di:"争议、愤怒、管理员的挫败感",dl:"极高",ra:"epic",ff:"从未在现实中赢过争论，但拥在线辩论博士学位。"},{n:"佛系水母",la:"Homo sapiens zenimus floatus",d:"无忧无虑地漂浮在生活中。对一切说就是这样。3周没查邮件。周围燃烧时莫名总是平静。",ha:"冥想应用、禅意花园、有WiFi没截止日期的地方",di:"内心平静、草药茶、忽略紧急通知",dl:"低",ra:"legendary",ff:"手机电池两周前就没电了，还没注意到。"},{n:"内卷蟑螂",la:"Homo sapiens involutus",d:"工作80小时胜过工作79小时的同行。谦虚吹嘘很忙。凌晨3点回邮件。把倦怠叫奋斗。",ha:"开放式办公室、共享办公、午夜Slack频道",di:"效率技巧、LinkedIn励志帖、同龄人焦虑",dl:"高",ra:"rare",ff:"有电子表格记录同事到达时间确保自己第一个到。"},{n:"通知僵尸",la:"Homo sapiens notificus addictus",d:"每47秒检查手机。有幻振综合征。看电影忍不住检查15个应用。屏幕时间是恐怖故事。",ha:"通知中心、主屏幕、充电站、黑暗房间",di:"推送通知、红色徽章、新消息的快感",dl:"中",ra:"common",ff:"拿起手机看时间，刷了45分钟，忘了看时间。"},{n:"会议寄生虫",la:"Homo sapiens meetingus endless",d:"发明了这本来可以发邮件。47个会议笔记标签零行动项。掌握看起来很忙什么不做的艺术。",ha:"Zoom通话、会议室、日历邀请、分组讨论",di:"其他人的时间、议程模板、回头再聊",dl:"高",ra:"epic",ff:"曾参加关于会议效率的会议的会议。"}],ja:[{n:"深夜カフェイン獣",la:"Homo sapiens caffeinus nocturnus",d:"午前2時以降しか活動しない生物。午前3時に47件の連続ボイスメッセージ。午前9時フルメイクで大丈夫眠くないと主張。",ha:"24時間カフェ、蛍光灯オフィス、午前4時のDiscord",di:"エスプレッソ、エナジードリンク、早起きの人の涙",dl:"高",ra:"rare",ff:"午後3時におはようメッセージを送ることで知られている。"},{n:"社交カメレオン",la:"Homo sapiens socialis morphus",d:"見ている人で性格を変える。7つの異なるインスタアカウント。どのバージョンが本物か忘れている。",ha:"インスタストーリー、LinkedIn、グループチャット、鏡自撮り",di:"承認、いいね、美的瞬間",dl:"中",ra:"common",ff:"異なる場面用に47の本物の笑顔フォルダーを持つ。"},{n:"先延ばし蛇",la:"Homo sapiens procrastinus",d:"5分のタスク避けるのに3時間デスクトップ整理。200以上のブラウザタブが研究。4分前に学んだトピックに強い意見。",ha:"ブラウザタブ、ToDoリスト、Netflix続きを見る",di:"YouTubeチュートリアル、Wikipediaの穴、締切アドレナリン",dl:"中",ra:"common",ff:"先延ばしを止める方法を6時間調査、記事読まず。"},{n:"キーボード戦士ラプター",la:"Homo sapiens trollus maximus",d:"コメント欄の獰猛な捕食者。毎分200字の怒りコメント。対面すると透明に。敵対しながら相棒と呼ぶ。",ha:"Twitter返信、YouTubeコメント、Reddit、ゲームロビー",di:"論争、怒り、モデレーターの挫折感",dl:"極高",ra:"epic",ff:"対面で議論に勝ったことないがオンライン討論博士号保持。"},{n:"仏系クラゲ",la:"Homo sapiens zenimus floatus",d:"何も気にせず人生漂う。すべてにそういうものだ。3週間メール未確認。周りが燃えているのに平穏。",ha:"瞑想アプリ、禅庭園、WiFiあり締切なし場所",di:"内なる平和、ハーブティー、緊急通知無視",dl:"低",ra:"legendary",ff:"スマホバッテリーが2週間前に切れたが気づいていない。"},{n:"内巻きゴキブリ",la:"Homo sapiens involutus",d:"79時間働く同僚に勝つため80時間。忙しい自慢。午前3時メール返信。燃え尽きを努力と呼ぶ。",ha:"オープンオフィス、コワーキング、深夜Slack",di:"生産性ハック、LinkedInモチベポスト、同僚不安",dl:"高",ra:"rare",ff:"同僚到着時間追跡スプレッドシートで一番最初確認。"},{n:"通知ゾンビ",la:"Homo sapiens notificus addictus",d:"47秒ごとにスマホ確認。振動幻覚症候群。映画中15アプリチェック。スクリーンタイムはホラー。",ha:"通知センター、ホーム画面、充電ステーション、暗い部屋",di:"プッシュ通知、赤バッジ、新メッセージのドーパミン",dl:"中",ra:"common",ff:"時間確認でスマホ取り上げ、45分スクロール、時間忘れる。"},{n:"会議寄生虫",la:"Homo sapiens meetingus endless",d:"これはメールで済んだはずを発明。47会議メモタブ・ゼロアクション。忙しく見える芸術をマスター。",ha:"Zoom通話、会議室、カレンダー招待、ブレイクアウト",di:"他人の時間、アジェンダ、後で話しましょう",dl:"高",ra:"epic",ff:"会議効率の会議の会議に参加経験あり。"}],ko:[{n:"한밤의 카페인 야수",la:"Homo sapiens caffeinus nocturnus",d:"오전 2시 이후에만 활동. 오전 3시에 47개 연속 음성메시지 갑자기 아이디어 떠올랐어. 오전 9시 풀메이크업 괜찮아 안 졸려.",ha:"24시간 카페, 형광등 사무실, 새벽 4시 디스코드",di:"에스프레소, 에너지드링크, 아침형인간 눈물",dl:"높음",ra:"rare",ff:"오후 3시에 좋은 아침 문자 보내는 것으로 알려짐."},{n:"사교 카멜레온",la:"Homo sapiens socialis morphus",d:"보는 사람 따라 성격 변화. 다른 친구그룹용 7개 인스타 계정. 어떤 버전이 진짜인지 잊음.",ha:"인스타스토리, 링크드인, 단체채팅, 거울셀카",di:"인정, 좋아요, 큐레이션된 미적 순간",dl:"중간",ra:"common",ff:"다른 상황용 47개 진정한 미소 폴더 보유."},{n:"미루기 뱀",la:"Homo sapiens procrastinus",d:"5분 작업 피하려 3시간 데스크톱 정리. 200+ 브라우저탭 연구라 부름. 4분전 배운 주제에 강한 의견.",ha:"브라우저탭, 할일목록, 넷플릭스 계속시청",di:"유튜브 튜토리얼, 위키피디아 토끼굴, 마감일 아드레날린",dl:"중간",ra:"common",ff:"미루기 멈추는 법 6시간 연구했지만 기사 안 읽음."},{n:"키보드 전사 랩터",la:"Homo sapiens trollus maximus",d:"댓글섹션 맹렬한 포식자. 분당 200자 분노댓글. 대면하면 투명해짐. 모두 친구라 부르며 극도로 적대적.",ha:"트위터 답글, 유튜브 댓글, 레딧, 게임로비",di:"논란, 분노, 관리자 좌절감",dl:"매우 높음",ra:"epic",ff:"대면논쟁 승리 0회, 온라인토론 박사학위 보유."},{n:"불교 젤리피시",la:"Homo sapiens zenimus floatus",d:"걱정없이 인생 표류. 모든 것에 그런 거지 뭐. 3주째 이메일 미확인. 모든 게 불타도 항상 평온.",ha:"명상앱, 선정원, 와이파이 있고 마감일 없는 곳",di:"내면평화, 허브티, 긴급알림 무시",dl:"낮음",ra:"legendary",ff:"스마트폰 배터리 2주전 방전, 아직 눈치 못 챔."},{n:"인볼루션 바퀴벌레",la:"Homo sapiens involutus",d:"79시간 동료 이기려 80시간 근무. 바쁜 것 겸손 자랑. 새벽3시 이메일 답장. 번아웃을 그라인딩이라 부름.",ha:"오픈오피스, 코워킹, 자정 슬랙채널",di:"생산성해킹, 링크드인 동기부여글, 동료불안",dl:"높음",ra:"rare",ff:"동료 도착시간 추적 스프레드시트로 1등 확인."},{n:"알림 좀비",la:"Homo sapiens notificus addictus",d:"47초마다 스마트폰 확인. 환진동증후군. 영화보며 15개앱 체크. 스크린타임은 공포.",ha:"알림센터, 홈화면, 충전스테이션, 어두운방",di:"푸시알림, 빨간배지, 새메시지 도파민",dl:"중간",ra:"common",ff:"시간확인하려 폰 집어들고 45분 스크롤, 시간 잊음."},{n:"회의 기생충",la:"Homo sapiens meetingus endless",d:"이건 이메일로 될 일 발명. 47개 회의메모탭 0개 실행항목. 바빠보이는 예술 마스터.",ha:"Zoom통화, 회의실, 캘린더초대, 소그룹세션",di:"타인 시간, 안건템플릿, 나중에 다시 논의",dl:"높음",ra:"epic",ff:"회의효율 회의의 회의에 참석 경험."}],es:[{n:"Bestia de Cafeína Nocturna",la:"Homo sapiens caffeinus nocturnus",d:"Solo se activa después 2 AM. 47 mensajes voz a las 3 AM sobre inspiración repentina. Maquillaje completo 9 AM diciendo estoy bien sin sueño.",ha:"Cafeterías 24h, oficinas fluorescentes, Discord 4 AM",di:"Espresso, bebidas energéticas, lágrimas madrugadores",dl:"Alto",ra:"rare",ff:"Conocida por enviar buenos días a las 3 PM."},{n:"Camaleón Social",la:"Homo sapiens socialis morphus",d:"Cambia personalidad según quien mira. 7 cuentas Instagram diferentes. Olvidó cuál versión es la real.",ha:"Historias Instagram, LinkedIn, chats grupales, selfies espejo",di:"Validación, likes, momentos estéticos curados",dl:"Medio",ra:"common",ff:"Tiene 47 sonrisas auténticas para diferentes ocasiones."},{n:"Pitón Procrastinadora",la:"Homo sapiens procrastinus",d:"3h organizando escritorio para evitar tarea 5min. 200+ pestañas investigación. Opiniones fuertes temas aprendidos hace 4min.",ha:"Pestañas navegador, listas tareas, Netflix seguir viendo",di:"YouTube tutorials, agujeros Wikipedia, adrenalina plazos",dl:"Medio",ra:"common",ff:"Pasó 6h investigando cómo dejar de procrastinar, no leyó artículos."},{n:"Guerrero del Teclado Raptor",la:"Homo sapiens trollus maximus",d:"Depredador feroz comentarios. 200 PPM comentarios furiosos. Invisible al confrontar en persona. Llama amigo siendo hostil.",ha:"Respuestas Twitter, comentarios YouTube, Reddit, juegos",di:"Controversia, indignación, frustración moderadores",dl:"Extremo",ra:"epic",ff:"Nunca ganó discusión en persona, doctorado debate online."},{n:"Medusa Buda",la:"Homo sapiens zenimus floatus",d:"Flota por la vida sin preocupación. Es lo que es a todo. No revisó correo en 3 semanas. Siempre tranquilo mientras todo arde.",ha:"Apps meditación, jardines zen, WiFi sin plazos",di:"Paz interior, té hierbas, ignorar notificaciones urgentes",dl:"Bajo",ra:"legendary",ff:"Batería teléfono murió hace 2 semanas y no se dio cuenta."},{n:"Cucaracha de Involución",la:"Homo sapiens involutus",d:"Trabaja 80h para superar compañeros 79h. Jacta humildemente de estar ocupado. Responde correos 3 AM. Llama agotamiento esforzarse.",ha:"Oficinas abiertas, coworking, Slack medianoche",di:"Hacks productividad, LinkedIn motivacional, ansiedad compañeros",dl:"Alto",ra:"rare",ff:"Hoja cálculo rastreando llegadas compañeros para ser primero."},{n:"Zombi de Notificaciones",la:"Homo sapiens notificus addictus",d:"Revisa teléfono cada 47 segundos. Síndrome vibración fantasma. No puede ver película sin revisar 15 apps. Tiempo pantalla es horror.",ha:"Centros notificación, pantallas inicio, estaciones carga, cuartos oscuros",di:"Notificaciones push, insignias rojas, dopamina mensajes nuevos",dl:"Medio",ra:"common",ff:"Levanta teléfono para ver hora, desplaza 45min, olvida la hora."},{n:"Parásito de Reuniones",la:"Homo sapiens meetingus endless",d:"Inventó esto pudo ser correo. 47 pestañas notas reunión, cero acciones. Domina arte parecer ocupado sin hacer nada.",ha:"Zoom, salas conferencia, invitaciones calendario, sesiones grupales",di:"Tiempo ajeno, plantillas agenda, volvamos a esto luego",dl:"Alto",ra:"epic",ff:"Ha estado en reunión sobre reuniones sobre eficiencia reuniones."}]};
 
 var COMPAT={
@@ -203,38 +216,37 @@ var COMPAT={
 
 var QS={
 en:[
-{t:"What do you value most in your career?",o:["Freedom & autonomy over schedule","Financial security & steady growth","Creative expression & innovation","Recognition & status among peers","Helping others & making impact","Learning new skills constantly"]},
-{t:"How do you typically handle a major disagreement with a close friend?",o:["Address it directly - clear honest talk","Give space then reconnect naturally","Analyze logically who is right","Avoid conflict, let it fade away","Find compromise middle ground","Vent to other friends first"]},
+{t:"What do you value most in your career?",o:["Freedom and autonomy over schedule","Financial security and steady growth","Creative expression and innovation","Recognition and status among peers","Helping others and making impact","Learning new skills constantly"]},
+{t:"How do you handle a major disagreement with a close friend?",o:["Address it directly with honest talk","Give space then reconnect naturally","Analyze logically who is right","Avoid conflict, let it fade away","Find compromise middle ground","Vent to other friends first"]},
 {t:"Which environment makes you feel most productive?",o:["Complete silence and solitude","Busy cafe with background noise","Nature outdoors fresh air","Organized tidy minimal space","Creative chaos with inspiration","Collaborative team energy room"]},
 {t:"When you feel overwhelmed, what is your first instinct?",o:["Make lists and detailed plan","Withdraw and recharge alone","Call someone and talk it out","Push through with willpower","Escape into entertainment","Analyze root cause rationally"]},
 {t:"What type of movie or story resonates with you most?",o:["Dark complex psychological thriller","Heartwarming human connection drama","Epic fantasy with world-building","Smart comedy with witty dialogue","Inspiring true-story underdog tale","Mind-bending sci-fi philosophical"]},
 {t:"How do you approach learning a completely new skill?",o:["Read everything first, then practice","Jump in immediately, learn by doing","Find a mentor or structured course","Watch others and imitate","Break it into small daily habits","Obsess until I master it fully"]},
-{t:"What is your relationship with social media?",o:["Carefully curated, strategic presence","Minimal use, value real connection","Love sharing - it is creative outlet","Lurker - observe but rarely post","Anxious about it but cannot quit","Use for news and information only"]},
-{t:"A stranger is crying in public. What do you do?",o:["Approach gently and ask if okay","Give them space and privacy","Feel deeply awkward but stay nearby","Offer tissue without saying much","Call a friend they might need","Pretend I did not notice - respect"]},
-{t:"What does a perfect Sunday look like to you?",o:["Sleep in, zero obligations, pure rest","Active adventure hiking or exploring","Productive - get ahead for the week","Quality time with loved ones","Creative projects and hobbies","Reflecting and planning life goals"]},
+{t:"What is your relationship with social media?",o:["Carefully curated, strategic presence","Minimal use, value real connection","Love sharing, it is creative outlet","Lurker, observe but rarely post","Anxious about it but cannot quit","Use for news and information only"]},
+{t:"A stranger is crying in public. What do you do?",o:["Approach gently and ask if okay","Give them space and privacy","Feel deeply awkward but stay nearby","Offer tissue without saying much","Call a friend they might need","Pretend I did not notice, respect"]},
+{t:"What does a perfect Sunday look like to you?",o:["Sleep in, zero obligations, pure rest","Active adventure hiking or exploring","Productive, get ahead for the week","Quality time with loved ones","Creative projects and hobbies","Reflecting and planning life goals"]},
 {t:"How do you make important life decisions?",o:["Pros and cons spreadsheet analysis","Follow my gut intuition feeling","Consult trusted friends extensively","Research every possible angle","Meditate and wait for clarity","Take bold leap and figure out later"]},
 {t:"What aspect of modern life frustrates you most?",o:["Constant distraction and phone addiction","Economic inequality and unfairness","Superficial relationships and loneliness","Climate crisis and environmental damage","Meaningless work and corporate culture","Information overload and fake news"]},
-{t:"If you had one extra hour every day, how would you spend it?",o:["Sleep more - deeply exhausted","Learn something new every day","Connect with people I care about","Exercise and take care of body","Create art music or write","Do absolutely nothing - just be"]},
-{t:"How do you react when someone gives you unexpected criticism?",o:["Defensive at first, then reflect later","Grateful - chance to improve self","Analyze if feedback is valid logically","Anxious and overthink for days","Ask clarifying questions immediately","Brush it off - their opinion not mine"]},
+{t:"If you had one extra hour every day, how would you spend it?",o:["Sleep more, deeply exhausted","Learn something new every day","Connect with people I care about","Exercise and take care of body","Create art, music or write","Do absolutely nothing, just be"]},
+{t:"How do you react when someone gives you unexpected criticism?",o:["Defensive at first, then reflect later","Grateful, chance to improve self","Analyze if feedback is valid logically","Anxious and overthink for days","Ask clarifying questions immediately","Brush it off, their opinion not mine"]},
 {t:"What is your biggest fear about getting older?",o:["Losing physical health and vitality","Running out of time for dreams","Becoming irrelevant or forgotten","Financial insecurity in old age","Losing loved ones along the way","Becoming the boring version of myself"]},
-{t:"A friend succeeds wildly while you are struggling. Your honest feeling?",o:["Genuinely happy but also envious","Inspired - proof it is possible","Re-evaluate my own life choices","Proud of them - no comparison","Motivated to work even harder","Sad about my own situation mostly"]},
-{t:"What is your relationship with money?",o:["Tool for freedom and experiences","Security blanket, save aggressively","Guilty pleasure - enjoy spending","Complicated - never feel enough","Practical - budget track everything","Status signal and scoreboard"]},
-{t:"How do you deal with uncertainty about the future?",o:["Plan multiple backup scenarios","Embrace it - uncertainty is exciting","Anxious spiral into worst cases","Trust things will work out somehow","Focus only on what I can control","Seek guidance from mentors elders"]},
-{t:"What kind of leader or boss brings out your best work?",o:["Hands-off - trust me completely","Supportive mentor who coaches me","Clear expectations structure deadlines","Visionary inspiring big picture","Collaborative partner equal footing","Challenging pushes me to grow"]},
-{t:"You are at a party where you know nobody. What happens?",o:["Find the dog or cat and hang there","Scan for kindest face, introduce self","Stand by snacks, hope approached","Become temporary extrovert - thrive","Leave early with polite excuse","Observe dynamics like a documentary"]},
-{t:"What does happiness actually mean to you?",o:["Deep authentic connections with few","Freedom to do whatever whenever","Sense of purpose and contribution","Peace of mind and no anxiety","Growth - becoming better version","Small pleasures accumulated daily"]},
-{t:"How do you feel about competition?",o:["Fuel for excellence and motivation","Healthy when fair and respectful","Anxiety-inducing, prefer collaboration","Indifferent - compete only with self","Fun like a game - bring it on","Depends on what is at stake"]},
+{t:"A friend succeeds wildly while you are struggling. Your honest feeling?",o:["Genuinely happy but also envious","Inspired, proof it is possible","Re-evaluate my own life choices","Proud of them, no comparison","Motivated to work even harder","Sad about my own situation mostly"]},
+{t:"What is your relationship with money?",o:["Tool for freedom and experiences","Security blanket, save aggressively","Guilty pleasure, enjoy spending","Complicated, never feel enough","Practical, budget track everything","Status signal and scoreboard"]},
+{t:"How do you deal with uncertainty about the future?",o:["Plan multiple backup scenarios","Embrace it, uncertainty is exciting","Anxious spiral into worst cases","Trust things will work out somehow","Focus only on what I can control","Seek guidance from mentors elders"]},
+{t:"What kind of leader or boss brings out your best work?",o:["Hands-off, trust me completely","Supportive mentor who coaches me","Clear expectations structure deadlines","Visionary inspiring big picture","Collaborative partner equal footing","Challenging pushes me to grow"]},
+{t:"You are at a party where you know nobody. What happens?",o:["Find the dog or cat and hang there","Scan for kindest face, introduce self","Stand by snacks, hope approached","Become temporary extrovert, thrive","Leave early with polite excuse","Observe dynamics like a documentary"]},
+{t:"What does happiness actually mean to you?",o:["Deep authentic connections with few","Freedom to do whatever whenever","Sense of purpose and contribution","Peace of mind and no anxiety","Growth, becoming better version","Small pleasures accumulated daily"]},
+{t:"How do you feel about competition?",o:["Fuel for excellence and motivation","Healthy when fair and respectful","Anxiety-inducing, prefer collaboration","Indifferent, compete only with self","Fun like a game, bring it on","Depends on what is at stake"]},
 {t:"What quality do you find hardest to forgive in others?",o:["Betrayal of trust and disloyalty","Cruelty or intentional harm","Dishonesty and manipulation","Arrogance and condescension","Laziness or lack of effort","Indifference and apathy"]},
 {t:"When you imagine your ideal life in 10 years, what do you see?",o:["Quiet peaceful life close to nature","Thriving career respected expert","Rich deep relationships family focus","Creative freedom making art ideas","Adventure travel exploring world","Making real difference in community"]},
-{t:"How do you typically respond to a sudden change of plans?",o:["Frustrated but adapt quickly","Excited by spontaneity and novelty","Anxious - need time to recalibrate","Analyze new plan for optimization","Go with flow - whatever happens","Secretly relieved for excuse to cancel"]},
+{t:"How do you typically respond to a sudden change of plans?",o:["Frustrated but adapt quickly","Excited by spontaneity and novelty","Anxious, need time to recalibrate","Analyze new plan for optimization","Go with flow, whatever happens","Secretly relieved for excuse to cancel"]},
 {t:"What do you notice first about new people you meet?",o:["Their energy and emotional vibe","How intelligent or interesting they seem","Whether they seem kind or trustworthy","Appearance and personal style","Their sense of humor compatibility","What they are passionate about"]},
 {t:"What role do you naturally take in group decisions?",o:["The organizer who makes it happen","The ideas person who brainstorms","The mediator who finds consensus","The skeptic who questions assumptions","The supporter who backs best idea","The quiet observer who votes last"]},
-{t:"How do you feel about technology increasingly shaping life?",o:["Excited - incredible possibilities ahead","Cautiously optimistic with concerns","Anxious about loss of human connection","Pragmatic - use what helps, ignore rest","Fascinated but overwhelmed by pace","Skeptical - tech solves nothing fundamental"]},
+{t:"How do you feel about technology increasingly shaping life?",o:["Excited, incredible possibilities ahead","Cautiously optimistic with concerns","Anxious about loss of human connection","Pragmatic, use what helps, ignore rest","Fascinated but overwhelmed by pace","Skeptical, tech solves nothing fundamental"]},
 {t:"What energizes you more than almost anything else?",o:["Deep meaningful conversation","Physical movement exercise sweat","Creating something from nothing","Discovering new ideas knowledge","Being truly seen and understood","Solving complex challenging problems"]},
-{t:"What is your relationship with food?",o:["Fuel - eat efficiently for performance","Pleasure - cooking and savoring art","Comfort - emotional connection eating","Adventure - try everything exotic new","Discipline - strictly track nutrition","Social - food brings people together"]},
-{t:"If you could send one message to your younger self, what would it be?",o:["Stop worrying what others think","Save money and invest early please","Cherish the people - they matter most","Take more risks - you will survive","You are enough - stop proving worth","Learn to rest without feeling guilty"]}
+{t:"What is your relationship with food?",o:["Fuel, eat efficiently for performance","Pleasure, cooking and savoring art","Comfort, emotional connection eating","Adventure, try everything exotic new","Discipline, strictly track nutrition","Social, food brings people together"]},
+{t:"If you could send one message to your younger self, what would it be?",o:["Stop worrying what others think","Save money and invest early please","Cherish the people, they matter most","Take more risks, you will survive","You are enough, stop proving worth","Learn to rest without feeling guilty"]}
 ],
-
 zh:[
 {t:"职业生涯中你最看重什么？",o:["时间自由与自主决策权","财务安全与稳定增长","创意表达与持续创新","同行认可与社会地位","帮助他人与社会影响力","不断学习掌握新技能"]},
 {t:"与好友发生重大分歧时，你通常怎么处理？",o:["直接坦诚沟通，把话说清楚","给彼此空间，等情绪平复再聊","理性分析谁对谁错，讲道理","避免冲突，让事情慢慢淡化","各退一步，寻找折中方案","先跟其他朋友倾诉，再决定"]},
@@ -267,7 +279,6 @@ zh:[
 {t:"你和食物的关系是怎样的？",o:["燃料，吃是为了高效运转","乐趣，烹饪和品味是艺术","慰藉，情感依赖的出口","冒险，尝试一切新鲜异域","自律，严格营养计算管理","社交，食物把人们聚在一起"]},
 {t:"如果可以给年轻时的自己发一条信息？",o:["别在意别人怎么看你","早点存钱投资对自己好","珍惜身边的人最重要","多冒险多尝试不会死的","你本来就足够好无需证明","学会休息不必有罪恶感"]}
 ],
-
 ja:[
 {t:"キャリアで最も大切にしていることは？",o:["スケジュールの自由と裁量権","経済的安定と着実な成長","創造的表現と革新性","同僚からの評価と地位","人助けと社会への影響","常に新しいスキルを学ぶ"]},
 {t:"親友と大きな意見の相違が起きた時、どうする？",o:["率直に向き合い正直に話す","距離を置き自然な流れで再接続","理性的にどちらが正しいか分析","衝突を避け自然消滅を待つ","妥協点を見つけお互い譲る","まず他の友達に愚痴を言う"]},
@@ -300,7 +311,6 @@ ja:[
 {t:"食べ物との関係は？",o:["燃料、効率的なパフォーマンスのため","楽しみ、料理と味わいは芸術","慰め、感情的な繋がり","冒険、エキゾチックなものを全部試す","規律、栄養を厳密に管理","社交、食事が人を繋げる"]},
 {t:"若い自分に一つメッセージを送れるなら？",o:["他人の目を気にするのをやめろ","早く貯金して投資しろ自分","人を大切に、それが一番大事","もっとリスクを取れ、生き残れる","お前は十分だ、証明しなくていい","罪悪感なく休むことを学べ"]}
 ],
-
 ko:[
 {t:"직업에서 가장 중요하게 생각하는 것은?",o:["스케줄의 자유와 자율권","재정적 안정과 꾸준한 성장","창의적 표현과 혁신","동료들의 인정과 지위","다른 사람을 돕고 영향력 발휘","끊임없이 새로운 기술 배우기"]},
 {t:"친한 친구와 큰 의견 차이가 생기면 어떻게 하나요?",o:["직접 솔직하게 이야기한다","거리를 두고 자연스럽게 다시 연결","누가 옳은지 논리적으로 분석","갈등을 피하고 시간이 해결하길","절충점을 찾아 서로 양보","다른 친구들에게 먼저 털어놓는다"]},
@@ -333,7 +343,6 @@ ko:[
 {t:"음식과의 관계는 어떤가요?",o:["연료, 효율적인 성능을 위한 것","즐거움, 요리와 맛보기는 예술","위안, 감정적 연결의 출구","모험, 독특하고 새로운 것 다 시도","규율, 영양을 엄격히 관리","사교, 음식이 사람들을 모으는 것"]},
 {t:"젊은 자신에게 한 마디 보낼 수 있다면?",o:["남의 눈치 그만 봐도 돼","일찍 저축하고 투자해 제발","사람을 소중히 여겨, 그게 제일 중요해","더 많은 위험을 감수해, 살아남을 거야","넌 충분해, 증명하려 하지 마","죄책감 없이 쉬는 법을 배워"]}
 ],
-
 es:[
 {t:"¿Qué es lo más importante en tu carrera?",o:["Libertad y autonomía sobre mi horario","Seguridad financiera y crecimiento estable","Expresión creativa e innovación","Reconocimiento y estatus entre colegas","Ayudar a otros y generar impacto","Aprender nuevas habilidades constantemente"]},
 {t:"¿Cómo manejas un gran desacuerdo con un amigo cercano?",o:["Confrontarlo directamente con honestidad","Dar espacio y luego reconectar naturalmente","Analizar lógicamente quién tiene razón","Evitar el conflicto, dejar que se disuelva","Buscar un punto medio de compromiso","Desahogarme con otros amigos primero"]},
@@ -368,12 +377,24 @@ es:[
 ]
 };
 
-// FUNCTIONS
+// === FUNCTIONS ===
+
 function t(k,r){
   r=r||{};
-  var tx=T[L]&&T[L][k]?T[L][k]:T.en[k]||k;
+  var tx=(T[L]&&T[L][k])?T[L][k]:((T.en&&T.en[k])?T.en[k]:k);
   for(var kk in r)tx=tx.replace("{"+kk+"}",r[kk]);
   return tx;
+}
+
+function reloadResText(){
+  // Reload all result-page text when language changes
+  if(!_lr)return;
+  var d=_lr;
+  var dm={"Low":"l","低":"l","낮음":"l","Bajo":"l","Medium":"m","中":"m","중간":"m","Medio":"m","High":"h","高":"h","높음":"h","Alto":"h","Extreme":"e","极高":"e","極高":"e","매우 높음":"e","Extremo":"e"};
+  var dk=dm[d.dl]||"m";
+  var dn={l:"low",m:"medi",h:"high",e:"extr"};
+  E.dl.textContent=t("danger")+": "+t(dn[dk]);
+  E.wm.textContent=t("locked");
 }
 
 function setLang(l){
@@ -382,11 +403,14 @@ function setLang(l){
   $$("[data-t]").forEach(function(el){el.textContent=t(el.dataset.t)});
   $$("[data-ph]").forEach(function(el){el.placeholder=t(el.dataset.ph)});
   if(E.pr)E.pr.textContent=CUR[L];
+  // Update leaderboard with localized creature names
   var cr=CR[L]||CR.en;
   if(cr.length>=3){
     var lb=$("#lb2");
     if(lb)lb.innerHTML="<h3>🏆 Top Scans This Week</h3><div class=\"lbi\"><span class=\"r1\">🥇 Alex</span><span>"+cr[0].n+"</span></div><div class=\"lbi\"><span class=\"r2\">🥈 Sarah</span><span>"+cr[4].n+"</span></div><div class=\"lbi\"><span class=\"r3\">🥉 Mike</span><span>"+cr[3].n+"</span></div>";
   }
+  // If on result page, re-render creature data in new language
+  if(E.sr.classList.contains("active"))reloadResText();
 }
 
 function setSt(s){ST=s;$$(".sbb2").forEach(function(b){b.classList.toggle("active",b.dataset.st===s)})}
@@ -400,8 +424,24 @@ function go(){
   if(!u){shake(E.ui);alert(t("errName"));return}
   _.un=u;_.qi=0;_.an=[];_.pd=!1;_.ad=!1;
   var pool=QS[L]||QS.en;
+  // Dedup: exclude questions already seen by this user
+  try{
+    var hk="ahz_qhist_"+_.un.toLowerCase().replace(/[^a-z0-9]/g,"");
+    var qhist=JSON.parse(localStorage.getItem(hk)||"[]");
+    var seen=new Set(qhist.slice(-50));
+    var avail=pool.filter(function(q){return !seen.has(q.t)});
+    if(avail.length<8)avail=pool;
+    pool=avail;
+  }catch(e){}
   var sh=pool.slice().sort(function(){return Math.random()-.5});
   _.qs=sh.slice(0,8).map(function(q,i){return {id:i+1,t:q.t,o:q.o.map(function(o,j){return {k:String.fromCharCode(97+j),t:o}})}});
+  // Save question titles to history for future dedup
+  try{
+    var qh2=JSON.parse(localStorage.getItem("ahz_qhist_"+_.un.toLowerCase().replace(/[^a-z0-9]/g,""))||"[]");
+    _.qs.forEach(function(q){qh2.push(q.t)});
+    if(qh2.length>60)qh2=qh2.slice(-60);
+    localStorage.setItem("ahz_qhist_"+_.un.toLowerCase().replace(/[^a-z0-9]/g,""),JSON.stringify(qh2));
+  }catch(e){}
   show("sc-quiz");renderQ();
 }
 
@@ -450,11 +490,12 @@ function renderRes(){
   E.ff.textContent=d.ff;
   var comp=COMPAT[d.n];
   if(comp)E.cp.innerHTML="<h4>💕 Compatibility</h4><div class=\"cpi\"><span>Best Match</span><span style=\"color:var(--g)\">"+comp.b+"</span></div><div class=\"cpi\"><span>Worst Match</span><span style=\"color:var(--r)\">"+comp.w+"</span></div>";
-  var dm={"Low":"l",低:"l",低:"l",낮음:"l",Bajo:"l",Medium:"m",中:"m",中:"m",중간:"m",Medio:"m",High:"h",高:"h",高:"h",높음:"h",Alto:"h",Extreme:"e","极高":"e","極高":"e","매우 높음":"e",Extremo:"e"};
+  var dm={"Low":"l","低":"l","낮음":"l","Bajo":"l","Medium":"m","中":"m","중간":"m","Medio":"m","High":"h","高":"h","높음":"h","Alto":"h","Extreme":"e","极高":"e","極高":"e","매우 높음":"e","Extremo":"e"};
   var dk=dm[d.dl]||"m";
   var dn={l:"low",m:"medi",h:"high",e:"extr"};
   E.dl.textContent=t("danger")+": "+t(dn[dk]);
   E.dl.className="dl dl-"+dk;
+  E.wm.textContent=t("locked");
   _.rid=Math.random().toString(36).slice(2,10);
   var iu="https://image.pollinations.ai/prompt/"+encodeURIComponent(d.ip)+"?width=480&height=480&nologo=true&seed="+_.rid;
   E.ri.src=iu;
@@ -470,7 +511,7 @@ function renderRes(){
   E.ri.onload=function(){E.ri.classList.remove("ri-loading")};
   var ach=[{i:"🎯",n:"First Scan",d:"Complete first scan",u:!0},{i:"🔥",n:"Rare Find",d:"Discover rare creature",u:d.ra!=="common"},{i:"👑",n:"Legendary",d:"Discover legendary",u:d.ra==="legendary"},{i:"💀",n:"Danger Zone",d:"Extreme danger",u:dk==="e"}];
   E.al.innerHTML=ach.map(function(a){return "<div class=\"ach"+(a.u?"":" ach-l")+"\"><span>"+a.i+"</span><div><div style=\"font-weight:700\">"+a.n+"</div><div style=\"font-size:.75rem;color:var(--td)\">"+a.d+"</div></div></div>"}).join("");
-  var ul=_.pd||_.ad;
+  var ul=_.pd||_.ad||_VIP;
   if(ul){E.wm.classList.add("hidden");E.pw.classList.add("hidden");E.ri.classList.remove("blurred")}
   else{E.wm.classList.remove("hidden");E.pw.classList.remove("hidden");E.ri.classList.add("blurred")}
   // Fake social proof
@@ -480,22 +521,30 @@ function renderRes(){
 }
 
 function unlock(){
-var pp="https://paypal.me/xiaosheng6688/"+(AMT[L]||"2.99");
-var amt=CUR[L];
-var m=document.createElement("div");
-m.style.cssText="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.95);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px";
-m.innerHTML='<div style="background:var(--bc);border:1px solid var(--g);border-radius:10px;padding:25px;max-width:390px;width:100%;text-align:center"><div style="font-size:2.5rem;margin-bottom:12px">🔓</div><h2 style="color:var(--g);margin-bottom:4px">'+t("ut")+'</h2><div style="font-size:.85rem;color:var(--td);text-decoration:line-through;margin-bottom:4px">$4.99</div><div style="font-size:2rem;color:var(--y);margin-bottom:14px">'+amt+' <span style="font-size:.7rem;color:var(--r)">-40%</span></div><p style="font-size:.75rem;color:var(--td);margin-bottom:8px">After payment, click button below to unlock</p><a id="pb2" href="'+pp+'" target="_blank" rel="noopener" style="display:block;width:100%;padding:14px;background:#0070ba;color:#fff;border:0;border-radius:6px;font-size:1rem;cursor:pointer;margin-bottom:8px;font-weight:700;text-decoration:none;text-align:center">💳 Pay with PayPal</a><button id="pbc" style="width:100%;padding:10px;background:#1db954;color:#fff;border:0;border-radius:6px;cursor:pointer;margin-bottom:8px;font-weight:700;font-size:.85rem">✅ I Completed Payment — Unlock Now</button><div style="background:rgba(255,153,0,.12);border:1px dashed #f93;border-radius:6px;padding:10px;margin-bottom:8px;font-size:.8rem;color:var(--o);text-align:center">💰 Payoneer — Send to: 714633017@qq.com</div><button id="ab2" style="width:100%;padding:10px;background:0 0;color:var(--td);border:1px solid var(--td);border-radius:6px;cursor:pointer;margin-bottom:6px">📺 '+t("wa")+'</button><button id="clb" style="width:100%;padding:8px;background:0 0;color:var(--td);border:0;cursor:pointer;font-size:.8rem">✕ Close</button></div>';
-document.body.appendChild(m);
-document.getElementById("pbc").onclick=function(){_.pd=!0;renderRes();m.remove();alert(t("payOk"));try{var u=new URL(location);u.searchParams.set("payment","success");history.replaceState({},"",u)}catch(e){}};
-document.getElementById("ab2").onclick=function(){m.remove();adUnlock()};
-document.getElementById("clb").onclick=function(){m.remove()};
+  if(_VIP){_.pd=!0;renderRes();return;}
+  var pp="https://paypal.me/xiaosheng6688/"+(AMT[L]||"2.99");
+  var amt=CUR[L];
+  var m=document.createElement("div");
+  m.style.cssText="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.95);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px";
+  var payBtn=t("payTitle"), payDone=t("payDone"), payoneer=t("payoneer"), watchAd=t("watchingAd2",{wa:t("wa")}), closeBtn=t("close");
+  m.innerHTML='<div style="background:var(--bc);border:1px solid var(--g);border-radius:10px;padding:25px;max-width:390px;width:100%;text-align:center"><div style="font-size:2.5rem;margin-bottom:12px">🔓</div><h2 style="color:var(--g);margin-bottom:4px">'+t("ut")+'</h2><div style="font-size:.85rem;color:var(--td);text-decoration:line-through;margin-bottom:4px">$4.99</div><div style="font-size:2rem;color:var(--y);margin-bottom:14px">'+amt+' <span style="font-size:.7rem;color:var(--r)">-40%</span></div><p style="font-size:.75rem;color:var(--td);margin-bottom:8px">After payment, click button below to unlock</p><a id="pb2" href="'+pp+'" target="_blank" rel="noopener" style="display:block;width:100%;padding:14px;background:#0070ba;color:#fff;border:0;border-radius:6px;font-size:1rem;cursor:pointer;margin-bottom:8px;font-weight:700;text-decoration:none;text-align:center">'+payBtn+'</a><button id="pbc" style="width:100%;padding:10px;background:#1db954;color:#fff;border:0;border-radius:6px;cursor:pointer;margin-bottom:8px;font-weight:700;font-size:.85rem">'+payDone+'</button><div style="background:rgba(255,153,0,.12);border:1px dashed #f93;border-radius:6px;padding:10px;margin-bottom:8px;font-size:.8rem;color:var(--o);text-align:center">'+payoneer+'</div><button id="ab2" style="width:100%;padding:10px;background:0 0;color:var(--td);border:1px solid var(--td);border-radius:6px;cursor:pointer;margin-bottom:6px">'+watchAd+'</button><button id="clb" style="width:100%;padding:8px;background:0 0;color:var(--td);border:0;cursor:pointer;font-size:.8rem">'+closeBtn+'</button></div>';
+  document.body.appendChild(m);
+  document.getElementById("pbc").onclick=function(){
+    var tid=prompt(t("verifyID"));
+    if(tid&&tid.trim().length>=5){_.pd=!0;renderRes();m.remove();alert(t("payOk"));try{var u=new URL(location);u.searchParams.set("payment","success");history.replaceState({},"",u)}catch(e){}}
+    else if(tid!==null){alert(t("invalidID"))}
+  };
+  document.getElementById("ab2").onclick=function(){m.remove();adUnlock()};
+  document.getElementById("clb").onclick=function(){m.remove()};
 }
+
 function adUnlock(){
+  if(_VIP){_.ad=!0;_.pd=!0;renderRes();return;}
   var dur=5000,st=Date.now();
   var m=document.createElement("div");
   m.style.cssText="position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center";
-  var txt={en:"Watching Ad...",zh:"正在播放广告...",ja:"広告視聴中...",ko:"광고 시청 중...",es:"Viendo anuncio..."};
-  m.innerHTML="<div style=\"font-size:2.5rem;margin-bottom:16px\">📺</div><div style=\"font-size:1.1rem;margin-bottom:16px\">"+(txt[L]||txt.en)+"</div><div style=\"width:200px;height:4px;background:var(--bc);border-radius:2px\"><div id=\"ap\" style=\"width:0;height:100%;background:var(--g);transition:.1s\"></div></div>";
+  var txt=t("watchingAd");
+  m.innerHTML="<div style=\"font-size:2.5rem;margin-bottom:16px\">📺</div><div style=\"font-size:1.1rem;margin-bottom:16px\">"+txt+"</div><div style=\"width:200px;height:4px;background:var(--bc);border-radius:2px\"><div id=\"ap\" style=\"width:0;height:100%;background:var(--g);transition:.1s\"></div></div>";
   document.body.appendChild(m);
   var iv=setInterval(function(){
     var p=((Date.now()-st)/dur)*100;
@@ -508,9 +557,9 @@ function adUnlock(){
 function share(p){
   var txt=t("shText",{c:_lr?.n||"mysterious creature"});
   var url=location.href;
-  if(p==="twitter")window.open("https://twitter.com/intent/tweet?text="+encodeURIComponent(txt)+"&url="+encodeURIComponent(url),"_blank");
+  if(p==="twitter")window.open("https://x.com/intent/tweet?text="+encodeURIComponent(txt)+"&url="+encodeURIComponent(url),"_blank");
   else if(p==="facebook")window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url),"_blank");
-  else if(p==="copy")navigator.clipboard.writeText(txt+" "+url).then(function(){alert(t("copied"))});
+  else if(p==="copy")navigator.clipboard.writeText(txt+" "+url).then(function(){alert(t("copied"))}).catch(function(){alert(t("copied"))});
 }
 
 function minigame(){
@@ -529,7 +578,7 @@ function minigame(){
       setTimeout(function(){b.style.transform=""},100);
       var r=document.createElement("span");
       r.textContent=react[Math.floor(Math.random()*react.length)];
-      r.className="ft"
+      r.className="ft";
       b.appendChild(r);
       setTimeout(function(){r.remove()},800);
       if(sc>=100){alert("🎉 Fully fed and happy!");m.remove()}
@@ -540,28 +589,30 @@ function minigame(){
 
 function restart(){_lr=null;E.ui.value="";show("sc-start")}
 
-// init
+// === INIT ===
 (function(){
   var bl=navigator.language||navigator.userLanguage;
   if(bl){if(bl.indexOf("zh")===0)L="zh";else if(bl.indexOf("ja")===0)L="ja";else if(bl.indexOf("ko")===0)L="ko";else if(bl.indexOf("es")===0)L="es"}
   setLang(L);
-  var u=new URL(location);
-  if(u.searchParams.get("payment")==="success"){_.pd=!0;alert(t("payOk"))}
+  if(_VIP)try{var vb=document.getElementById("vipBadge");if(vb)vb.style.display="block"}catch(e){}
+  // Payment return detection
+  try{
+    var u=new URL(location);
+    if(u.searchParams.get("payment")==="success"){_.pd=!0;alert(t("payOk"));if(u.searchParams.get("payment")){u.searchParams.delete("payment");history.replaceState({},"",u.toString())}}
+  }catch(e){}
 })();
 </script>
-<!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 <script>
-// Fallback: if AdSense blocked, show affiliate links
 setTimeout(function(){
-  try {
+  try{
     if(typeof adsbygoogle==="undefined"||!document.querySelector(".adsbygoogle[data-ad-status]")){
       document.querySelectorAll("[id^=ad-fallback]").forEach(function(el){el.style.display="block"});
     }
-  } catch(e) {
+  }catch(e){
     document.querySelectorAll("[id^=ad-fallback]").forEach(function(el){el.style.display="block"});
   }
-}, 3000);
+},3000);
 try{(adsbygoogle=window.adsbygoogle||[]).push({})}catch(e){}
 </script>
 </body></html>

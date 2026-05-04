@@ -305,26 +305,15 @@ function renderRes(){
 }
 
 function unlock(){
-  var pp="https://paypal.me/xiaosheng6688/"+(AMT[L]||"2.99");
-  var m=document.createElement("div");
-  m.style.cssText="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.95);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px";
-  m.innerHTML="<div style="background:var(--bc);border:1px solid var(--g);border-radius:10px;padding:25px;max-width:390px;width:100%;text-align:center"><div style="font-size:2.5rem;margin-bottom:12px">🔓</div><h2 style="color:var(--g);margin-bottom:4px">"+t("ut")+"</h2><div style="font-size:.85rem;color:var(--td);text-decoration:line-through;margin-bottom:4px">$4.99</div><div style="font-size:2rem;color:var(--y);margin-bottom:14px">"+CUR[L]+" <span style="font-size:.7rem;color:var(--r)">-40%</span></div><button id="pb2" style="width:100%;padding:14px;background:#0070ba;color:#fff;border:0;border-radius:6px;font-size:1rem;cursor:pointer;margin-bottom:8px;font-weight:700">💳 Pay with PayPal</button><button id="pnb" style="width:100%;padding:14px;background:#ff4800;color:#fff;border:0;border-radius:6px;font-size:1rem;cursor:pointer;margin-bottom:8px;font-weight:700">🏦 Pay with Payoneer</button><button id="ab2" style="width:100%;padding:10px;background:0 0;color:var(--td);border:1px solid var(--td);border-radius:6px;cursor:pointer;margin-bottom:6px">📺 "+t("wa")+"</button><button id="clb" style="width:100%;padding:8px;background:0 0;color:var(--td);border:0;cursor:pointer;font-size:.8rem">✕ Close</button></div>";
-  document.body.appendChild(m);
-  document.getElementById("pb2").onclick=function(){window.open(pp,"_blank");setTimeout(function(){if(confirm("Payment completed?\n\n(PayPal)")){_.pd=!0;renderRes();m.remove();try{var u=new URL(location);u.searchParams.set("payment","success");history.replaceState({},"",u)}catch(e){}}},25000)};
-  document.getElementById("pnb").onclick=function(){var pe="your-payoneer@email.com";m.innerHTML="<div style="background:var(--bc);border:1px solid #ff4800;border-radius:10px;padding:25px;max-width:390px;width:100%;text-align:center"><div style="font-size:2.5rem;margin-bottom:12px">🏦</div><h2 style="color:#ff4800;margin-bottom:10px">Payoneer Payment</h2><p style="color:var(--tp);margin-bottom:12px">Send "+CUR[L]+" to Payoneer:</p><div style="background:var(--bg);border:1px solid var(--g);border-radius:6px;padding:12px;margin-bottom:14px;font-size:.95rem;color:var(--g);word-break:break-all">"+pe+"</div><p style="color:var(--td);font-size:.8rem;margin-bottom:14px">After sending verify below</p><button id="pconf" style="width:100%;padding:12px;background:#ff4800;color:#fff;border:0;border-radius:6px;font-size:1rem;cursor:pointer;margin-bottom:6px">✅ Payment Sent</button><button id="pback" style="width:100%;padding:8px;background:0 0;color:var(--td);border:0;cursor:pointer">← Back</button></div>";document.getElementById("pconf").onclick=function(){_.pd=!0;renderRes();m.remove()};document.getElementById("pback").onclick=function(){m.remove();unlock()}};
-  document.getElementById("ab2").onclick=function(){m.remove();adUnlock()};
-  document.getElementById("clb").onclick=function(){m.remove()};
+var pp="https://paypal.me/xiaosheng6688/"+(AMT[L]||"2.99");
+var m=document.createElement("div");
+m.style.cssText="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.95);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px";
+m.innerHTML='<div style="background:var(--bc);border:1px solid var(--g);border-radius:10px;padding:25px;max-width:390px;width:100%;text-align:center"><div style="font-size:2.5rem;margin-bottom:12px">🔓</div><h2 style="color:var(--g);margin-bottom:4px">'+t("ut")+'</h2><div style="font-size:.85rem;color:var(--td);text-decoration:line-through;margin-bottom:4px">$4.99</div><div style="font-size:2rem;color:var(--y);margin-bottom:14px">'+CUR[L]+' <span style="font-size:.7rem;color:var(--r)">-40%</span></div><button id="pb2" style="width:100%;padding:14px;background:#0070ba;color:#fff;border:0;border-radius:6px;font-size:1rem;cursor:pointer;margin-bottom:8px;font-weight:700">💳 Pay with PayPal</button><button id="ab2" style="width:100%;padding:10px;background:0 0;color:var(--td);border:1px solid var(--td);border-radius:6px;cursor:pointer;margin-bottom:6px">📺 '+t("wa")+'</button><button id="clb" style="width:100%;padding:8px;background:0 0;color:var(--td);border:0;cursor:pointer;font-size:.8rem">✕ Close</button></div>';
+document.body.appendChild(m);
+document.getElementById("pb2").onclick=function(){window.open(pp,"_blank");setTimeout(function(){if(confirm("Payment completed?\n\n(PayPal)")){_.pd=!0;renderRes();m.remove();try{var u=new URL(location);u.searchParams.set("payment","success");history.replaceState({},"",u)}catch(e){}}},25000)};
+document.getElementById("ab2").onclick=function(){m.remove();adUnlock()};
+document.getElementById("clb").onclick=function(){m.remove()};
 }
-
-  document.getElementById("pb2").onclick=function(){
-    window.open(pp,"_blank");
-    setTimeout(function(){
-      if(confirm("Payment completed?")){_.pd=!0;renderRes();m.remove();var u=new URL(location);u.searchParams.set("payment","success");history.replaceState({},"",u)}
-    },25000);
-  };
-  document.getElementById("ab2").onclick=function(){m.remove();adUnlock()};
-}
-
 function adUnlock(){
   var dur=5000,st=Date.now();
   var m=document.createElement("div");
